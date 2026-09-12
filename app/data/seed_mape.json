@@ -1,0 +1,54 @@
+{
+  "USA": {
+    "mape": 1.2919416667877113,
+    "name": "United States"
+  },
+  "JPN": {
+    "mape": 1.7051777866419975,
+    "name": "Japan"
+  },
+  "DEU": {
+    "mape": 1.7605168744207287,
+    "name": "Germany"
+  },
+  "GBR": {
+    "mape": 1.9577263962798457,
+    "name": "United Kingdom"
+  },
+  "IND": {
+    "mape": 2.4501388813778475,
+    "name": "India"
+  },
+  "IDN": {
+    "mape": 2.2035932056470067,
+    "name": "Indonesia"
+  },
+  "BRA": {
+    "mape": 2.2463101190098476,
+    "name": "Brazil"
+  },
+  "AUS": {
+    "mape": 1.0622096016574518,
+    "name": "Australia"
+  },
+  "ZAF": {
+    "mape": 1.6164575714737097,
+    "name": "South Africa"
+  },
+  "MEX": {
+    "mape": 3.2063733793576117,
+    "name": "Mexico"
+  },
+  "FRA": {
+    "mape": 1.6300915811878265,
+    "name": "France"
+  },
+  "CAN": {
+    "mape": 1.7109359153031662,
+    "name": "Canada"
+  },
+  "KOR": {
+    "mape": 2.5197899921841507,
+    "name": "South Korea"
+  }
+}

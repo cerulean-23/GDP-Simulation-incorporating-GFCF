@@ -1,0 +1,31 @@
+"""
+Quick sanity check: run rolling DE on real Indonesia data, print MAPE.
+Run from backend/ with: uv run python test_simulation.py
+"""
+
+import numpy as np
+
+from app.optimization.rolling_de import OptimizationConfig, run_rolling_de
+
+years = np.array([1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020])
+gdp = np.array([269915108912.607,288571594912.183,307321553097.314,327286415428.63,351963716551.494,380895160093.945,410674256276.219,429975448805.372,373533751956.055,376488874892.846,395012382597.556,409404526219.842,427825582126.161,448277224148.753,470829486219.898,497631790442.44,525006275302.523,558318040161.892,591893632243.067,619291626017.383,657835433773.518,698422460479.197,740537688618.414,781691320690.699,820828013230.588,860854232686.214,904181621780.388,950021694164.001,999178586309.021,1049330233997.45,1027656193885.38])
+gfcf = np.array([84465256579.076,89976536186.6669,94420500513.22,99792946556.7035,113520172061.189,129407169819.529,148189830671.111,160886739913.529,107781006499.062,88169763190.8613,102926959522.809,109609459945.065,114755002059.007,115443883666.051,132394855673.434,146808880183.595,150621331125.822,164665083195.267,184237385408.536,190305080122.404,206445369673.4,224735627806.657,245242939943.775,257530293663.011,268988067231.643,282462858810.417,295097785405.692,313258026441.979,334170649691.748,349049205908.843,331732641828.495])
+
+config = OptimizationConfig(window=3, population_size=20, max_iterations=1000)
+
+def progress(msg):
+    print(f"  window {msg['window']}/{msg['total_windows']} -> year {msg['year']}, SSE {msg['sse']:.6f}")
+
+print("Running rolling DE on Indonesia data (this takes a bit, DE is not fast)...")
+result = run_rolling_de(years, gdp, gfcf, config, progress_callback=progress)
+
+print("\n--- RESULTS ---")
+print(f"MAPE: {result.mape_overall:.4f}%")
+print(f"MAE:  {result.mae_overall:.2f}")
+print(f"R2:   {result.r2_overall:.4f}")
+print(f"Best SSE (final window): {result.best_sse_final:.6f}")
+
+print("\nYear | Actual | Predicted | a | b | c")
+for i, y in enumerate(result.years):
+    if result.y_pred[i] is not None:
+        print(f"{y} | {result.y_actual[i]:.0f} | {result.y_pred[i]:.0f} | {result.a_track[i]:.4f} | {result.b_track[i]:.6f} | {result.c_track[i]:.4f}")
