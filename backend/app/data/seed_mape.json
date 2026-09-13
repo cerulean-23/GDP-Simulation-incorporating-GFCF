@@ -1,0 +1,638 @@
+{
+  "ALB": {
+    "mape": 2.5191360565102774,
+    "name": "Albania"
+  },
+  "DZA": {
+    "mape": 1.8036279098149588,
+    "name": "Algeria"
+  },
+  "AGO": {
+    "mape": 2.283227611526303,
+    "name": "Angola"
+  },
+  "ARG": {
+    "mape": 4.9093005307754884,
+    "name": "Argentina"
+  },
+  "AUS": {
+    "mape": 1.0622096016574518,
+    "name": "Australia"
+  },
+  "AUT": {
+    "mape": 1.520082184993572,
+    "name": "Austria"
+  },
+  "BHS": {
+    "mape": 3.256114376672577,
+    "name": "Bahamas"
+  },
+  "BHR": {
+    "mape": 1.9798713767927214,
+    "name": "Bahrain"
+  },
+  "BLR": {
+    "mape": 3.337336564495369,
+    "name": "Belarus"
+  },
+  "BEL": {
+    "mape": 1.735599369507432,
+    "name": "Belgium"
+  },
+  "BLZ": {
+    "mape": 3.2510462416862103,
+    "name": "Belize"
+  },
+  "BEN": {
+    "mape": 1.807579492038661,
+    "name": "Benin"
+  },
+  "BMU": {
+    "mape": 3.6379856413160994,
+    "name": "Bermuda"
+  },
+  "BTN": {
+    "mape": 3.969948490998523,
+    "name": "Bhutan"
+  },
+  "BOL": {
+    "mape": 1.7799656682429559,
+    "name": "Bolivia, Plurinational State of"
+  },
+  "BIH": {
+    "mape": 1.984163744835262,
+    "name": "Bosnia and Herzegovina"
+  },
+  "BWA": {
+    "mape": 4.781861922596335,
+    "name": "Botswana"
+  },
+  "BRA": {
+    "mape": 2.2463101190098476,
+    "name": "Brazil"
+  },
+  "BRN": {
+    "mape": 3.0123139893240345,
+    "name": "Brunei Darussalam"
+  },
+  "BGR": {
+    "mape": 3.42938932578006,
+    "name": "Bulgaria"
+  },
+  "BFA": {
+    "mape": 2.140836790900046,
+    "name": "Burkina Faso"
+  },
+  "KHM": {
+    "mape": 2.690657256905217,
+    "name": "Cambodia"
+  },
+  "CMR": {
+    "mape": 1.6175089784114016,
+    "name": "Cameroon"
+  },
+  "CAN": {
+    "mape": 1.7109359153031662,
+    "name": "Canada"
+  },
+  "CAF": {
+    "mape": 11.248450150046242,
+    "name": "Central African Republic"
+  },
+  "TCD": {
+    "mape": 3.967434221034616,
+    "name": "Chad"
+  },
+  "CHL": {
+    "mape": 2.200072575859433,
+    "name": "Chile"
+  },
+  "COL": {
+    "mape": 2.1604174600504336,
+    "name": "Colombia"
+  },
+  "COM": {
+    "mape": 2.259291133890714,
+    "name": "Comoros"
+  },
+  "COG": {
+    "mape": 5.6871996888280725,
+    "name": "Congo"
+  },
+  "COD": {
+    "mape": 3.7509289728106165,
+    "name": "Congo, Democratic Republic of the"
+  },
+  "CRI": {
+    "mape": 2.0496856601099473,
+    "name": "Costa Rica"
+  },
+  "CIV": {
+    "mape": 3.488265298291652,
+    "name": "C\u00f4te d'Ivoire"
+  },
+  "HRV": {
+    "mape": 2.3490728338097093,
+    "name": "Croatia"
+  },
+  "CUB": {
+    "mape": 3.4641387006458433,
+    "name": "Cuba"
+  },
+  "CYP": {
+    "mape": 2.9114550421853216,
+    "name": "Cyprus"
+  },
+  "CZE": {
+    "mape": 2.5203680630965533,
+    "name": "Czechia"
+  },
+  "DNK": {
+    "mape": 1.7317595281287506,
+    "name": "Denmark"
+  },
+  "DJI": {
+    "mape": 1.4748023435646809,
+    "name": "Djibouti"
+  },
+  "DOM": {
+    "mape": 2.7534888013763963,
+    "name": "Dominican Republic"
+  },
+  "ECU": {
+    "mape": 2.773072117968195,
+    "name": "Ecuador"
+  },
+  "EGY": {
+    "mape": 1.2161540727684281,
+    "name": "Egypt"
+  },
+  "SLV": {
+    "mape": 1.579156867944578,
+    "name": "El Salvador"
+  },
+  "GNQ": {
+    "mape": 6.475407261316442,
+    "name": "Equatorial Guinea"
+  },
+  "EST": {
+    "mape": 4.88514566560894,
+    "name": "Estonia"
+  },
+  "SWZ": {
+    "mape": 3.0659934101087027,
+    "name": "Eswatini"
+  },
+  "ETH": {
+    "mape": 2.0191789939286253,
+    "name": "Ethiopia"
+  },
+  "FIN": {
+    "mape": 2.350229087364619,
+    "name": "Finland"
+  },
+  "FRA": {
+    "mape": 1.6300915811878265,
+    "name": "France"
+  },
+  "GAB": {
+    "mape": 2.8924521451188845,
+    "name": "Gabon"
+  },
+  "GMB": {
+    "mape": 3.9853238822886197,
+    "name": "Gambia"
+  },
+  "GEO": {
+    "mape": 2.399780912718523,
+    "name": "Georgia"
+  },
+  "DEU": {
+    "mape": 1.7605168744207287,
+    "name": "Germany"
+  },
+  "GHA": {
+    "mape": 2.8799728811657404,
+    "name": "Ghana"
+  },
+  "GRC": {
+    "mape": 2.3472742826697717,
+    "name": "Greece"
+  },
+  "GRL": {
+    "mape": 2.735206171089815,
+    "name": "Greenland"
+  },
+  "GTM": {
+    "mape": 1.4532185402452564,
+    "name": "Guatemala"
+  },
+  "GIN": {
+    "mape": 2.312651023784308,
+    "name": "Guinea"
+  },
+  "GNB": {
+    "mape": 2.7769580180614173,
+    "name": "Guinea-Bissau"
+  },
+  "HTI": {
+    "mape": 2.675492167293951,
+    "name": "Haiti"
+  },
+  "HND": {
+    "mape": 3.234911616822564,
+    "name": "Honduras"
+  },
+  "HKG": {
+    "mape": 2.6492172983750955,
+    "name": "Hong Kong"
+  },
+  "HUN": {
+    "mape": 2.1372064522127743,
+    "name": "Hungary"
+  },
+  "ISL": {
+    "mape": 3.252124308606494,
+    "name": "Iceland"
+  },
+  "IND": {
+    "mape": 2.4501388813778475,
+    "name": "India"
+  },
+  "IDN": {
+    "mape": 2.2035932056470067,
+    "name": "Indonesia"
+  },
+  "IRN": {
+    "mape": 3.3741737694479914,
+    "name": "Iran, Islamic Republic of"
+  },
+  "IRQ": {
+    "mape": 5.860336614063233,
+    "name": "Iraq"
+  },
+  "IRL": {
+    "mape": 3.9306456827750753,
+    "name": "Ireland"
+  },
+  "ISR": {
+    "mape": 2.163196942358403,
+    "name": "Israel"
+  },
+  "ITA": {
+    "mape": 1.7993000845886378,
+    "name": "Italy"
+  },
+  "JPN": {
+    "mape": 1.7051777866419975,
+    "name": "Japan"
+  },
+  "KAZ": {
+    "mape": 3.0347944690773976,
+    "name": "Kazakhstan"
+  },
+  "KEN": {
+    "mape": 1.7937471685494402,
+    "name": "Kenya"
+  },
+  "KIR": {
+    "mape": 2.9960286907786893,
+    "name": "Kiribati"
+  },
+  "KOR": {
+    "mape": 2.5197899921841507,
+    "name": "Korea, Republic of"
+  },
+  "KGZ": {
+    "mape": 3.1017312009518148,
+    "name": "Kyrgyzstan"
+  },
+  "LAO": {
+    "mape": 0.9831785020194381,
+    "name": "Lao People's Democratic Republic"
+  },
+  "LVA": {
+    "mape": 4.098497405259413,
+    "name": "Latvia"
+  },
+  "LBN": {
+    "mape": 3.1511054576086015,
+    "name": "Lebanon"
+  },
+  "LSO": {
+    "mape": 2.451156604079526,
+    "name": "Lesotho"
+  },
+  "LBY": {
+    "mape": 21.23351684254178,
+    "name": "Libya"
+  },
+  "LTU": {
+    "mape": 3.801840351800665,
+    "name": "Lithuania"
+  },
+  "LUX": {
+    "mape": 2.319899840825995,
+    "name": "Luxembourg"
+  },
+  "MAC": {
+    "mape": 10.958603352270687,
+    "name": "Macao"
+  },
+  "MDG": {
+    "mape": 3.359341344157797,
+    "name": "Madagascar"
+  },
+  "MYS": {
+    "mape": 3.2559151690062538,
+    "name": "Malaysia"
+  },
+  "MDV": {
+    "mape": 15.710605541702963,
+    "name": "Maldives"
+  },
+  "MLI": {
+    "mape": 2.9050860542937973,
+    "name": "Mali"
+  },
+  "MLT": {
+    "mape": 3.1813188405799044,
+    "name": "Malta"
+  },
+  "MHL": {
+    "mape": 5.272083892945147,
+    "name": "Marshall Islands"
+  },
+  "MRT": {
+    "mape": 4.4963291282056765,
+    "name": "Mauritania"
+  },
+  "MUS": {
+    "mape": 1.9009030462646102,
+    "name": "Mauritius"
+  },
+  "MEX": {
+    "mape": 3.2063733793576117,
+    "name": "Mexico"
+  },
+  "MDA": {
+    "mape": 4.088678184526623,
+    "name": "Moldova, Republic of"
+  },
+  "MNG": {
+    "mape": 3.074072249690114,
+    "name": "Mongolia"
+  },
+  "MNE": {
+    "mape": 4.891679470930583,
+    "name": "Montenegro"
+  },
+  "MAR": {
+    "mape": 3.153564664157337,
+    "name": "Morocco"
+  },
+  "NAM": {
+    "mape": 2.3897616945048776,
+    "name": "Namibia"
+  },
+  "NPL": {
+    "mape": 2.271044443244743,
+    "name": "Nepal"
+  },
+  "NLD": {
+    "mape": 1.4159326995217927,
+    "name": "Netherlands, Kingdom of the"
+  },
+  "NZL": {
+    "mape": 1.1798490058536366,
+    "name": "New Zealand"
+  },
+  "NIC": {
+    "mape": 2.4483769265685646,
+    "name": "Nicaragua"
+  },
+  "NER": {
+    "mape": 2.845778104478714,
+    "name": "Niger"
+  },
+  "MKD": {
+    "mape": 2.2642183044622963,
+    "name": "North Macedonia"
+  },
+  "NOR": {
+    "mape": 1.3145282928929491,
+    "name": "Norway"
+  },
+  "OMN": {
+    "mape": 2.442880411529583,
+    "name": "Oman"
+  },
+  "PAK": {
+    "mape": 1.6809239219753758,
+    "name": "Pakistan"
+  },
+  "PLW": {
+    "mape": 4.582061309916345,
+    "name": "Palau"
+  },
+  "PSE": {
+    "mape": 6.738995885837497,
+    "name": "Palestine, State of"
+  },
+  "PAN": {
+    "mape": 3.321724000971505,
+    "name": "Panama"
+  },
+  "PRY": {
+    "mape": 2.657753784768579,
+    "name": "Paraguay"
+  },
+  "PER": {
+    "mape": 3.0295692163755086,
+    "name": "Peru"
+  },
+  "POL": {
+    "mape": 1.9250870353758376,
+    "name": "Poland"
+  },
+  "PRT": {
+    "mape": 2.030466276267075,
+    "name": "Portugal"
+  },
+  "PRI": {
+    "mape": 1.9942057761581748,
+    "name": "Puerto Rico"
+  },
+  "ROU": {
+    "mape": 3.5767129674775253,
+    "name": "Romania"
+  },
+  "RUS": {
+    "mape": 3.83909218123756,
+    "name": "Russian Federation"
+  },
+  "RWA": {
+    "mape": 9.948479533135117,
+    "name": "Rwanda"
+  },
+  "WSM": {
+    "mape": 4.156923747192095,
+    "name": "Samoa"
+  },
+  "SMR": {
+    "mape": 3.5831379300676,
+    "name": "San Marino"
+  },
+  "STP": {
+    "mape": 1.5641277877830384,
+    "name": "Sao Tome and Principe"
+  },
+  "SAU": {
+    "mape": 3.0715515626998044,
+    "name": "Saudi Arabia"
+  },
+  "SEN": {
+    "mape": 1.7086744349434195,
+    "name": "Senegal"
+  },
+  "SRB": {
+    "mape": 3.265724442378018,
+    "name": "Serbia"
+  },
+  "SYC": {
+    "mape": 5.455058142074442,
+    "name": "Seychelles"
+  },
+  "SLE": {
+    "mape": 5.830847230941202,
+    "name": "Sierra Leone"
+  },
+  "SGP": {
+    "mape": 3.420678545096514,
+    "name": "Singapore"
+  },
+  "SVK": {
+    "mape": 2.5109037852545852,
+    "name": "Slovakia"
+  },
+  "SVN": {
+    "mape": 2.629447378681838,
+    "name": "Slovenia"
+  },
+  "SLB": {
+    "mape": 3.658357281388247,
+    "name": "Solomon Islands"
+  },
+  "SOM": {
+    "mape": 5.453380268405404,
+    "name": "Somalia"
+  },
+  "ZAF": {
+    "mape": 1.6164575714737097,
+    "name": "South Africa"
+  },
+  "ESP": {
+    "mape": 1.8259005058442401,
+    "name": "Spain"
+  },
+  "LKA": {
+    "mape": 3.043032184422673,
+    "name": "Sri Lanka"
+  },
+  "SWE": {
+    "mape": 2.2661197582811314,
+    "name": "Sweden"
+  },
+  "CHE": {
+    "mape": 1.7084675123083541,
+    "name": "Switzerland"
+  },
+  "TZA": {
+    "mape": 1.311959698775231,
+    "name": "Tanzania, United Republic of"
+  },
+  "THA": {
+    "mape": 2.9387647763692937,
+    "name": "Thailand"
+  },
+  "TLS": {
+    "mape": 5.370313858817637,
+    "name": "Timor-Leste"
+  },
+  "TGO": {
+    "mape": 4.095718666803013,
+    "name": "Togo"
+  },
+  "TON": {
+    "mape": 2.6268237056846786,
+    "name": "Tonga"
+  },
+  "TUN": {
+    "mape": 2.18701768601981,
+    "name": "Tunisia"
+  },
+  "TUR": {
+    "mape": 4.840612591578399,
+    "name": "T\u00fcrkiye"
+  },
+  "UGA": {
+    "mape": 2.396995812646272,
+    "name": "Uganda"
+  },
+  "UKR": {
+    "mape": 6.045863239829638,
+    "name": "Ukraine"
+  },
+  "GBR": {
+    "mape": 1.9577263962798457,
+    "name": "United Kingdom of Great Britain and Northern Ireland"
+  },
+  "USA": {
+    "mape": 1.2919416667877113,
+    "name": "United States of America"
+  },
+  "URY": {
+    "mape": 3.362610821780572,
+    "name": "Uruguay"
+  },
+  "UZB": {
+    "mape": 1.641013509735754,
+    "name": "Uzbekistan"
+  },
+  "VUT": {
+    "mape": 2.2155184703597444,
+    "name": "Vanuatu"
+  },
+  "VEN": {
+    "mape": 6.015143089446574,
+    "name": "Venezuela, Bolivarian Republic of"
+  },
+  "VNM": {
+    "mape": 1.1432606691399296,
+    "name": "Viet Nam"
+  },
+  "YEM": {
+    "mape": 4.7901638911992075,
+    "name": "Yemen"
+  },
+  "ZWE": {
+    "mape": 5.523497632760506,
+    "name": "Zimbabwe"
+  },
+  "ARM": {
+    "mape": 4.758858446351988,
+    "name": "Armenia"
+  },
+  "BGD": {
+    "mape": 0.9470454598132219,
+    "name": "Bangladesh"
+  },
+  "PHL": {
+    "mape": 2.4447059092194863,
+    "name": "Philippines"
+  },
+  "SYR": {
+    "mape": 5.168883617807101,
+    "name": "Syrian Arab Republic"
+  }
+}
