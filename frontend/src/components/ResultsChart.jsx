@@ -45,7 +45,7 @@ export default function ResultsChart() {
           />
           <Tooltip
             contentStyle={{ background: "#0F1729", border: "1px solid #1E293B", fontSize: 12 }}
-            formatter={(v) => (v != null ? formatGdp(v) : "—")}
+            formatter={(v) => (v != null ? formatGdp(v) : "-")}
           />
           <Legend wrapperStyle={{ fontSize: 12 }} />
           <Line type="monotone" dataKey="actual" name="Actual GDP" stroke="#3B82F6" dot={false} strokeWidth={2} />
@@ -62,26 +62,26 @@ export default function ResultsChart() {
         </LineChart>
       </ResponsiveContainer>
 
-      {/* Key performance metrics — primary output of the simulation */}
+      {/* Key performance metrics - primary output of the simulation */}
       <div className="mt-4 grid grid-cols-3 gap-4 border-t border-slate-800 pt-4">
         <Stat label="MAPE" value={`${result.mape_overall.toFixed(2)}%`} accent />
-        <Stat label="RMSE" value={rmse != null ? formatGdp(rmse) : "—"} />
+        <Stat label="RMSE" value={rmse != null ? formatGdp(rmse) : "-"} />
         <Stat label="SSE (final window)" value={result.best_sse_final.toFixed(3)} />
       </div>
 
-      {/* Additional detail — lower priority than the chart/metrics above */}
+      {/* Additional detail - lower priority than the chart/metrics above */}
       <div className="mt-3 grid grid-cols-2 gap-4 text-xs text-slate-500">
         <span>
           Actual GDP ({result.years[latestIdx]}): {formatGdp(result.y_actual[latestIdx])}
         </span>
         <span>
           Simulated GDP ({result.years[latestIdx]}):{" "}
-          {result.y_pred[latestIdx] != null ? formatGdp(result.y_pred[latestIdx]) : "—"}
+          {result.y_pred[latestIdx] != null ? formatGdp(result.y_pred[latestIdx]) : "-"}
         </span>
       </div>
 
       <p className="mt-2 text-xs text-slate-500">
-        Rolling window {settings.window}y — predictions start after the first full window; earlier years show no forecast.
+        Rolling window {settings.window}y - predictions start after the first full window; earlier years show no forecast.
       </p>
     </div>
   );
