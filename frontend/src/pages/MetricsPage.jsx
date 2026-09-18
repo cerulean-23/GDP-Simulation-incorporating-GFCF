@@ -17,7 +17,7 @@ export default function MetricsPage() {
     return (
       <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-10 text-center">
         {status === "running" ? (
-          <p className="mb-4 text-sm text-slate-400">Simulation in progress — results will appear here once complete.</p>
+          <p className="mb-4 text-sm text-slate-400">Simulation in progress - results will appear here once complete.</p>
         ) : (
           <>
             <p className="mb-1 text-sm font-medium text-slate-300">NO SIMULATION RESULTS</p>
