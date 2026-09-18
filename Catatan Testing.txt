@@ -1,0 +1,5 @@
+1. Ketika Time range dihapus semua, muncul 0 dan 0 tidak bisa dihapus
+2. Tahun time range batas atasnya tahun ini yaitu 2026
+3. Parameter Lebih baik diberi validasi penjagaan
+4. begitu juga dengan population size
+5. 

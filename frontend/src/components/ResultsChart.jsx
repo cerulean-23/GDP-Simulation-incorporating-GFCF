@@ -9,14 +9,16 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useSimulation } from "../context/SimulationContext";
+import { computeRmse, formatGdp } from "../utils/metrics";
 
 export default function ResultsChart() {
   const { result, settings } = useSimulation();
 
   if (!result) {
     return (
-      <div className="flex h-[320px] items-center justify-center text-sm text-slate-500">
-        Run a simulation to see GDP actual vs predicted.
+      <div className="flex h-[320px] flex-col items-center justify-center gap-1 text-center text-sm text-slate-500">
+        <p>No simulation results yet.</p>
+        <p className="text-xs">Configure the model and run a simulation to see the results.</p>
       </div>
     );
   }
@@ -28,18 +30,10 @@ export default function ResultsChart() {
   }));
 
   const latestIdx = result.years.length - 1;
+  const rmse = computeRmse(result.y_actual, result.y_pred);
 
   return (
     <div>
-      <div className="mb-4 grid grid-cols-3 gap-4">
-        <Stat label={`Actual GDP (${result.years[latestIdx]})`} value={formatGdp(result.y_actual[latestIdx])} />
-        <Stat
-          label={`Predicted GDP (${result.years[latestIdx]})`}
-          value={result.y_pred[latestIdx] != null ? formatGdp(result.y_pred[latestIdx]) : "—"}
-        />
-        <Stat label="MAPE (Overall)" value={`${result.mape_overall.toFixed(2)}%`} accent />
-      </div>
-
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
@@ -54,11 +48,11 @@ export default function ResultsChart() {
             formatter={(v) => (v != null ? formatGdp(v) : "—")}
           />
           <Legend wrapperStyle={{ fontSize: 12 }} />
-          <Line type="monotone" dataKey="actual" name="Actual (Y)" stroke="#3B82F6" dot={false} strokeWidth={2} />
+          <Line type="monotone" dataKey="actual" name="Actual GDP" stroke="#3B82F6" dot={false} strokeWidth={2} />
           <Line
             type="monotone"
             dataKey="predicted"
-            name="Predicted (Ŷ)"
+            name="Simulated GDP"
             stroke="#F97316"
             strokeDasharray="5 4"
             dot={false}
@@ -68,7 +62,25 @@ export default function ResultsChart() {
         </LineChart>
       </ResponsiveContainer>
 
-      <p className="mt-2 flex items-center gap-1 text-xs text-slate-500">
+      {/* Key performance metrics — primary output of the simulation */}
+      <div className="mt-4 grid grid-cols-3 gap-4 border-t border-slate-800 pt-4">
+        <Stat label="MAPE" value={`${result.mape_overall.toFixed(2)}%`} accent />
+        <Stat label="RMSE" value={rmse != null ? formatGdp(rmse) : "—"} />
+        <Stat label="SSE (final window)" value={result.best_sse_final.toFixed(3)} />
+      </div>
+
+      {/* Additional detail — lower priority than the chart/metrics above */}
+      <div className="mt-3 grid grid-cols-2 gap-4 text-xs text-slate-500">
+        <span>
+          Actual GDP ({result.years[latestIdx]}): {formatGdp(result.y_actual[latestIdx])}
+        </span>
+        <span>
+          Simulated GDP ({result.years[latestIdx]}):{" "}
+          {result.y_pred[latestIdx] != null ? formatGdp(result.y_pred[latestIdx]) : "—"}
+        </span>
+      </div>
+
+      <p className="mt-2 text-xs text-slate-500">
         Rolling window {settings.window}y — predictions start after the first full window; earlier years show no forecast.
       </p>
     </div>
@@ -82,8 +94,4 @@ function Stat({ label, value, accent }) {
       <p className={`text-xl font-semibold ${accent ? "text-green-400" : "text-slate-100"}`}>{value}</p>
     </div>
   );
-}
-
-function formatGdp(v) {
-  return `${(v / 1e9).toFixed(2)}B`;
 }

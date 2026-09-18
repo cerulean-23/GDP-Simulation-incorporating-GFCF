@@ -3,7 +3,7 @@ import json
 import numpy as np
 import httpx
 from pathlib import Path
-from fastapi import APIRouter, File, HTTPException, Response, UploadFile, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, File, Form, HTTPException, Response, UploadFile, WebSocket, WebSocketDisconnect
 
 from app.api import session_cache
 from app.data.loader import load_country_data, load_csv_fallback
@@ -56,8 +56,14 @@ async def get_country_data(country_code: str, start_year: int = 1990, end_year: 
 
 
 @router.post("/api/data/upload-fallback")
-async def upload_fallback(gdp_file: UploadFile = File(...), gfcf_file: UploadFile = File(...)):
-    """Fallback: two separate CSV uploads, World-Bank-export format."""
+async def upload_fallback(
+    gdp_file: UploadFile = File(...),
+    gfcf_file: UploadFile = File(...),
+    country_code: str = Form("ID"),
+    start_year: int | None = Form(None),
+    end_year: int | None = Form(None),
+):
+    """Fallback: two CSV uploads (single-country or full World Bank export), filtered to country_code + year range."""
     if not gdp_file.filename.lower().endswith(".csv") or not gfcf_file.filename.lower().endswith(".csv"):
         raise HTTPException(400, "Both files must be .csv.")
 
@@ -65,7 +71,9 @@ async def upload_fallback(gdp_file: UploadFile = File(...), gfcf_file: UploadFil
     gfcf_bytes = await gfcf_file.read()
 
     try:
-        df = load_csv_fallback(gdp_bytes, gfcf_bytes)
+        df, matched_name = load_csv_fallback(gdp_bytes, gfcf_bytes, country_code, start_year, end_year)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
     except Exception as e:
         raise HTTPException(
             400,
@@ -81,6 +89,7 @@ async def upload_fallback(gdp_file: UploadFile = File(...), gfcf_file: UploadFil
         "years": df["year"].tolist(),
         "gdp": df["gdp"].tolist(),
         "gfcf": df["gfcf"].tolist(),
+        "matched_country_name": matched_name,
     }
 
 
@@ -130,9 +139,29 @@ async def simulate_ws(websocket: WebSocket, session_id: str):
             b=tuple(payload["bounds"]["b"]),
             c=tuple(payload["bounds"]["c"]),
         )
+        population_size = payload.get("population_size", 50)
+
+        # Mirrors the frontend's validateSettings() — this is the authoritative
+        # check, since the WS payload could come from anywhere, not just our UI.
+        PARAM_LIMITS = {"a": (-2, 2), "b": (0, 1), "c": (0, 5)}
+        validation_errors = []
+        for name, (lo, hi) in [("a", bounds.a), ("b", bounds.b), ("c", bounds.c)]:
+            limit_lo, limit_hi = PARAM_LIMITS[name]
+            if lo >= hi:
+                validation_errors.append(f"Parameter {name}: lower bound must be less than upper bound.")
+            if lo < limit_lo or hi > limit_hi:
+                validation_errors.append(f"Parameter {name}: must stay within [{limit_lo}, {limit_hi}].")
+        if not (5 <= population_size <= 100):
+            validation_errors.append("Population size must be between 5 and 100.")
+
+        if validation_errors:
+            await websocket.send_json({"type": "error", "message": " ".join(validation_errors)})
+            await websocket.close()
+            return
+
         config = OptimizationConfig(
             bounds=bounds,
-            population_size=payload.get("population_size", 50),
+            population_size=population_size,
             max_iterations=payload.get("max_iterations", 1000),
             window=window,
             step_size=payload.get("step_size", 1.0),

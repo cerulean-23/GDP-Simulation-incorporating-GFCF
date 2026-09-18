@@ -12,7 +12,7 @@ const DEFAULT_SETTINGS = {
   dataSource: "World Bank Open Data",
   startYear: 1990,
   endYear: 2020,
-  countryCode: "ID",
+  countryCode: "IDN",
   countryName: "Indonesia",
   bounds: DEFAULT_BOUNDS,
   populationSize: 50,
@@ -36,6 +36,12 @@ function loadStoredMape() {
 export function SimulationProvider({ children }) {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
   const [rawData, setRawData] = useState(null); // { years, gdp, gfcf }
+  // Which country rawData (and therefore any result) actually belongs to —
+  // deliberately separate from settings.countryCode, which is just the
+  // pending selection for the *next* fetch. Without this split, clicking a
+  // new country on the map instantly relabels stale results as if they
+  // were freshly computed for it.
+  const [dataCountry, setDataCountry] = useState(null); // { code, name, source }
   const [result, setResultState] = useState(null); // full SimulationResult from backend
   const [progress, setProgress] = useState(null); // latest progress message
   const [status, setStatus] = useState("idle"); // idle | loading-data | running | done | error
@@ -69,23 +75,6 @@ export function SimulationProvider({ children }) {
     localStorage.setItem(MAPE_STORAGE_KEY, JSON.stringify(countryMape));
   }, [countryMape]);
 
-  // Wraps setResult so completing a run also records that country's MAPE.
-  const setResult = useCallback(
-    (newResult) => {
-      setResultState(newResult);
-      if (newResult) {
-        setCountryMape((prev) => ({
-          ...prev,
-          [settings.countryCode]: {
-            mape: newResult.mape_overall,
-            name: settings.countryName || settings.countryCode,
-          },
-        }));
-      }
-    },
-    [settings.countryCode, settings.countryName]
-  );
-
   const resetResult = useCallback(() => {
     setResultState(null);
     setProgress(null);
@@ -93,12 +82,47 @@ export function SimulationProvider({ children }) {
     setErrorMessage(null);
   }, []);
 
+  // Sets rawData together with which country it belongs to, and clears any
+  // previous result — the single entry point DataConfigPanel uses after a
+  // successful fetch/upload, so "loaded data" and "its label" can never
+  // drift apart.
+  const loadData = useCallback(
+    (data, code, name, source) => {
+      setRawData(data);
+      setDataCountry({ code, name, source });
+      resetResult();
+    },
+    [resetResult]
+  );
+
+  // Wraps setResult so completing a run also records that country's MAPE —
+  // keyed off dataCountry (what was actually simulated), not settings
+  // .countryCode, which may have moved on to a different pending selection
+  // by the time a long-running DE fit finishes.
+  const setResult = useCallback(
+    (newResult) => {
+      setResultState(newResult);
+      if (newResult && dataCountry) {
+        setCountryMape((prev) => ({
+          ...prev,
+          [dataCountry.code]: {
+            mape: newResult.mape_overall,
+            name: dataCountry.name || dataCountry.code,
+          },
+        }));
+      }
+    },
+    [dataCountry]
+  );
+
   const value = {
     sessionId: SESSION_ID,
     settings,
     setSettings,
     rawData,
     setRawData,
+    dataCountry,
+    loadData,
     result,
     setResult,
     countryMape,

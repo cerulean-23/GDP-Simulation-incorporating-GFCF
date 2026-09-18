@@ -57,7 +57,7 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
         </button>
       </div>
 
-      <ComposableMap projectionConfig={{ scale: 175 }} className="h-[340px] w-full sm:h-[420px] lg:h-[520px]">
+      <ComposableMap projectionConfig={{ scale: 175 }} className="h-[300px] w-full sm:h-[360px] lg:h-[400px]">
         <ZoomableGroup
           zoom={zoom}
           center={center}
@@ -127,7 +127,7 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
         <span>20%+</span>
       </div>
       <div className="mt-1 flex justify-between text-[11px]">
-        <span className="text-green-400">Low Error (Accurate)</span>
+        <span className="text-green-400">Low Error</span>
         <span className="text-red-400">High Error</span>
       </div>
     </div>

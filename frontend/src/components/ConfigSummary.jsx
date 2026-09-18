@@ -1,6 +1,6 @@
-export default function ConfigSummary({ settings, result }) {
+export default function ConfigSummary({ settings, result, dataCountry }) {
   const rows = [
-    ["Selected Region", settings.countryName || settings.countryCode],
+    ["Selected Region", dataCountry?.name || dataCountry?.code || "—"],
     ["Optimization Algorithm", "Differential Evolution"],
     ["Simulation Period", `${settings.startYear} - ${settings.endYear}`],
     ["Population Size", settings.populationSize],

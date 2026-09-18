@@ -17,10 +17,13 @@ export async function fetchCountryData(countryCode, startYear, endYear) {
   return res.json();
 }
 
-export async function uploadFallbackData(gdpFile, gfcfFile) {
+export async function uploadFallbackData(gdpFile, gfcfFile, countryCode, startYear, endYear) {
   const form = new FormData();
   form.append("gdp_file", gdpFile);
   form.append("gfcf_file", gfcfFile);
+  form.append("country_code", countryCode);
+  if (startYear != null) form.append("start_year", startYear);
+  if (endYear != null) form.append("end_year", endYear);
   const res = await fetch(`${API_BASE}/api/data/upload-fallback`, {
     method: "POST",
     body: form,

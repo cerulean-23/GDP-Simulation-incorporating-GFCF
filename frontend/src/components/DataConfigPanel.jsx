@@ -1,8 +1,12 @@
 import { useRef, useState } from "react";
 import { useSimulation } from "../context/SimulationContext";
 import { fetchCountryData, uploadFallbackData } from "../api/client";
+import { alpha3ToName } from "../data/countryCodes";
+import NumberInput from "./NumberInput";
+import CountrySelect from "./CountrySelect";
+
 export default function DataConfigPanel() {
-  const { settings, setSettings, setRawData, rawData, resetResult } = useSimulation();
+  const { settings, setSettings, loadData, rawData, dataCountry } = useSimulation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [gdpFile, setGdpFile] = useState(null);
@@ -16,11 +20,10 @@ export default function DataConfigPanel() {
     setError(null);
     try {
       const data = await fetchCountryData(settings.countryCode, settings.startYear, settings.endYear);
-      setRawData(data);
-      resetResult();
+      const resolvedName = alpha3ToName[settings.countryCode.toUpperCase()] || settings.countryCode;
+      loadData(data, settings.countryCode, resolvedName, "api");
     } catch (e) {
       setError(e.message);
-      setRawData(null);
     } finally {
       setLoading(false);
     }
@@ -34,12 +37,16 @@ export default function DataConfigPanel() {
     setLoading(true);
     setError(null);
     try {
-      const data = await uploadFallbackData(gdpFile, gfcfFile);
-      setRawData(data);
-      resetResult();
+      const data = await uploadFallbackData(
+        gdpFile,
+        gfcfFile,
+        settings.countryCode,
+        settings.startYear,
+        settings.endYear
+      );
+      loadData(data, settings.countryCode, data.matched_country_name, "csv");
     } catch (e) {
       setError(e.message);
-      setRawData(null);
     } finally {
       setLoading(false);
     }
@@ -54,31 +61,24 @@ export default function DataConfigPanel() {
       <div className="space-y-3">
         <div>
           <label className="mb-1 block text-xs text-slate-400">Country</label>
-          <input
-            type="text"
+          <CountrySelect
             value={settings.countryCode}
-            onChange={(e) =>
-              setSettings((s) => ({ ...s, countryCode: e.target.value.toUpperCase() }))
-            }
-            placeholder="ISO code e.g. ID"
-            className="w-full rounded-md border border-slate-700 bg-[#0A0F1E] px-3 py-2 text-sm text-slate-100 focus:border-blue-500 focus:outline-none"
+            onChange={(code, name) => setSettings((s) => ({ ...s, countryCode: code, countryName: name }))}
           />
         </div>
 
         <div>
           <label className="mb-1 block text-xs text-slate-400">Time Range</label>
           <div className="flex items-center gap-2">
-            <input
-              type="number"
+            <NumberInput
               value={settings.startYear}
-              onChange={(e) => setSettings((s) => ({ ...s, startYear: Number(e.target.value) }))}
+              onChange={(n) => setSettings((s) => ({ ...s, startYear: n }))}
               className="w-full rounded-md border border-slate-700 bg-[#0A0F1E] px-3 py-2 text-sm text-slate-100 focus:border-blue-500 focus:outline-none"
             />
             <span className="text-slate-500">–</span>
-            <input
-              type="number"
+            <NumberInput
               value={settings.endYear}
-              onChange={(e) => setSettings((s) => ({ ...s, endYear: Number(e.target.value) }))}
+              onChange={(n) => setSettings((s) => ({ ...s, endYear: n }))}
               className="w-full rounded-md border border-slate-700 bg-[#0A0F1E] px-3 py-2 text-sm text-slate-100 focus:border-blue-500 focus:outline-none"
             />
           </div>
@@ -135,9 +135,16 @@ export default function DataConfigPanel() {
         </div>
 
         {error && <p className="text-xs text-red-400">{error}</p>}
-        {!error && rawData && (
+        {!error && rawData && dataCountry && (
           <p className="text-xs text-green-400">
-            ✓ Loaded {rawData.years.length} years ({rawData.years[0]}–{rawData.years[rawData.years.length - 1]})
+            ✓ Loaded <span className="font-medium">{dataCountry.name}</span> — {rawData.years.length} years (
+            {rawData.years[0]}–{rawData.years[rawData.years.length - 1]})
+            {dataCountry.source === "csv" && " · from uploaded CSVs"}
+          </p>
+        )}
+        {rawData && dataCountry && settings.countryCode !== dataCountry.code && (
+          <p className="text-xs text-yellow-400">
+            ⚠ Selected country changed to {settings.countryCode} — click Fetch to load its data.
           </p>
         )}
       </div>

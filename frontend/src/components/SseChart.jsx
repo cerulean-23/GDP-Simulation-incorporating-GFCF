@@ -13,7 +13,10 @@ export default function SseChart({ result }) {
 
   return (
     <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
-      <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">SSE (ERROR) PER YEAR</h3>
+      <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">SSE BY YEAR</h3>
+      <p className="mb-4 text-xs text-slate-500">
+        Sum of squared errors for each step-ahead forecast.
+      </p>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <div className="md:col-span-3">
           <ResponsiveContainer width="100%" height={220}>
