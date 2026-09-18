@@ -22,7 +22,7 @@ export default function SimulationPage() {
           GLOBAL MODEL ERROR (MAPE)
         </h3>
         <p className="mb-3 text-xs text-slate-500">
-          Lower MAPE indicates better model performance — click a country to select it, then fetch data and run
+          Lower MAPE indicates better model performance - click a country to select it, then fetch data and run
         </p>
         <WorldMap
           countryMape={countryMape}
@@ -33,7 +33,7 @@ export default function SimulationPage() {
         />
       </section>
 
-      {/* 3. Simulation Configuration — Data | Model Parameters | Numerical Method */}
+      {/* 3. Simulation Configuration - Data | Model Parameters | Numerical Method */}
       <div>
         <h2 className="mb-3 text-xs font-semibold tracking-wide text-slate-400">
           SIMULATION CONFIGURATION
@@ -51,7 +51,7 @@ export default function SimulationPage() {
       {/* 5. Simulation Results */}
       <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
         <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">
-          SIMULATION RESULTS{dataCountry ? ` — ${dataCountry.name?.toUpperCase() || dataCountry.code}` : ""}
+          SIMULATION RESULTS{dataCountry ? ` - ${dataCountry.name?.toUpperCase() || dataCountry.code}` : ""}
         </h3>
         <ResultsChart />
       </section>
