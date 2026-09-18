@@ -1,9 +1,9 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const PARAMS = [
-  { key: "a_track", label: "a — Intrinsic Growth", color: "#22C55E" },
-  { key: "b_track", label: "b — Growth Constraint", color: "#3B82F6" },
-  { key: "c_track", label: "c — GFCF Effect", color: "#A855F7" },
+  { key: "a_track", label: "a - Intrinsic Growth", color: "#22C55E" },
+  { key: "b_track", label: "b - Growth Constraint", color: "#3B82F6" },
+  { key: "c_track", label: "c - GFCF Effect", color: "#A855F7" },
 ];
 
 function WindowTooltip({ active, payload, valueLabel }) {
@@ -32,7 +32,7 @@ export default function ParameterTracksChart({ result, title = "PARAMETER ESTIMA
               const value = result[key][i];
               if (value == null) return null;
               // The estimation window for the forecast at index i is the
-              // trailing `window` years ending right before it — derived
+              // trailing `window` years ending right before it - derived
               // from actual data/settings, never hardcoded.
               const windowLabel =
                 window && i - window >= 0
@@ -50,7 +50,7 @@ export default function ParameterTracksChart({ result, title = "PARAMETER ESTIMA
                   <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
                   <XAxis dataKey="year" stroke="#64748B" fontSize={11} />
                   <YAxis stroke="#64748B" fontSize={11} width={40} />
-                  <Tooltip content={<WindowTooltip valueLabel={label.split(" — ")[0]} />} />
+                  <Tooltip content={<WindowTooltip valueLabel={label.split(" - ")[0]} />} />
                   <Line type="monotone" dataKey="value" stroke={color} dot={{ r: 1.5 }} strokeWidth={1.5} />
                 </LineChart>
               </ResponsiveContainer>
