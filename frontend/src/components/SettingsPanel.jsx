@@ -3,6 +3,7 @@ import { useSimulationSocket } from "../hooks/useSimulationSocket";
 import { PARAM_LIMITS, POPULATION_SIZE_LIMITS, clamp, validateSettings } from "../utils/paramLimits";
 import NumberInput from "./NumberInput";
 import InfoTooltip from "./InfoTooltip";
+import { computeActualDataRange } from "../utils/metrics";
 
 const PARAM_INFO = {
   a: { title: "a  (Intrinsic Growth)", tooltip: "Intrinsic GDP growth parameter." },
@@ -81,6 +82,7 @@ export default function SettingsPanel() {
   const { settings, setSettings, status, progress, errorMessage, rawData, dataCountry } = useSimulation();
   const { runSimulation, cancelSimulation } = useSimulationSocket();
 
+  const dataRange = computeActualDataRange(rawData) ?? "—";
   const isRunning = status === "running";
   const validationProblems = validateSettings(settings);
   const isValid = validationProblems.length === 0;
@@ -180,7 +182,8 @@ export default function SettingsPanel() {
             <div>
               <p className="text-slate-500">Ready to simulate:</p>
               <p className="font-medium text-slate-100">
-                {dataCountry.name} · {settings.startYear}–{settings.endYear}
+                {/* {dataCountry.name} · {settings.startYear}–{settings.endYear} */}
+                {dataCountry.name} · {dataRange}
               </p>
             </div>
             <div className="flex justify-between text-slate-400">

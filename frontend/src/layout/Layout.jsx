@@ -1,5 +1,10 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { useSimulation } from "../context/SimulationContext";
+import { downloadJson } from "../utils/exportJson";
+import { downloadExcel } from "../utils/exportExcel";
+import { downloadPdf } from "../utils/exportPdf";
+import Footer from "../components/Footer";
 
 function ChartIcon() {
   return (
@@ -17,40 +22,95 @@ function ChartIcon() {
 }
 
 function ExportButton() {
-  const { result } = useSimulation();
+  const { result, settings, dataCountry } = useSimulation();
+  const [open, setOpen] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
+  const rootRef = useRef(null);
 
-  const handleExport = () => {
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (rootRef.current && !rootRef.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  async function handleSelect(format) {
     if (!result) return;
-    const blob = new Blob([JSON.stringify(result, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "solow-swan-results.json";
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+    setBusy(true);
+    setOpen(false);
+    setError(null);
+    try {
+      if (format === "json") downloadJson(result, dataCountry);
+      else if (format === "excel") downloadExcel(result, settings, dataCountry);
+      else if (format === "pdf") downloadPdf(result, settings, dataCountry);
+    } catch (e) {
+      console.error("Export failed:", e);
+      setError(`Export failed: ${e?.message || "unknown error"}`);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const OPTIONS = [
+    { key: "json", label: "JSON", hint: "Raw result data" },
+    { key: "excel", label: "Excel (.xlsx)", hint: "Summary, forecast, parameters" },
+    { key: "pdf", label: "PDF Report", hint: "Full Model & Metrics report" },
+  ];
 
   return (
-    <button
-      onClick={handleExport}
-      disabled={!result}
-      className="flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-200 transition-colors hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-40"
-    >
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path
-          d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-      Export Results
-    </button>
+    <div ref={rootRef} className="relative">
+      <button
+        onClick={() => result && setOpen((o) => !o)}
+        disabled={!result || busy}
+        className="flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-200 transition-colors hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        {busy ? "Exporting..." : "Export Results"}
+      </button>
+
+      {error && (
+        <div
+          role="alert"
+          onClick={() => setError(null)}
+          className="absolute right-0 z-20 mt-1 w-72 cursor-pointer rounded-md border border-red-900/60 bg-[#1a0f14] px-3 py-2 text-xs text-red-300 shadow-lg"
+        >
+          {error}
+        </div>
+      )}
+
+      {open && (
+        <div className="absolute right-0 z-20 mt-1 w-56 overflow-hidden rounded-md border border-slate-700 bg-[#0F1729] shadow-lg">
+          {OPTIONS.map((opt) => (
+            <button
+              key={opt.key}
+              onClick={() => handleSelect(opt.key)}
+              className="flex w-full flex-col items-start px-3 py-2 text-left hover:bg-slate-800"
+            >
+              <span className="text-sm text-slate-100">{opt.label}</span>
+              <span className="text-[11px] text-slate-500">{opt.hint}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
 export default function Layout() {
+  // The header export covers the annual simulation only; the FRED page has
+  // its own export buttons, so hide this one there to avoid exporting the
+  // wrong result.
+  const onFredPage = useLocation().pathname.startsWith("/fred");
   const navClass = ({ isActive }) =>
     `text-sm font-medium transition-colors ${
       isActive ? "text-blue-400" : "text-slate-400 hover:text-slate-200"
@@ -78,14 +138,18 @@ export default function Layout() {
           <NavLink to="/metrics" className={navClass}>
             Model &amp; Metrics
           </NavLink>
+          <NavLink to="/fred" className={navClass}>
+            Quarterly (FRED)
+          </NavLink>
         </nav>
 
-        <ExportButton />
+        {onFredPage ? <div className="w-[140px]" /> : <ExportButton />}
       </header>
 
       <main className="px-6 py-6">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 }

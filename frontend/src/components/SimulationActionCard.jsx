@@ -2,11 +2,12 @@ import { useSimulation } from "../context/SimulationContext";
 import { useSimulationSocket } from "../hooks/useSimulationSocket";
 import { validateSettings } from "../utils/paramLimits";
 import { ReadinessLine } from "./settingsControls";
+import { computeActualDataRange } from "../utils/metrics";
 
 export default function SimulationActionCard() {
   const { settings, status, progress, errorMessage, rawData, dataCountry, result } = useSimulation();
   const { runSimulation, cancelSimulation } = useSimulationSocket();
-
+  const dataRange = computeActualDataRange(rawData) ?? "—";
   const isRunning = status === "running";
   const isDone = status === "done" && !!result;
   const validationProblems = validateSettings(settings);
@@ -15,6 +16,7 @@ export default function SimulationActionCard() {
 
   let buttonLabel = "🚀 RUN SIMULATION";
   if (isRunning) buttonLabel = "RUNNING...";
+
 
   return (
     <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
@@ -30,6 +32,7 @@ export default function SimulationActionCard() {
         </p>
       )}
 
+
       {rawData && dataCountry && (
         <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -39,7 +42,7 @@ export default function SimulationActionCard() {
           <div>
             <p className="text-xs text-slate-500">Data Period</p>
             <p className="text-sm font-medium text-slate-100">
-              {settings.startYear}–{settings.endYear}
+              {dataRange}
             </p>
           </div>
           <div>

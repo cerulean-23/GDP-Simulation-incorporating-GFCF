@@ -1,6 +1,7 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { formatSse } from "../utils/metrics";
 
-export default function SseChart({ result }) {
+export default function SseChart({ result, title = "SSE BY YEAR" }) {
   const points = result.years
     .map((year, i) => ({ year, sse: result.sse_per_year[i] }))
     .filter((p) => p.sse != null && p.sse > 0);
@@ -13,7 +14,7 @@ export default function SseChart({ result }) {
 
   return (
     <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
-      <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">SSE BY YEAR</h3>
+      <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">{title}</h3>
       <p className="mb-4 text-xs text-slate-500">
         Sum of squared errors for each step-ahead forecast.
       </p>
@@ -23,20 +24,26 @@ export default function SseChart({ result }) {
             <LineChart data={points} margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
               <XAxis dataKey="year" stroke="#64748B" fontSize={12} />
-              <YAxis scale="log" domain={["auto", "auto"]} stroke="#64748B" fontSize={12} />
+              <YAxis
+                scale="log"
+                domain={["auto", "auto"]}
+                stroke="#64748B"
+                fontSize={12}
+                tickFormatter={(v) => (v >= 1000 || v < 0.01 ? v.toExponential(0) : String(v))}
+              />
               <Tooltip
                 contentStyle={{ background: "#0F1729", border: "1px solid #1E293B", fontSize: 12 }}
-                formatter={(v) => v.toFixed(4)}
+                formatter={(v) => formatSse(v)}
               />
               <Line type="monotone" dataKey="sse" stroke="#3B82F6" dot={{ r: 2 }} strokeWidth={1.5} />
             </LineChart>
           </ResponsiveContainer>
         </div>
         <div className="flex flex-col justify-center gap-3 text-sm">
-          <Stat label="Average SSE" value={avg.toFixed(3)} />
-          <Stat label="Median SSE" value={median.toFixed(3)} />
-          <Stat label="Min SSE" value={`${minEntry.sse.toFixed(3)} (${minEntry.year})`} />
-          <Stat label="Max SSE" value={`${maxEntry.sse.toFixed(3)} (${maxEntry.year})`} />
+          <Stat label="Average SSE" value={formatSse(avg)} />
+          <Stat label="Median SSE" value={formatSse(median)} />
+          <Stat label="Min SSE" value={`${formatSse(minEntry.sse)} (${minEntry.year})`} />
+          <Stat label="Max SSE" value={`${formatSse(maxEntry.sse)} (${maxEntry.year})`} />
         </div>
       </div>
     </div>

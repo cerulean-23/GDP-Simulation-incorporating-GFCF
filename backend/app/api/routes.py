@@ -8,6 +8,7 @@ from fastapi import APIRouter, File, Form, HTTPException, Response, UploadFile, 
 from app.api import session_cache
 from app.data.loader import load_country_data, load_csv_fallback
 from app.optimization.rolling_de import OptimizationBounds, OptimizationConfig, run_rolling_de
+from app.api.routes_fred import fred_router  # noqa: E402
 
 router = APIRouter()
 
@@ -206,3 +207,5 @@ async def simulate_ws(websocket: WebSocket, session_id: str):
             await websocket.send_json({"type": "error", "message": f"Simulation failed: {e}"})
         except Exception:
             pass
+
+router.include_router(fred_router)

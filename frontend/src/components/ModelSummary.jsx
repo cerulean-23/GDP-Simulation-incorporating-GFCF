@@ -1,4 +1,5 @@
 import { computeForecastRange } from "../utils/metrics";
+import { computeActualDataRange } from "../utils/metrics";
 
 function SubCard({ title, rows }) {
   return (
@@ -18,6 +19,7 @@ function SubCard({ title, rows }) {
 
 export default function ModelSummary({ settings, result, dataCountry }) {
   const forecastRange = computeForecastRange(result);
+  const dataRange = computeActualDataRange(result) ?? "—";
 
   return (
     <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
@@ -37,7 +39,8 @@ export default function ModelSummary({ settings, result, dataCountry }) {
         <SubCard
           title="Timeline & Scope"
           rows={[
-            ["Data Period", `${settings.startYear}–${settings.endYear}`],
+            ["Data Period", dataRange],
+            // ["Data Period", `${settings.startYear}–${settings.endYear}`],
             ["Frequency", "Annual"],
             ["Rolling Window", `w = ${settings.window} years`],
           ]}

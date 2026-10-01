@@ -1,8 +1,9 @@
+import { computeActualDataRange } from "../utils/metrics";  
 export default function ConfigSummary({ settings, result, dataCountry }) {
   const rows = [
     ["Selected Region", dataCountry?.name || dataCountry?.code || "—"],
     ["Optimization Algorithm", "Differential Evolution"],
-    ["Simulation Period", `${settings.startYear} - ${settings.endYear}`],
+    ["Simulation Period", computeActualDataRange(result) ?? "—"],
     ["Population Size", settings.populationSize],
     ["Total Data Points", `${result.years.length} Years`],
     ["Max Iterations", settings.maxIterations],
