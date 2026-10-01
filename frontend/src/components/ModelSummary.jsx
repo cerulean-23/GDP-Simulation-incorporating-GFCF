@@ -31,7 +31,7 @@ export default function ModelSummary({ settings, result, dataCountry }) {
         <SubCard
           title="Country & Data"
           rows={[
-            ["Selected Country", dataCountry?.name || dataCountry?.code || "—"],
+            ["Selected Country", dataCountry?.name || dataCountry?.code || "-"],
             ["Currency", "Constant 2015 US$"],
             ["Data Type", "Real GDP + GFCF"],
           ]}

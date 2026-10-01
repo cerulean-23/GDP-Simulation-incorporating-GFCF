@@ -3,9 +3,9 @@ import InfoTooltip from "./InfoTooltip";
 import { clamp } from "../utils/paramLimits";
 
 export const PARAM_INFO = {
-  a: { title: "a — Intrinsic Growth", tooltip: "Intrinsic GDP growth parameter." },
-  b: { title: "b — Growth Constraint", tooltip: "Nonlinear growth constraint representing diminishing growth at higher GDP levels." },
-  c: { title: "c — GFCF Effect", tooltip: "Sensitivity of GDP dynamics to GFCF." },
+  a: { title: "a - Intrinsic Growth", tooltip: "Intrinsic GDP growth parameter." },
+  b: { title: "b - Growth Constraint", tooltip: "Nonlinear growth constraint representing diminishing growth at higher GDP levels." },
+  c: { title: "c - GFCF Effect", tooltip: "Sensitivity of GDP dynamics to GFCF." },
 };
 
 export function BoundInput({ paramKey, value, onChange, limit }) {

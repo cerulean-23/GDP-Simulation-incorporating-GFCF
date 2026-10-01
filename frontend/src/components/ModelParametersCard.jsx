@@ -9,7 +9,7 @@ export default function ModelParametersCard() {
     <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
       <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">MODEL PARAMETERS</h3>
       <p className="mb-3 text-xs text-slate-500">
-        dY/dt = aY &minus; bY&sup2; + cI(t) — search space (Ω)
+        dY/dt = aY &minus; bY&sup2; + cI(t) - search space (Ω)
       </p>
       <div className="space-y-4">
         <BoundInput

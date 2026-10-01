@@ -94,7 +94,7 @@ export default function DataConfigPanel() {
 
         <div className="border-t border-slate-800 pt-3">
           <p className="mb-2 text-xs text-slate-400">
-            Offline fallback — upload World Bank CSV exports directly
+            Offline fallback - upload World Bank CSV exports directly
           </p>
           <div className="flex gap-2">
             <button
@@ -137,14 +137,14 @@ export default function DataConfigPanel() {
         {error && <p className="text-xs text-red-400">{error}</p>}
         {!error && rawData && dataCountry && (
           <p className="text-xs text-green-400">
-            ✓ Loaded <span className="font-medium">{dataCountry.name}</span> — {rawData.years.length} years (
+            ✓ Loaded <span className="font-medium">{dataCountry.name}</span> - {rawData.years.length} years (
             {rawData.years[0]}–{rawData.years[rawData.years.length - 1]})
             {dataCountry.source === "csv" && " · from uploaded CSVs"}
           </p>
         )}
         {rawData && dataCountry && settings.countryCode !== dataCountry.code && (
           <p className="text-xs text-yellow-400">
-            ⚠ Selected country changed to {settings.countryCode} — click Fetch to load its data.
+            ⚠ Selected country changed to {settings.countryCode} - click Fetch to load its data.
           </p>
         )}
       </div>

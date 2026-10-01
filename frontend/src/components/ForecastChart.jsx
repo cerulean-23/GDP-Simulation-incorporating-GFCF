@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { formatGdp } from "../utils/metrics";
 
-// Renders the same result.years/y_actual/y_pred arrays as Page 1's chart —
+// Renders the same result.years/y_actual/y_pred arrays as Page 1's chart -
 // no recalculation, just Page-2-appropriate labels ("Step-Ahead Forecast"
 // rather than "Simulated GDP") and a note on the forecasting methodology.
 // Kept as its own component rather than reusing ResultsChart directly so
@@ -36,7 +36,7 @@ export default function ForecastChart({ result }) {
           <YAxis stroke="#64748B" fontSize={12} tickFormatter={(v) => `${(v / 1e9).toFixed(0)}B`} />
           <Tooltip
             contentStyle={{ background: "#0F1729", border: "1px solid #1E293B", fontSize: 12 }}
-            formatter={(v) => (v != null ? `${formatGdp(v)} constant 2015 US$` : "—")}
+            formatter={(v) => (v != null ? `${formatGdp(v)} constant 2015 US$` : "-")}
           />
           <Legend wrapperStyle={{ fontSize: 12 }} />
           <Line type="monotone" dataKey="actual" name="Actual GDP" stroke="#3B82F6" dot={false} strokeWidth={2} />

@@ -24,7 +24,7 @@ export default function PerformanceSummary({ result }) {
         />
         <Card
           label="RMSE"
-          value={rmse != null ? formatGdp(rmse) : "—"}
+          value={rmse != null ? formatGdp(rmse) : "-"}
           description={
             <>
               Root Mean Squared Error of step-ahead forecasts.
