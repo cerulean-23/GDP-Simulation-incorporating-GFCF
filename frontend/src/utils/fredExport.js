@@ -46,6 +46,10 @@ function fileStem(result) {
   return `fred_${result.fred.dataset.id}_quarterly`;
 }
 
+export function downloadFredJson(result) {
+  downloadBlob(JSON.stringify(result, null, 2), `${fileStem(result)}.json`, "application/json");
+}
+
 /** Same layout as the notebook's Tabel_Error_Prediksi.csv: ';' separator, decimal comma. */
 export function downloadFredCsv(result) {
   const dec = (n, d) => n.toFixed(d).replace(".", ",");

@@ -1,9 +1,12 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useSimulation } from "../context/SimulationContext";
+import { useFred } from "../context/FredContext";
 import { downloadJson } from "../utils/exportJson";
 import { downloadExcel } from "../utils/exportExcel";
 import { downloadPdf } from "../utils/exportPdf";
+import { downloadFredJson, downloadFredExcel } from "../utils/fredExport";
+import { downloadFredPdf } from "../utils/exportFredPdf";
 import Footer from "../components/Footer";
 
 function ChartIcon() {
@@ -21,8 +24,24 @@ function ChartIcon() {
   );
 }
 
-function ExportButton() {
-  const { result, settings, dataCountry } = useSimulation();
+const ANNUAL_OPTIONS = [
+  { key: "json", label: "JSON", hint: "Raw result data" },
+  { key: "excel", label: "Excel (.xlsx)", hint: "Summary, forecast, parameters" },
+  { key: "pdf", label: "PDF Report", hint: "Full Model & Metrics report" },
+];
+
+const FRED_OPTIONS = [
+  { key: "json", label: "JSON", hint: "Raw quarterly result data" },
+  { key: "excel", label: "Excel (.xlsx)", hint: "Summary and evaluation table" },
+  { key: "pdf", label: "PDF Report", hint: "Quarterly (FRED) report" },
+];
+
+/**
+ * Header export dropdown. Generic over WHICH result it exports: the annual
+ * page and the FRED page each pass their own result, option hints and
+ * exporters, so the two flows never export each other's data.
+ */
+function ExportMenu({ result, options, onExport }) {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
@@ -42,9 +61,7 @@ function ExportButton() {
     setOpen(false);
     setError(null);
     try {
-      if (format === "json") downloadJson(result, dataCountry);
-      else if (format === "excel") downloadExcel(result, settings, dataCountry);
-      else if (format === "pdf") downloadPdf(result, settings, dataCountry);
+      onExport(format);
     } catch (e) {
       console.error("Export failed:", e);
       setError(`Export failed: ${e?.message || "unknown error"}`);
@@ -52,12 +69,6 @@ function ExportButton() {
       setBusy(false);
     }
   }
-
-  const OPTIONS = [
-    { key: "json", label: "JSON", hint: "Raw result data" },
-    { key: "excel", label: "Excel (.xlsx)", hint: "Summary, forecast, parameters" },
-    { key: "pdf", label: "PDF Report", hint: "Full Model & Metrics report" },
-  ];
 
   return (
     <div ref={rootRef} className="relative">
@@ -90,7 +101,7 @@ function ExportButton() {
 
       {open && (
         <div className="absolute right-0 z-20 mt-1 w-56 overflow-hidden rounded-md border border-slate-700 bg-[#0F1729] shadow-lg">
-          {OPTIONS.map((opt) => (
+          {options.map((opt) => (
             <button
               key={opt.key}
               onClick={() => handleSelect(opt.key)}
@@ -106,10 +117,39 @@ function ExportButton() {
   );
 }
 
+function AnnualExportButton() {
+  const { result, settings, dataCountry } = useSimulation();
+  return (
+    <ExportMenu
+      result={result}
+      options={ANNUAL_OPTIONS}
+      onExport={(format) => {
+        if (format === "json") downloadJson(result, dataCountry);
+        else if (format === "excel") downloadExcel(result, settings, dataCountry);
+        else if (format === "pdf") downloadPdf(result, settings, dataCountry);
+      }}
+    />
+  );
+}
+
+function FredExportButton() {
+  const { result } = useFred();
+  return (
+    <ExportMenu
+      result={result}
+      options={FRED_OPTIONS}
+      onExport={(format) => {
+        if (format === "json") downloadFredJson(result);
+        else if (format === "excel") downloadFredExcel(result);
+        else if (format === "pdf") downloadFredPdf(result);
+      }}
+    />
+  );
+}
+
 export default function Layout() {
-  // The header export covers the annual simulation only; the FRED page has
-  // its own export buttons, so hide this one there to avoid exporting the
-  // wrong result.
+  // The header export follows the page: annual result on / and /metrics,
+  // quarterly FRED result on /fred.
   const onFredPage = useLocation().pathname.startsWith("/fred");
   const navClass = ({ isActive }) =>
     `text-sm font-medium transition-colors ${
@@ -123,7 +163,7 @@ export default function Layout() {
           <ChartIcon />
           <div>
             <h1 className="text-base font-semibold leading-tight tracking-tight">
-              NONLINEAR ODE GDP GROWTH SIMULATION
+              NONLINEAR GDP GROWTH SIMULATION
             </h1>
             <p className="text-[11px] font-medium leading-tight text-blue-400">
               RK4 &middot; DIFFERENTIAL EVOLUTION &middot; GFCF
@@ -143,7 +183,7 @@ export default function Layout() {
           </NavLink>
         </nav>
 
-        {onFredPage ? <div className="w-[140px]" /> : <ExportButton />}
+        {onFredPage ? <FredExportButton /> : <AnnualExportButton />}
       </header>
 
       <main className="px-6 py-6">
