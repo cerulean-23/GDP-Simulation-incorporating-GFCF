@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-6 text-xs leading-relaxed text-slate-400">
         <p>
           <span className="font-semibold text-slate-400">Disclaimer.</span>{" "}
-          This website was developed by{""}
+          This website was developed by {""}
           {AUTHOR.name ? `${AUTHOR.name}, ` : ""}
           a student at {AUTHOR.university} (Student ID: {AUTHOR.studentId}), as
           part of an academic thesis project on nonlinear GDP growth
