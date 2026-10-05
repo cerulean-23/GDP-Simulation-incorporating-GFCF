@@ -9,7 +9,7 @@ import ParameterTracksChart from "../components/ParameterTracksChart";
 import SseChart from "../components/SseChart";
 
 export default function FredPage() {
-  const { meta, dataset, result, status, errorMessage, retryLoad } = useFred();
+  const { meta, dataset, result, status, errorMessage, retryLoad, offline, resultSource, snapshotInfo } = useFred();
 
   if (!meta || !dataset) {
     return (
@@ -39,6 +39,24 @@ export default function FredPage() {
 
   return (
     <div className="space-y-4">
+      {offline && (
+        <div
+          role="status"
+          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-700/50 bg-[#1a1608] p-4 text-sm text-amber-200"
+        >
+          <span>
+            The server is unreachable, so the page is using bundled data. “Load thesis result” still works; running a custom
+            simulation needs the server.
+          </span>
+          <button
+            onClick={retryLoad}
+            className="rounded-md border border-amber-600/60 px-3 py-1 text-xs text-amber-100 hover:border-amber-400"
+          >
+            Retry connection
+          </button>
+        </div>
+      )}
+
       <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
         <h2 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">
           QUARTERLY ANALYSIS — {dataset.meta.name.toUpperCase()} (FRED)
@@ -67,6 +85,14 @@ export default function FredPage() {
 
       {result && (
         <>
+          {resultSource === "snapshot" && (
+            <p className="rounded-xl border border-blue-900/60 bg-[#0B1530] p-3 text-xs text-blue-200">
+              Precomputed result: default settings (window {result.fred.config.window} quarters, population{" "}
+              {result.fred.config.population_size}, {result.fred.config.max_iterations} iterations, seed{" "}
+              {snapshotInfo?.seed ?? 42}), generated {snapshotInfo?.generated_at ?? "earlier"} by this application's backend.
+              Running the simulation with the same settings reproduces it.
+            </p>
+          )}
           <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
             <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">PERFORMANCE SUMMARY</h3>
             <FredMetrics />

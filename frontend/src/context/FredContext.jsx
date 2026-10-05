@@ -18,6 +18,13 @@ async function errorDetail(res) {
   }
 }
 
+// Bundled default result + data, produced by backend/scripts/precompute_fred_default.py.
+// Loaded lazily so it stays out of the main bundle until needed.
+async function loadSnapshot() {
+  const mod = await import("../data/fredDefault.json");
+  return mod.default;
+}
+
 function configFromDefaults(d) {
   return {
     bounds: { a: [...d.bounds.a], b: [...d.bounds.b], c: [...d.bounds.c] },
@@ -42,6 +49,11 @@ export function FredProvider({ children }) {
   const [progress, setProgress] = useState(null);
   const [status, setStatus] = useState("loading"); // loading | idle | running | done | error
   const [errorMessage, setErrorMessage] = useState(null);
+  // offline: backend unreachable at load time, page is running from the bundled snapshot data.
+  const [offline, setOffline] = useState(false);
+  // where the CURRENT result came from: "run" (live backend) or "snapshot" (bundled)
+  const [resultSource, setResultSource] = useState(null);
+  const [snapshotInfo, setSnapshotInfo] = useState(null);
   const socketRef = useRef(null);
 
   const loadInitial = useCallback(async () => {
@@ -57,10 +69,22 @@ export function FredProvider({ children }) {
       setMeta(m);
       setDataset(d);
       setConfig(configFromDefaults(m.defaults));
+      setOffline(false);
       setStatus("idle");
     } catch (e) {
-      setErrorMessage(`Could not load FRED data: ${e.message}`);
-      setStatus("error");
+      // Backend unreachable: fall back to the bundled data so the page (and the
+      // precomputed thesis result) still work. Custom runs need the server.
+      try {
+        const snap = await loadSnapshot();
+        setMeta(snap.meta);
+        setDataset(snap.dataset);
+        setConfig(configFromDefaults(snap.meta.defaults));
+        setOffline(true);
+        setStatus("idle");
+      } catch {
+        setErrorMessage(`Could not load FRED data: ${e.message}`);
+        setStatus("error");
+      }
     }
   }, []);
 
@@ -86,6 +110,7 @@ export function FredProvider({ children }) {
       socketRef.current.close();
     }
     setResult(null);
+    setResultSource(null);
     setProgress(null);
     setErrorMessage(null);
     setStatus("running");
@@ -121,6 +146,7 @@ export function FredProvider({ children }) {
       } else if (msg.type === "done") {
         finished = true;
         setResult(msg.result);
+        setResultSource("run");
         setStatus("done");
         ws.close();
       } else if (msg.type === "error") {
@@ -136,6 +162,31 @@ export function FredProvider({ children }) {
       if (!ws.cancelled) fail("Connection closed before the simulation finished.");
     };
   }, [meta, dataset, config]);
+
+  // Instant, no server computation: shows the precomputed default result.
+  const loadThesisResult = useCallback(async () => {
+    try {
+      const snap = await loadSnapshot();
+      if (socketRef.current) {
+        socketRef.current.cancelled = true;
+        socketRef.current.close();
+        socketRef.current = null;
+      }
+      // keep the page usable even if the initial backend load never succeeded
+      setMeta((m) => m ?? snap.meta);
+      setDataset((d) => d ?? snap.dataset);
+      setConfig((c) => c ?? configFromDefaults(snap.meta.defaults));
+      setResult(snap.result);
+      setResultSource("snapshot");
+      setSnapshotInfo(snap.snapshot);
+      setProgress(null);
+      setErrorMessage(null);
+      setStatus("done");
+    } catch (e) {
+      setErrorMessage(`Could not load the bundled result: ${e.message}`);
+      setStatus("error");
+    }
+  }, []);
 
   const cancel = useCallback(() => {
     if (socketRef.current) {
@@ -160,6 +211,10 @@ export function FredProvider({ children }) {
     errorMessage,
     run,
     cancel,
+    loadThesisResult,
+    offline,
+    resultSource,
+    snapshotInfo,
     retryLoad: loadInitial,
   };
 

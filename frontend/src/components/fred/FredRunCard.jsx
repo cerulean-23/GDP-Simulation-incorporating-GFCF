@@ -2,7 +2,7 @@ import { useFred } from "../../context/FredContext";
 import { validateFredConfig } from "../../utils/fredValidation";
 
 export default function FredRunCard() {
-  const { meta, dataset, config, status, progress, errorMessage, run, cancel } = useFred();
+  const { meta, dataset, config, status, progress, errorMessage, run, cancel, loadThesisResult } = useFred();
   const running = status === "running";
   const invalid = validateFredConfig(config, meta.limits, dataset.gdp.length).length > 0;
   const pct = progress?.percent ?? 0;
@@ -17,6 +17,15 @@ export default function FredRunCard() {
         >
           {running ? "RUNNING..." : "RUN SIMULATION"}
         </button>
+        {!running && (
+          <button
+            onClick={loadThesisResult}
+            title="Instantly shows the precomputed default result (window 20, 80/20 split) — no server computation"
+            className="rounded-lg border border-blue-500/60 px-4 py-2 text-sm text-blue-300 transition-colors hover:border-blue-400 hover:text-blue-200"
+          >
+            Load thesis result
+          </button>
+        )}
         {running && (
           <button
             onClick={cancel}
