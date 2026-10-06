@@ -46,3 +46,13 @@ export function formatSse(v) {
   if (a < 0.001 || a >= 1e6) return v.toExponential(2);
   return v.toFixed(3);
 }
+
+/**
+ * Total SSE: the sum of the per-period squared one-step-ahead forecast errors
+ * (sse_per_year, in the backend's scaled units). Returns null when there are
+ * no predictions yet.
+ */
+export function computeTotalSse(result) {
+  const vals = (result?.sse_per_year ?? []).filter((v) => v != null && Number.isFinite(v));
+  return vals.length ? vals.reduce((a, b) => a + b, 0) : null;
+}

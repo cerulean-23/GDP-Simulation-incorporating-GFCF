@@ -1,6 +1,6 @@
 import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
-import { computeRmse, computeForecastRange } from "./metrics";
+import { computeRmse, computeForecastRange, computeTotalSse, formatSse } from "./metrics";
 import { drawLineChart, CHART_COLORS } from "./pdfCharts";
 import { computeActualDataRange } from "./metrics";
 import { addPdfFooter } from "./pdfFooter";
@@ -143,7 +143,7 @@ export function downloadPdf(result, settings, dataCountry) {
   keyValueGrid([
     ["MAPE", `${result.mape_overall.toFixed(2)}%`],
     ["RMSE", rmse != null ? `${(rmse / 1e9).toFixed(2)}B constant 2015 US$` : "-"],
-    ["SSE (final window)", result.best_sse_final.toFixed(3)],
+    ["SSE (total)", computeTotalSse(result) != null ? formatSse(computeTotalSse(result)) : "-"],
     ["R2 (coefficient of determination)", result.r2_overall.toFixed(3)],
   ]);
 
@@ -201,10 +201,10 @@ export function downloadPdf(result, settings, dataCountry) {
     const minYear = result.years[result.sse_per_year.indexOf(minVal)];
     const maxYear = result.years[result.sse_per_year.indexOf(maxVal)];
     keyValueGrid([
-      ["Mean SSE", avg.toFixed(3)],
-      ["Median SSE", median.toFixed(3)],
-      ["Minimum SSE", `${minVal.toFixed(3)} (${minYear})`],
-      ["Maximum SSE", `${maxVal.toFixed(3)} (${maxYear})`],
+      ["Mean SSE", formatSse(avg)],
+      ["Median SSE", formatSse(median)],
+      ["Minimum SSE", `${formatSse(minVal)} (${minYear})`],
+      ["Maximum SSE", `${formatSse(maxVal)} (${maxYear})`],
     ]);
     chart(
       {

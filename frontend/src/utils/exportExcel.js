@@ -1,5 +1,5 @@
 import * as XLSX from "xlsx";
-import { computeRmse, computeForecastRange } from "./metrics";
+import { computeRmse, computeForecastRange, computeTotalSse } from "./metrics";
 import { computeActualDataRange } from "./metrics";
 
 /**
@@ -38,7 +38,7 @@ export function downloadExcel(result, settings, dataCountry) {
     [],
     ["MAPE (%)", result.mape_overall],
     ["RMSE (constant 2015 US$)", rmse],
-    ["SSE (final window)", result.best_sse_final],
+    ["SSE (total)", computeTotalSse(result)],
     ["R2", result.r2_overall],
   ];
   const summarySheet = XLSX.utils.aoa_to_sheet(summaryRows);

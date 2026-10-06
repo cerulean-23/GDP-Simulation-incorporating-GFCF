@@ -1,4 +1,4 @@
-import { computeRmse, formatGdp } from "../utils/metrics";
+import { computeRmse, computeTotalSse, formatGdp, formatSse } from "../utils/metrics";
 
 function Card({ label, value, description }) {
   return (
@@ -12,6 +12,7 @@ function Card({ label, value, description }) {
 
 export default function PerformanceSummary({ result }) {
   const rmse = computeRmse(result.y_actual, result.y_pred);
+  const totalSse = computeTotalSse(result);
 
   return (
     <section>
@@ -35,8 +36,14 @@ export default function PerformanceSummary({ result }) {
         />
         <Card
           label="SSE"
-          value={result.best_sse_final.toFixed(3)}
-          description="Sum of squared errors of the final rolling-window step-ahead forecast."
+          value={formatSse(totalSse)}
+          description={
+            <>
+              Sum of squared errors of all step-ahead forecasts.
+              <br />
+              squared billions of constant 2015 US$
+            </>
+          }
         />
         <Card
           label="R²"

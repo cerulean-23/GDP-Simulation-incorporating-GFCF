@@ -47,13 +47,13 @@ export default function MetricCards({ result }) {
         value={`${result.mape_overall.toFixed(2)}%`}
         sublabel="Lower is better"
       />
-      <Card
+      {/* <Card
         icon="trend"
         iconColor="bg-blue-500/10 text-blue-400"
         label="Best SSE (Final)"
         value={result.best_sse_final.toFixed(3)}
         sublabel="Lower is better"
-      />
+      /> */}
       <Card
         icon="gauge"
         iconColor="bg-purple-500/10 text-purple-400"
@@ -77,3 +77,5 @@ function formatMae(v) {
   if (Math.abs(v) >= 1e6) return `${(v / 1e6).toFixed(2)}M`;
   return v.toFixed(3);
 }
+
+
