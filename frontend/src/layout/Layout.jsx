@@ -11,7 +11,7 @@ import Footer from "../components/Footer";
 
 function ChartIcon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" className="shrink-0">
       <rect width="28" height="28" rx="7" fill="#1E3A8A" />
       <path
         d="M7 19L11 14L14.5 17L21 9"
@@ -71,13 +71,13 @@ function ExportMenu({ result, options, onExport }) {
   }
 
   return (
-    <div ref={rootRef} className="relative">
+    <div ref={rootRef} className="relative shrink-0">
       <button
         onClick={() => result && setOpen((o) => !o)}
         disabled={!result || busy}
-        className="flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-200 transition-colors hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-40"
+        className="flex items-center gap-2 whitespace-nowrap rounded-lg border border-slate-700 px-3 py-2 text-sm text-slate-200 sm:px-4 transition-colors hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-40"
       >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0">
           <path
             d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10"
             stroke="currentColor"
@@ -86,7 +86,11 @@ function ExportMenu({ result, options, onExport }) {
             strokeLinejoin="round"
           />
         </svg>
-        {busy ? "Exporting..." : "Export Results"}
+        {busy ? "Exporting..." : (
+          <>
+            Export<span className="hidden sm:inline"> Results</span>
+          </>
+        )}
       </button>
 
       {error && (
@@ -100,7 +104,7 @@ function ExportMenu({ result, options, onExport }) {
       )}
 
       {open && (
-        <div className="absolute right-0 z-20 mt-1 w-56 overflow-hidden rounded-md border border-slate-700 bg-[#0F1729] shadow-lg">
+        <div className="absolute right-0 z-20 mt-1 w-56 overflow-hidden rounded-md border border-slate-700 bg-ink-800 shadow-lg">
           {options.map((opt) => (
             <button
               key={opt.key}
@@ -150,28 +154,32 @@ function FredExportButton() {
 export default function Layout() {
   // The header export follows the page: annual result on / and /metrics,
   // quarterly FRED result on /fred.
-  const onFredPage = useLocation().pathname.startsWith("/fred");
+  const { pathname } = useLocation();
+  const onFredPage = pathname.startsWith("/fred");
   const navClass = ({ isActive }) =>
-    `text-sm font-medium transition-colors ${
-      isActive ? "text-blue-400" : "text-slate-400 hover:text-slate-200"
+    `whitespace-nowrap border-b-2 pb-1 text-sm font-medium transition-colors ${
+      isActive ? "border-blue-400 text-blue-400" : "border-transparent text-slate-400 hover:text-slate-200"
     }`;
 
   return (
-    <div className="min-h-screen bg-[#0A0F1E] text-slate-100">
-      <header className="flex items-center justify-between border-b border-slate-800 px-6 py-4">
-        <div className="flex items-center gap-3">
+    <div className="min-h-screen overflow-x-clip text-slate-100">
+      <header className="flex flex-wrap items-center gap-x-4 gap-y-3 border-b border-slate-800 px-4 py-3 sm:px-6 sm:py-4 lg:flex-nowrap lg:justify-between">
+        {/* Brand: shrinks and wraps its text instead of pushing the page wider */}
+        <div className="order-1 flex min-w-0 flex-1 items-center gap-3 lg:flex-none">
           <ChartIcon />
-          <div>
-            <h1 className="text-base font-semibold leading-tight tracking-tight">
+          <div className="min-w-0">
+            <h1 className="font-serif text-[15px] font-semibold leading-tight tracking-wide sm:text-lg">
               NONLINEAR GDP GROWTH SIMULATION
             </h1>
-            <p className="text-[11px] font-medium leading-tight text-blue-400">
+            <p className="mt-0.5 font-mono text-[10px] font-medium leading-tight tracking-wider text-blue-400 sm:text-[11px]">
               RK4 &middot; DIFFERENTIAL EVOLUTION &middot; GFCF
             </p>
           </div>
         </div>
 
-        <nav className="flex items-center gap-6">
+        {/* Nav: own full-width row on mobile (scrolls sideways if too tight),
+            sits between brand and export button on large screens */}
+        <nav className="order-3 -mx-4 flex w-[calc(100%+2rem)] items-center gap-6 overflow-x-auto border-t border-slate-800/70 px-4 pt-3 sm:-mx-6 sm:w-[calc(100%+3rem)] sm:px-6 lg:order-2 lg:m-0 lg:w-auto lg:overflow-visible lg:border-0 lg:p-0">
           <NavLink to="/" end className={navClass}>
             Simulation
           </NavLink>
@@ -183,10 +191,12 @@ export default function Layout() {
           </NavLink>
         </nav>
 
-        {onFredPage ? <FredExportButton /> : <AnnualExportButton />}
+        <div className="order-2 lg:order-3">
+          {onFredPage ? <FredExportButton /> : <AnnualExportButton />}
+        </div>
       </header>
 
-      <main className="px-6 py-6">
+      <main key={pathname} className="stagger mx-auto min-w-0 max-w-[1600px] px-4 py-4 sm:px-6 sm:py-6">
         <Outlet />
       </main>
       <Footer />

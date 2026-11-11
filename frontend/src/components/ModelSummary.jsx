@@ -3,7 +3,7 @@ import { computeActualDataRange } from "../utils/metrics";
 
 function SubCard({ title, rows }) {
   return (
-    <div className="rounded-lg border border-slate-800 bg-[#0A0F1E] p-4">
+    <div className="rounded-lg border border-slate-800 bg-ink-900 p-4">
       <p className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-cyan-500">{title}</p>
       <dl className="space-y-2">
         {rows.map(([label, value]) => (
@@ -22,7 +22,7 @@ export default function ModelSummary({ settings, result, dataCountry }) {
   const dataRange = computeActualDataRange(result) ?? "—";
 
   return (
-    <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <h2 className="mb-4 text-xs font-semibold tracking-wide text-cyan-400">
         MODEL &amp; SIMULATION SUMMARY
       </h2>

@@ -1,6 +1,6 @@
 function Pillar({ title, description, rows }) {
   return (
-    <div className="rounded-lg border border-slate-800 bg-[#0A0F1E] p-4">
+    <div className="rounded-lg border border-slate-800 bg-ink-900 p-4">
       <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-cyan-500">{title}</p>
       <p className="mb-3 text-xs leading-snug text-slate-500">{description}</p>
       <dl className="space-y-1.5">
@@ -19,7 +19,7 @@ function Pillar({ title, description, rows }) {
 
 export default function ModelConfiguration({ settings }) {
   return (
-    <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <h2 className="mb-4 text-xs font-semibold tracking-wide text-cyan-400">MODEL CONFIGURATION</h2>
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3">

@@ -26,7 +26,7 @@ const ICONS = {
 
 function Card({ icon, iconColor, label, value, sublabel }) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <div className={`mb-3 flex h-9 w-9 items-center justify-center rounded-full ${iconColor}`}>
         {ICONS[icon]}
       </div>

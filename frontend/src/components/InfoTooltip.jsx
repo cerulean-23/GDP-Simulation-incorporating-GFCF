@@ -7,7 +7,7 @@ export default function InfoTooltip({ text }) {
       >
         i
       </span>
-      <span className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-1.5 w-48 -translate-x-1/2 rounded-md border border-slate-700 bg-[#0F1729] px-2.5 py-1.5 text-[11px] leading-snug text-slate-300 opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+      <span className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-1.5 w-48 -translate-x-1/2 rounded-md border border-slate-700 bg-ink-800 px-2.5 py-1.5 text-[11px] leading-snug text-slate-300 opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
         {text}
       </span>
     </span>

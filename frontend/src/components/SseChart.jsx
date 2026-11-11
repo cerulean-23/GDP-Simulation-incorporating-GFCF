@@ -13,7 +13,7 @@ export default function SseChart({ result, title = "SSE BY YEAR" }) {
   const maxEntry = points.reduce((a, b) => (b.sse > a.sse ? b : a), points[0]);
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">{title}</h3>
       <p className="mb-4 text-xs text-slate-500">
         Sum of squared errors for each step-ahead forecast.

@@ -3,9 +3,21 @@ import InfoTooltip from "./InfoTooltip";
 import { clamp } from "../utils/paramLimits";
 
 export const PARAM_INFO = {
-  a: { title: "a - Intrinsic Growth", tooltip: "Intrinsic GDP growth parameter." },
-  b: { title: "b - Growth Constraint", tooltip: "Nonlinear growth constraint representing diminishing growth at higher GDP levels." },
-  c: { title: "c - GFCF Effect", tooltip: "Sensitivity of GDP dynamics to GFCF." },
+  a: {
+    title: "a — Intrinsic Growth",
+    desc: "Term aY: growth proportional to current GDP.",
+    tooltip: "Intrinsic GDP growth parameter. Multiplies Y in dY/dt = aY − bY² + cI(t).",
+  },
+  b: {
+    title: "b — Nonlinear Growth Constraint",
+    desc: "Term −bY²: growth slows as GDP rises.",
+    tooltip: "Nonlinear growth constraint representing diminishing growth at higher GDP levels (multiplies Y²).",
+  },
+  c: {
+    title: "c — GFCF Effect",
+    desc: "Term cI(t): contribution of capital formation.",
+    tooltip: "Sensitivity of GDP dynamics to Gross Fixed Capital Formation I(t).",
+  },
 };
 
 export function BoundInput({ paramKey, value, onChange, limit }) {
@@ -18,14 +30,15 @@ export function BoundInput({ paramKey, value, onChange, limit }) {
         <label className="text-xs text-slate-300">{info.title}</label>
         <InfoTooltip text={info.tooltip} />
       </div>
-      <p className="mb-1.5 text-[11px] text-slate-500">
-        Search range: {lo} to {hi}
+      <p className="text-[11px] text-slate-500">{info.desc}</p>
+      <p className="mb-1.5 font-mono text-[11px] text-slate-500">
+        Search range: [{lo}, {hi}]
       </p>
       <div className="flex items-center gap-2">
         <NumberInput
           value={lo}
           onChange={(n) => onChange([clamp(n, limit.min, limit.max), hi])}
-          className={`w-full rounded-md border bg-[#0A0F1E] px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
+          className={`w-full rounded-md border bg-ink-900 px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
             invalid ? "border-red-500" : "border-slate-700 focus:border-blue-500"
           }`}
         />
@@ -33,7 +46,7 @@ export function BoundInput({ paramKey, value, onChange, limit }) {
         <NumberInput
           value={hi}
           onChange={(n) => onChange([lo, clamp(n, limit.min, limit.max)])}
-          className={`w-full rounded-md border bg-[#0A0F1E] px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
+          className={`w-full rounded-md border bg-ink-900 px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
             invalid ? "border-red-500" : "border-slate-700 focus:border-blue-500"
           }`}
         />
@@ -51,7 +64,7 @@ export function SliderField({ label, tooltip, valueLabel, value, onChange, min, 
           {label}
           {tooltip && <InfoTooltip text={tooltip} />}
         </span>
-        <span className="text-xs font-medium text-slate-200">{valueLabel ?? value}</span>
+        <span className="font-mono text-xs font-medium text-slate-200">{valueLabel ?? value}</span>
       </div>
       <input
         type="range"

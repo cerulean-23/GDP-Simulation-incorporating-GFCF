@@ -16,7 +16,7 @@ export default function FredDataCard() {
     ["Chart unit", m.unit_label],
   ];
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <h3 className="mb-3 text-xs font-semibold tracking-wide text-blue-400">DATA</h3>
       <dl className="space-y-2 text-sm">
         {rows.map(([k, v]) => (

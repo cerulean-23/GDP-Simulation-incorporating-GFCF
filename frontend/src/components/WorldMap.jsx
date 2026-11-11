@@ -3,6 +3,15 @@ import { useState } from "react";
 import { numericToAlpha3, alpha3ToName } from "../data/countryCodes";
 
 const GEO_URL = "https://unpkg.com/world-atlas@2/countries-110m.json";
+const LEGEND = [
+  ["≤ 1%", "#22C55E"],
+  ["1–2%", "#84CC16"],
+  ["2–5%", "#EAB308"],
+  ["5–10%", "#F97316"],
+  ["10–20%", "#EF4444"],
+  [">20%", "#B91C1C"],
+  ["No MAPE yet", "#1E293B"],
+];
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 8;
 
@@ -31,7 +40,7 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
 
   return (
     <div className="relative">
-      <div className="absolute right-2 top-2 z-10 flex flex-col overflow-hidden rounded-md border border-slate-700 bg-[#0F1729]">
+      <div className="absolute right-2 top-2 z-10 flex flex-col overflow-hidden rounded-md border border-slate-700 bg-ink-800">
         <button
           onClick={zoomIn}
           className="flex h-8 w-8 items-center justify-center text-slate-300 hover:bg-slate-800"
@@ -115,21 +124,29 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
       {tooltip && (
         <div className="pointer-events-none absolute left-1/2 top-2 -translate-x-1/2 rounded-md bg-slate-800 px-3 py-1.5 text-xs text-slate-100 shadow-lg">
           {tooltip.name}
-          {tooltip.mape != null && (
-            <span className="ml-2 text-blue-400">MAPE: {tooltip.mape.toFixed(2)}%</span>
-          )}
+          <span className="ml-2 font-mono text-blue-400">
+            {tooltip.mape != null ? `MAPE ${tooltip.mape.toFixed(2)}%` : "No MAPE yet"}
+          </span>
         </div>
       )}
 
-      <div className="mt-3 flex items-center gap-2 text-[11px] text-slate-400">
-        <span>0%</span>
-        <div className="h-2 flex-1 rounded-full bg-gradient-to-r from-green-500 via-yellow-500 to-red-700" />
-        <span>20%+</span>
-      </div>
-      <div className="mt-1 flex justify-between text-[11px]">
-        <span className="text-green-400">Low Error</span>
-        <span className="text-red-400">High Error</span>
-      </div>
+      {selectedIso && (
+        <p className="mt-3 text-xs text-slate-400">
+          Selected:{" "}
+          <span className="font-medium text-blue-400">{countryMape?.[selectedIso]?.name || alpha3ToName[selectedIso] || selectedIso}</span>
+          <span className="ml-2 font-mono text-slate-300">
+            {countryMape?.[selectedIso]?.mape != null ? `MAPE ${countryMape[selectedIso].mape.toFixed(2)}%` : "no MAPE yet"}
+          </span>
+        </p>
+      )}
+      <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-[11px] text-slate-400" aria-label="MAPE color legend">
+        {LEGEND.map(([label, color]) => (
+          <li key={label} className="flex items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-sm border border-slate-600" style={{ backgroundColor: color }} />
+            {label}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

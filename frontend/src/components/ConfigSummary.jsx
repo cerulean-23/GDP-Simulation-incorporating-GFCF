@@ -14,7 +14,7 @@ export default function ConfigSummary({ settings, result, dataCountry }) {
   ];
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <div className="grid grid-cols-1 gap-x-12 gap-y-3 sm:grid-cols-2">
         {rows.map(([label, value]) => (
           <div key={label} className="flex items-center justify-between text-sm">

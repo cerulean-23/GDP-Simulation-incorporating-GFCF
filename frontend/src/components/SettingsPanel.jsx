@@ -28,7 +28,7 @@ function BoundInput({ paramKey, value, onChange, limit }) {
         <NumberInput
           value={lo}
           onChange={(n) => onChange([clamp(n, limit.min, limit.max), hi])}
-          className={`w-full rounded-md border bg-[#0A0F1E] px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
+          className={`w-full rounded-md border bg-ink-900 px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
             invalid ? "border-red-500" : "border-slate-700 focus:border-blue-500"
           }`}
         />
@@ -36,7 +36,7 @@ function BoundInput({ paramKey, value, onChange, limit }) {
         <NumberInput
           value={hi}
           onChange={(n) => onChange([lo, clamp(n, limit.min, limit.max)])}
-          className={`w-full rounded-md border bg-[#0A0F1E] px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
+          className={`w-full rounded-md border bg-ink-900 px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
             invalid ? "border-red-500" : "border-slate-700 focus:border-blue-500"
           }`}
         />
@@ -93,7 +93,7 @@ export default function SettingsPanel() {
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-      <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+      <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
         <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">
           DIFFERENTIAL EVOLUTION
         </h3>
@@ -135,7 +135,7 @@ export default function SettingsPanel() {
         </div>
       </div>
 
-      <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+      <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
         {/* Section A — numerical integration (RK4) */}
         <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">
           NUMERICAL INTEGRATION
@@ -168,7 +168,7 @@ export default function SettingsPanel() {
         />
       </div>
 
-      <div className="flex flex-col rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+      <div className="flex flex-col rounded-xl border border-slate-800 bg-ink-800 p-5">
         <h3 className="mb-3 text-xs font-semibold tracking-wide text-blue-400">RUN SIMULATION</h3>
 
         {!rawData && (

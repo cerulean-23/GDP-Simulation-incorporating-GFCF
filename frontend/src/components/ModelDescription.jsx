@@ -1,13 +1,13 @@
 export default function ModelDescription() {
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">MODEL DESCRIPTION</h3>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
           <p className="mb-2 text-sm font-medium text-slate-200">Differential Equation Model</p>
           <p className="mb-3 text-xs text-slate-400">The model used in the simulation:</p>
-          <div className="rounded-lg border border-slate-800 bg-[#0A0F1E] px-4 py-4 text-center font-mono text-lg text-slate-100">
+          <div className="rounded-lg border border-slate-800 bg-ink-900 px-4 py-4 text-center font-mono text-lg text-slate-100">
             dY/dt = aY &minus; bY<sup>2</sup> + cI
           </div>
 

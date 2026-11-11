@@ -8,7 +8,7 @@ export default function FredRunCard() {
   const pct = progress?.percent ?? 0;
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <div className="flex flex-wrap items-center gap-4">
         <button
           onClick={run}

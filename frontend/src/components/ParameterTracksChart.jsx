@@ -10,7 +10,7 @@ function WindowTooltip({ active, payload, valueLabel }) {
   if (!active || !payload?.length) return null;
   const p = payload[0].payload;
   return (
-    <div className="rounded-md border border-slate-700 bg-[#0F1729] px-2.5 py-1.5 text-[11px] text-slate-200 shadow-lg">
+    <div className="rounded-md border border-slate-700 bg-ink-800 px-2.5 py-1.5 text-[11px] text-slate-200 shadow-lg">
       {p.windowLabel && <p className="text-slate-400">Window: {p.windowLabel}</p>}
       <p>
         {valueLabel}: {p.value.toFixed(5)}
@@ -21,7 +21,7 @@ function WindowTooltip({ active, payload, valueLabel }) {
 
 export default function ParameterTracksChart({ result, title = "PARAMETER ESTIMATES BY ROLLING WINDOW", window }) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">
         {title}
       </h3>

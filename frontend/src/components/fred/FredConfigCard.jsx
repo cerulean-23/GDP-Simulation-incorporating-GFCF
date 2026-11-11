@@ -3,7 +3,7 @@ import NumberInput from "../NumberInput";
 import { maxWindowFor, splitIndexFor, validateFredConfig } from "../../utils/fredValidation";
 
 const INPUT =
-  "w-24 rounded-md border border-slate-700 bg-[#0A0F1E] px-2 py-1 text-sm text-slate-100 focus:border-blue-500 focus:outline-none";
+  "w-24 rounded-md border border-slate-700 bg-ink-900 px-2 py-1 text-sm text-slate-100 focus:border-blue-500 focus:outline-none";
 
 function Field({ label, hint, children }) {
   return (
@@ -52,7 +52,7 @@ export default function FredConfigCard() {
     });
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5 lg:col-span-2">
+    <div className="rounded-xl border border-slate-800 bg-ink-800 p-5 lg:col-span-2">
       <div className="mb-3 flex items-center justify-between">
         <h3 className="text-xs font-semibold tracking-wide text-blue-400">CONFIGURATION</h3>
         <button
@@ -86,7 +86,7 @@ export default function FredConfigCard() {
             />
           </Field>
           {preview && (
-            <p className="rounded-md border border-slate-800 bg-[#0A0F1E] p-2 text-xs text-slate-400">
+            <p className="rounded-md border border-slate-800 bg-ink-900 p-2 text-xs text-slate-400">
               Pending settings: moving forecast starts {preview.first}; fitting phase {preview.first}–{preview.lastFit} (
               {preview.nFit} quarters); forecast phase {preview.boundary}–{labels[n - 1]} ({preview.nFc} quarters).
             </p>

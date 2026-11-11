@@ -7,7 +7,7 @@ const num3 = (v) => (Number.isFinite(v) ? (big(v) ? v.toExponential(2) : v.toFix
 
 function Card({ label, value, sub, accent }) {
   return (
-    <div className="rounded-lg border border-slate-800 bg-[#0A0F1E] p-3">
+    <div className="rounded-lg border border-slate-800 bg-ink-900 p-3">
       <p className="text-xs text-slate-500">{label}</p>
       <p className={`text-xl font-semibold ${accent ? "text-green-400" : "text-slate-100"}`}>{value}</p>
       {sub && <p className="mt-1 text-[11px] text-slate-500">{sub}</p>}

@@ -2,7 +2,7 @@ import { computeRmse, computeTotalSse, formatGdp, formatSse } from "../utils/met
 
 function Card({ label, value, description }) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <p className="text-2xl font-semibold text-slate-100">{value}</p>
       <p className="mt-1 text-xs font-medium text-slate-300">{label}</p>
       <p className="mt-1 text-[11px] leading-snug text-slate-500">{description}</p>

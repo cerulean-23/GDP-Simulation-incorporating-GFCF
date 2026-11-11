@@ -15,7 +15,7 @@ export default function MetricsPage() {
 
   if (!result) {
     return (
-      <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-10 text-center">
+      <div className="rounded-xl border border-slate-800 bg-ink-800 p-10 text-center">
         {status === "running" ? (
           <p className="mb-4 text-sm text-slate-400">Simulation in progress - results will appear here once complete.</p>
         ) : (
@@ -56,7 +56,7 @@ export default function MetricsPage() {
       <ParameterTracksChart
         result={result}
         window={settings.window}
-        title="PARAMETER ESTIMATES BY ROLLING WINDOW"
+        title="ESTIMATED PARAMETER VALUES BY ROLLING WINDOW"
       />
     </div>
   );

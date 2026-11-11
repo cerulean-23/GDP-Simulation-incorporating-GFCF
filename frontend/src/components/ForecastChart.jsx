@@ -23,7 +23,7 @@ export default function ForecastChart({ result }) {
   }));
 
   return (
-    <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+    <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <h2 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">
         GDP STEP-AHEAD FORECAST PERFORMANCE
       </h2>

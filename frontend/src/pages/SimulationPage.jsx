@@ -17,12 +17,12 @@ export default function SimulationPage() {
       <WorkflowSteps />
 
       {/* 2. Global Model Error Map */}
-      <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+      <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
         <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">
-          GLOBAL MODEL ERROR (MAPE)
+          GLOBAL MODEL ERROR — MAPE
         </h3>
         <p className="mb-3 text-xs text-slate-500">
-          Lower MAPE indicates better model performance - click a country to select it, then fetch data and run
+          Lower MAPE means smaller percentage prediction error. Click a country to select it, then fetch data and run
         </p>
         <WorldMap
           countryMape={countryMape}
@@ -49,7 +49,7 @@ export default function SimulationPage() {
       <SimulationActionCard />
 
       {/* 5. Simulation Results */}
-      <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+      <section id="simulation-results" className="scroll-mt-4 rounded-xl border border-slate-800 bg-ink-800 p-5">
         <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">
           SIMULATION RESULTS{dataCountry ? ` - ${dataCountry.name?.toUpperCase() || dataCountry.code}` : ""}
         </h3>
@@ -57,7 +57,7 @@ export default function SimulationPage() {
       </section>
 
       {/* 6. Parameter Estimates Over Time */}
-      {result && <ParameterTracksChart result={result} title="PARAMETER ESTIMATES OVER TIME" />}
+      {result && <ParameterTracksChart result={result} title="ESTIMATED PARAMETER VALUES BY ROLLING WINDOW" />}
     </div>
   );
 }

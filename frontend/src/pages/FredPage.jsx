@@ -13,7 +13,7 @@ export default function FredPage() {
 
   if (!meta || !dataset) {
     return (
-      <div className="rounded-xl border border-slate-800 bg-[#0F1729] p-6 text-sm">
+      <div className="rounded-xl border border-slate-800 bg-ink-800 p-6 text-sm">
         {status === "error" ? (
           <>
             <p role="alert" className="text-red-300">
@@ -57,7 +57,7 @@ export default function FredPage() {
         </div>
       )}
 
-      <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+      <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
         <h2 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">
           QUARTERLY ANALYSIS — {dataset.meta.name.toUpperCase()} (FRED)
         </h2>
@@ -76,7 +76,7 @@ export default function FredPage() {
 
       <FredRunCard />
 
-      <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+      <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
         <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">
           GDP — ACTUAL VS ROLLING FORECAST ({(result ? result.fred.dataset.name : dataset.meta.name).toUpperCase()})
         </h3>
@@ -93,7 +93,7 @@ export default function FredPage() {
               Running the simulation with the same settings reproduces it.
             </p>
           )}
-          <section className="rounded-xl border border-slate-800 bg-[#0F1729] p-5">
+          <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
             <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">PERFORMANCE SUMMARY</h3>
             <FredMetrics />
           </section>

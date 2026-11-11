@@ -4,7 +4,7 @@ export default function MathFormulation({ settings, result }) {
   const forecastRange = computeForecastRange(result);
 
   return (
-    <section className="rounded-xl border border-cyan-950/40 bg-[#0F1729] p-5">
+    <section className="rounded-xl border border-cyan-950/40 bg-ink-800 p-5">
       <h2 className="mb-4 text-xs font-semibold tracking-wide text-cyan-400">
         MATHEMATICAL FORMULATION
       </h2>
@@ -12,7 +12,7 @@ export default function MathFormulation({ settings, result }) {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Left: the equation, set as real math typography via CSS (no
             heavy KaTeX dependency needed for a single static equation) */}
-        <div className="flex items-center justify-center rounded-lg border border-slate-800 bg-[#0A0F1E] px-6 py-8">
+        <div className="flex items-center justify-center rounded-lg border border-slate-800 bg-ink-900 px-6 py-8">
           <div className="flex items-center gap-3 font-serif italic text-slate-100">
             <span className="flex flex-col items-center text-xl leading-none">
               <span className="border-b border-slate-400 px-1 pb-0.5">dY</span>
@@ -28,7 +28,7 @@ export default function MathFormulation({ settings, result }) {
         </div>
 
         {/* Right: compact variable legend */}
-        <div className="rounded-lg border border-slate-800 bg-[#0A0F1E] p-4">
+        <div className="rounded-lg border border-slate-800 bg-ink-900 p-4">
           <p className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-cyan-500">
             Variable Legend
           </p>
