@@ -27,9 +27,9 @@ export default function SseChart({ result, title = "SSE BY YEAR" }) {
       </p>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <div className="md:col-span-3">
-          <ResponsiveContainer width="100%" height={260}>
+          <div className="rounded-lg border border-slate-800 bg-ink-900 p-2 sm:p-3"><ResponsiveContainer width="100%" height={260}>
             <LineChart data={points} margin={{ top: 8, right: 14, bottom: 4, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
+              <CartesianGrid strokeDasharray="3 3" stroke={C.grid} />
               <XAxis dataKey="year" stroke={C.text2} fontSize={13} minTickGap={16} />
               <YAxis
                 scale="log"
@@ -45,10 +45,10 @@ export default function SseChart({ result, title = "SSE BY YEAR" }) {
                 formatter={(v) => [formatSse(v), "SSE"]}
               />
               <Line type="monotone" dataKey="sse" stroke={C.ochreDeep} dot={{ r: 2.5, fill: C.ochreDeep }} strokeWidth={2} />
-              <ReferenceDot x={minEntry.year} y={minEntry.sse} r={6} fill={C.teal} stroke="#fff" strokeWidth={1.5} />
-              <ReferenceDot x={maxEntry.year} y={maxEntry.sse} r={6} fill={C.terracotta} stroke="#fff" strokeWidth={1.5} />
+              <ReferenceDot x={minEntry.year} y={minEntry.sse} r={6} fill={C.teal} stroke="#E8E2D5" strokeWidth={1.5} />
+              <ReferenceDot x={maxEntry.year} y={maxEntry.sse} r={6} fill={C.terracotta} stroke="#E8E2D5" strokeWidth={1.5} />
             </LineChart>
-          </ResponsiveContainer>
+          </ResponsiveContainer></div>
         </div>
         <div className="flex flex-col justify-center gap-3 text-sm">
           <Stat label="Average SSE" value={formatSse(avg)} />

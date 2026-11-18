@@ -34,17 +34,17 @@ export default function ResultsChart() {
 
   return (
     <div>
-      <ResponsiveContainer width="100%" height={280}>
+      <div className="rounded-lg border border-slate-800 bg-ink-900 p-2 sm:p-3"><ResponsiveContainer width="100%" height={280}>
         <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#D5D0C3" />
-          <XAxis dataKey="year" stroke="#4D5A51" fontSize={13} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#BDB6A5" />
+          <XAxis dataKey="year" stroke="#48574D" fontSize={13} />
           <YAxis
-            stroke="#4D5A51"
+            stroke="#48574D"
             fontSize={13}
             tickFormatter={(v) => `${(v / 1e9).toFixed(0)}B`}
           />
           <Tooltip
-            contentStyle={{ background: "#FFFFFF", border: "1px solid #D5D0C3", color: "#26372F", fontSize: 13 }}
+            contentStyle={{ background: "#EEE9DD", border: "1px solid #CEC7B8", color: "#26372F", fontSize: 13 }}
             formatter={(v) => (v != null ? formatGdp(v) : "—")}
           />
           <Legend wrapperStyle={{ fontSize: 13 }} />
@@ -60,7 +60,7 @@ export default function ResultsChart() {
             connectNulls={false}
           />
         </LineChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer></div>
 
       {/* Key performance metrics — primary output of the simulation */}
       <div className="mt-4 grid grid-cols-3 gap-4 border-t border-slate-800 pt-4">

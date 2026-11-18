@@ -42,7 +42,7 @@ export default function FredPage() {
       {offline && (
         <div
           role="status"
-          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-700/50 bg-[#FBF3DD] p-4 text-sm text-amber-200"
+          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-700/50 bg-[#E8DDBE] p-4 text-sm text-amber-200"
         >
           <span>
             The server is unreachable, so the page is using bundled data. “Load thesis result” still works; running a custom
@@ -86,7 +86,7 @@ export default function FredPage() {
       {result && (
         <>
           {resultSource === "snapshot" && (
-            <p className="rounded-xl border border-blue-900/60 bg-[#E7EFE9] p-3 text-xs text-blue-200">
+            <p className="rounded-xl border border-blue-900/60 bg-[#D9E3DA] p-3 text-xs text-blue-200">
               Precomputed result: default settings (window {result.fred.config.window} quarters, population{" "}
               {result.fred.config.population_size}, {result.fred.config.max_iterations} iterations, seed{" "}
               {snapshotInfo?.seed ?? 42}), generated {snapshotInfo?.generated_at ?? "earlier"} by this application's backend.

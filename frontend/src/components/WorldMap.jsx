@@ -10,14 +10,14 @@ const LEGEND = [
   ["5–10%", "#F97316"],
   ["10–20%", "#EF4444"],
   [">20%", "#B91C1C"],
-  ["No MAPE yet", "#D9D4C5"],
+  ["No MAPE yet", "#4F7692"],
 ];
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 8;
 
 // MAPE color scale matching the mockup legend: green (accurate) -> red (high error)
 function mapeColor(mape) {
-  if (mape == null) return "#D9D4C5"; // no data yet — neutral slate
+  if (mape == null) return "#4F7692"; // no data yet — muted forest-gray, readable on the dark canvas
   if (mape <= 1) return "#22C55E";
   if (mape <= 2) return "#84CC16";
   if (mape <= 5) return "#EAB308";
@@ -39,27 +39,28 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
   };
 
   return (
-    <div className="relative">
-      <div className="absolute right-2 top-2 z-10 flex flex-col overflow-hidden rounded-md border border-slate-700 bg-ink-800">
+    <div>
+      <div className="relative overflow-hidden rounded-lg border border-[#12304A] bg-[#1D4666]">
+      <div className="absolute right-2 top-2 z-10 flex flex-col overflow-hidden rounded-md border border-[#5E87A6] bg-[#163A57]">
         <button
           onClick={zoomIn}
-          className="flex h-8 w-8 items-center justify-center text-slate-300 hover:bg-slate-800"
+          className="flex h-8 w-8 items-center justify-center text-[#EEE9DD] hover:bg-[#2D5E84]"
           title="Zoom in"
         >
           +
         </button>
-        <div className="h-px bg-slate-700" />
+        <div className="h-px bg-[#5E87A6]" />
         <button
           onClick={zoomOut}
-          className="flex h-8 w-8 items-center justify-center text-slate-300 hover:bg-slate-800"
+          className="flex h-8 w-8 items-center justify-center text-[#EEE9DD] hover:bg-[#2D5E84]"
           title="Zoom out"
         >
           &minus;
         </button>
-        <div className="h-px bg-slate-700" />
+        <div className="h-px bg-[#5E87A6]" />
         <button
           onClick={resetZoom}
-          className="flex h-8 w-8 items-center justify-center text-[12px] text-slate-300 hover:bg-slate-800"
+          className="flex h-8 w-8 items-center justify-center text-[12px] text-[#EEE9DD] hover:bg-[#2D5E84]"
           title="Reset view"
         >
           ⟲
@@ -101,16 +102,16 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
                     key={geo.rsmKey}
                     geography={geo}
                     fill={fillColor}
-                    stroke={isSelected ? "#26372F" : hasData ? fillColor : "#F3F0E7"}
+                    stroke={isSelected ? "#EEE9DD" : hasData ? "#CFE0EC" : "#7497B0"}
                     strokeWidth={
-                      isSelected ? Math.max(1.5, 1.5 / zoom) : hasData ? Math.max(0.9, 1 / zoom) : Math.max(0.4, 0.5 / zoom)
+                      isSelected ? Math.max(1.8, 2.4 / zoom) : hasData ? Math.max(0.5, 0.6 / zoom) : Math.max(0.4, 0.5 / zoom)
                     }
                     onClick={() => iso && onSelectCountry?.(iso, name)}
                     onMouseEnter={() => setTooltip({ name, mape })}
                     onMouseLeave={() => setTooltip(null)}
                     style={{
                       default: { fill: fillColor, outline: "none" },
-                      hover: { fill: fillColor, stroke: "#26372F", cursor: "pointer", outline: "none" },
+                      hover: { fill: fillColor, stroke: "#EEE9DD", cursor: "pointer", outline: "none" },
                       pressed: { fill: fillColor, outline: "none" },
                     }}
                   />
@@ -122,13 +123,15 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
       </ComposableMap>
 
       {tooltip && (
-        <div className="pointer-events-none absolute left-1/2 top-2 -translate-x-1/2 rounded-md bg-slate-800 px-3 py-1.5 text-xs text-slate-100 shadow-lg">
+        <div className="pointer-events-none absolute left-1/2 top-2 -translate-x-1/2 rounded-md border border-slate-700 bg-ink-800 px-3 py-1.5 text-xs text-slate-100 shadow-lg">
           {tooltip.name}
           <span className="ml-2 font-mono text-blue-400">
             {tooltip.mape != null ? `MAPE ${tooltip.mape.toFixed(2)}%` : "No MAPE yet"}
           </span>
         </div>
       )}
+
+      </div>
 
       {selectedIso && (
         <p className="mt-3 text-xs text-slate-400">

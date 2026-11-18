@@ -29,12 +29,12 @@ export default function FredForecastChart() {
 
   return (
     <div>
-      <ResponsiveContainer width="100%" height={340}>
+      <div className="rounded-lg border border-slate-800 bg-ink-900 p-2 sm:p-3"><ResponsiveContainer width="100%" height={340}>
         <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 5, left: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#D5D0C3" />
-          <XAxis dataKey="label" ticks={ticks} tickFormatter={(l) => l.slice(0, 4)} stroke="#4D5A51" fontSize={13} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#BDB6A5" />
+          <XAxis dataKey="label" ticks={ticks} tickFormatter={(l) => l.slice(0, 4)} stroke="#48574D" fontSize={13} />
           <YAxis
-            stroke="#4D5A51"
+            stroke="#48574D"
             fontSize={13}
             width={55}
             domain={["auto", "auto"]}
@@ -42,7 +42,7 @@ export default function FredForecastChart() {
             label={{ value: unit, angle: -90, position: "insideLeft", fill: "#4D5A51", fontSize: 12, dy: 40 }}
           />
           <Tooltip
-            contentStyle={{ background: "#FFFFFF", border: "1px solid #D5D0C3", color: "#26372F", fontSize: 13 }}
+            contentStyle={{ background: "#EEE9DD", border: "1px solid #CEC7B8", color: "#26372F", fontSize: 13 }}
             formatter={(v, name) => [v == null ? "—" : `${v.toFixed(2)} ${unit}`, name]}
           />
           <Legend wrapperStyle={{ fontSize: 13 }} />
@@ -84,7 +84,7 @@ export default function FredForecastChart() {
             />
           )}
         </LineChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer></div>
 
       {f ? (
         <p className="mt-2 text-xs text-slate-500">

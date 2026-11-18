@@ -2,9 +2,10 @@
 // same palette as index.css lives here). Keep the two in sync.
 export const C = {
   text: "#26372F",
-  text2: "#4D5A51",
-  border: "#D5D0C3",
-  surfaceHi: "#FFFFFF",
+  text2: "#48574D",
+  border: "#CEC7B8",
+  grid: "#BDB6A5", // gridlines on the #E8E2D5 chart surface
+  surfaceHi: "#EEE9DD",
   forest: "#315B48",
   terracotta: "#9A4F32",
   teal: "#547A70",

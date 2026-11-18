@@ -2,19 +2,20 @@
 
 /* ARCHIVAL RESEARCH palette — single source of truth */
 :root {
-  --bg: #f0ede3;
-  --surface: #fffcf5;
-  --surface-2: #f5f1e7;
-  --field: #e8e3d7;
+  --bg: #e5e0d4;          /* level 1: page */
+  --surface: #eee9dd;     /* level 2: primary cards */
+  --surface-2: #e8e2d5;   /* level 3: nested panels, chart surfaces */
+  --field: #ddd7c9;       /* input controls */
+  --map-canvas: #1d4666;  /* deep-sea blue canvas, used only for the MAPE map */
   --text: #26372f;
-  --text-2: #4d5a51;
+  --text-2: #48574d;
   --text-3: #5f6c62;
   --forest: #315b48;
   --terracotta: #9a4f32;
   --ochre: #8a5a16;
   --teal: #547a70;
-  --border: #d5d0c3;
-  --divider: #e3ded2;
+  --border: #cec7b8;
+  --divider: #d8d1c3;
 }
 
 @theme {
@@ -38,13 +39,13 @@
   --color-slate-100: #26372f;
   --color-slate-200: #2d3f36;
   --color-slate-300: #3a4a41;
-  --color-slate-400: #4d5a51;
-  --color-slate-500: #576459;
+  --color-slate-400: #48574d;
+  --color-slate-500: #4f5c53;
   --color-slate-600: #6b7569;
-  --color-slate-700: #b3ae9e;
-  --color-slate-800: #d5d0c3;
-  --color-slate-900: #e3ded2;
-  --color-slate-950: #e8e3d7;
+  --color-slate-700: #aea898;
+  --color-slate-800: #cec7b8;
+  --color-slate-900: #d8d1c3;
+  --color-slate-950: #ddd7c9;
 
   /* accent: forest green */
   --color-blue-200: #27493a;
@@ -55,15 +56,15 @@
   --color-blue-900: #b9ccbf;
 
   /* analytical secondary: teal (was cyan) */
-  --color-cyan-400: #466a60;
+  --color-cyan-400: #3f6259;
   --color-cyan-500: #547a70;
   --color-cyan-900: #bcd0cc;
   --color-cyan-950: #dce8e5;
 
   /* status */
   --color-green-300: #245d36;
-  --color-green-400: #2b6f3f;
-  --color-green-500: #2b6f3f;
+  --color-green-400: #276638;
+  --color-green-500: #276638;
   --color-green-700: #7fb08e;
   --color-red-300: #8f3020;
   --color-red-400: #a33a28;
@@ -85,7 +86,7 @@ html { color-scheme: light; }
 body {
   background-color: var(--bg);
   background-image:
-    radial-gradient(ellipse 70% 40% at 50% -8%, rgba(255, 252, 245, 0.9), transparent),
+    radial-gradient(ellipse 70% 40% at 50% -8%, rgba(238, 233, 221, 0.55), transparent),
     linear-gradient(rgba(38, 55, 47, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(38, 55, 47, 0.045) 1px, transparent 1px);
   background-size: auto, 40px 40px, 40px 40px;

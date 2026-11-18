@@ -11,7 +11,7 @@ function WindowTooltip({ active, payload }) {
   if (!active || !payload?.length) return null;
   const p = payload[0].payload;
   return (
-    <div className="rounded-md border border-slate-800 bg-white px-3 py-2 text-[12px] text-slate-100 shadow-lg">
+    <div className="rounded-md border border-slate-800 bg-ink-800 px-3 py-2 text-[12px] text-slate-100 shadow-lg">
       <p className="font-mono font-semibold">Forecast year {p.year}</p>
       <p className="text-slate-400">Estimation window: {p.windowLabel ?? "—"}</p>
       {PARAMS.map(({ sym, color }) => (
@@ -41,7 +41,7 @@ export default function ParameterTracksChart({ result, title = "ESTIMATED PARAME
   return (
     <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <h3 className="mb-2 text-[15px] font-semibold tracking-wide text-blue-400">{title}</h3>
-      <p className="mb-5 max-w-3xl rounded-md border-l-2 border-blue-400 bg-ink-900 px-3 py-2 text-xs leading-relaxed text-slate-300">
+      <p className="mb-5 w-full rounded-md border-l-2 border-blue-400 bg-ink-900 px-3 py-2 text-xs leading-relaxed text-slate-300">
         Parameter values are re-estimated for each rolling window. Their variation across windows represents
         differences in estimated parameters across estimation periods, not necessarily time-varying coefficients
         within the differential equation.
@@ -54,15 +54,15 @@ export default function ParameterTracksChart({ result, title = "ESTIMATED PARAME
               {label}
               <span className="ml-2 font-normal text-slate-500">{desc}</span>
             </p>
-            <ResponsiveContainer width="100%" height={150}>
+            <div className="rounded-lg border border-slate-800 bg-ink-900 p-2 sm:p-3"><ResponsiveContainer width="100%" height={150}>
               <LineChart data={rows} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
+                <CartesianGrid strokeDasharray="3 3" stroke={C.grid} />
                 <XAxis dataKey="year" stroke={C.text2} fontSize={12} minTickGap={16} />
                 <YAxis stroke={C.text2} fontSize={12} width={56} domain={["auto", "auto"]} tickFormatter={fmtTick} />
                 <Tooltip content={<WindowTooltip />} />
                 <Line type="monotone" dataKey={sym} stroke={color} dot={{ r: 2, fill: color }} strokeWidth={2} connectNulls />
               </LineChart>
-            </ResponsiveContainer>
+            </ResponsiveContainer></div>
           </div>
         ))}
       </div>

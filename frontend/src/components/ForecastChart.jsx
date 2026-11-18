@@ -43,9 +43,9 @@ export default function ForecastChart({ result }) {
         title="Actual GDP versus step-ahead forecast"
         lede="Values in billions of constant 2015 US$. The shaded span is the initial rolling window, which has no forecast."
       />
-      <ResponsiveContainer width="100%" height={340}>
+      <div className="rounded-lg border border-slate-800 bg-ink-900 p-2 sm:p-3"><ResponsiveContainer width="100%" height={340}>
         <LineChart data={chartData} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
+          <CartesianGrid strokeDasharray="3 3" stroke={C.grid} />
           {firstF > 0 && (
             <ReferenceArea x1={chartData[0].year} x2={chartData[firstF].year} fill={C.ochre} fillOpacity={0.12} stroke="none" />
           )}
@@ -65,7 +65,7 @@ export default function ForecastChart({ result }) {
             connectNulls={false}
           />
         </LineChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer></div>
       <p className="mt-3 text-xs text-slate-500">
         Each forecast uses parameters estimated from the preceding rolling window.
       </p>
