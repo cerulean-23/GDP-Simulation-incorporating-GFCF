@@ -26,7 +26,7 @@ export const TOOLTIP_STYLE = {
 
 /** Compact, honest number formatting for parameter values of very different scale. */
 export function fmtParam(v) {
-  if (v == null || !Number.isFinite(v)) return "—";
+  if (v == null || !Number.isFinite(v)) return "-";
   const a = Math.abs(v);
   if (a !== 0 && (a < 1e-3 || a >= 1e4)) return v.toExponential(3);
   return v.toFixed(5);

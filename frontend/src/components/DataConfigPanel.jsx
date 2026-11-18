@@ -8,7 +8,7 @@ import CountrySelect from "./CountrySelect";
 export default function DataConfigPanel() {
   const { settings, setSettings, loadData, rawData, dataCountry } = useSimulation();
   const [loading, setLoading] = useState(false);
-  const [busyKind, setBusyKind] = useState(null); // "api" | "csv" — UI label only
+  const [busyKind, setBusyKind] = useState(null); // "api" | "csv" - UI label only
   const [error, setError] = useState(null);
   const [gdpFile, setGdpFile] = useState(null);
   const [gfcfFile, setGfcfFile] = useState(null);
@@ -129,7 +129,7 @@ export default function DataConfigPanel() {
           <p className="text-xs text-green-400">
             ✓ Loaded <span className="font-medium">{dataCountry.name}</span> - {rawData.years.length} years (
             {rawData.years[0]}–{rawData.years[rawData.years.length - 1]})
-            {dataCountry.source === "csv" && " · from uploaded CSVs"}
+            {dataCountry.source === "csv" && " - from uploaded CSVs"}
           </p>
         )}
         {rawData && dataCountry && settings.countryCode !== dataCountry.code && (

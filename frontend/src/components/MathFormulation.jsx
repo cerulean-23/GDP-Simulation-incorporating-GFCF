@@ -19,7 +19,7 @@ export default function MathFormulation() {
   return (
     <section className="rounded-xl border border-slate-800 bg-ink-800 p-5 sm:p-6">
       <SectionHead
-        n="02 · MATHEMATICAL FORMULATION"
+        n="02 - MATHEMATICAL FORMULATION"
         title="A nonlinear growth equation with capital formation"
       />
 

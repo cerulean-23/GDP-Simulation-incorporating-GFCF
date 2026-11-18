@@ -43,7 +43,7 @@ export default function FredForecastChart() {
           />
           <Tooltip
             contentStyle={{ background: "#EEE9DD", border: "1px solid #CEC7B8", color: "#26372F", fontSize: 13 }}
-            formatter={(v, name) => [v == null ? "—" : `${v.toFixed(2)} ${unit}`, name]}
+            formatter={(v, name) => [v == null ? "-" : `${v.toFixed(2)} ${unit}`, name]}
           />
           <Legend wrapperStyle={{ fontSize: 13 }} />
           <Line type="monotone" dataKey="actual" name="GDP actual" stroke="#315B48" dot={{ r: 2 }} strokeWidth={1.5} />

@@ -14,7 +14,7 @@ export default function MethodologyPipeline() {
   return (
     <section className="rounded-xl border border-slate-800 bg-ink-800 p-5 sm:p-6">
       <SectionHead
-        n="04 · COMPUTATIONAL METHODOLOGY"
+        n="04 - COMPUTATIONAL METHODOLOGY"
         title="From data to evaluated forecast"
         lede="The sequence repeats for every rolling window."
       />

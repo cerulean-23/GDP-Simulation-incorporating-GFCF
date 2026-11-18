@@ -15,7 +15,7 @@ function ForecastTooltip({ active, payload, label }) {
         <>
           <p style={{ color: C.terracotta }}>Forecast: {formatGdp(p.forecast)}</p>
           <p className="text-slate-400">
-            Error (forecast − actual): {formatGdp(p.forecast - p.actual)} · {(Math.abs(p.forecast - p.actual) / Math.abs(p.actual) * 100).toFixed(2)}%
+            Error (forecast − actual): {formatGdp(p.forecast - p.actual)} - {(Math.abs(p.forecast - p.actual) / Math.abs(p.actual) * 100).toFixed(2)}%
           </p>
         </>
       ) : (
@@ -39,7 +39,7 @@ export default function ForecastChart({ result }) {
   return (
     <section className="rounded-xl border border-slate-800 bg-ink-800 p-5 sm:p-6">
       <SectionHead
-        n="05 · FORECAST PERFORMANCE"
+        n="05 - FORECAST PERFORMANCE"
         title="Actual GDP versus step-ahead forecast"
         lede="Values in billions of constant 2015 US$. The shaded span is the initial rolling window, which has no forecast."
       />

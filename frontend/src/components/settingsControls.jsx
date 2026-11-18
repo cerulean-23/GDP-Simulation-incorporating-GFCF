@@ -4,17 +4,17 @@ import { clamp } from "../utils/paramLimits";
 
 export const PARAM_INFO = {
   a: {
-    title: "a — Intrinsic Growth",
+    title: "a - Intrinsic Growth",
     desc: "Term aY: growth proportional to current GDP.",
     tooltip: "Intrinsic GDP growth parameter. Multiplies Y in dY/dt = aY − bY² + cI(t).",
   },
   b: {
-    title: "b — Nonlinear Growth Constraint",
+    title: "b - Nonlinear Growth Constraint",
     desc: "Term −bY²: growth slows as GDP rises.",
     tooltip: "Nonlinear growth constraint representing diminishing growth at higher GDP levels (multiplies Y²).",
   },
   c: {
-    title: "c — GFCF Effect",
+    title: "c - GFCF Effect",
     desc: "Term cI(t): contribution of capital formation.",
     tooltip: "Sensitivity of GDP dynamics to Gross Fixed Capital Formation I(t).",
   },

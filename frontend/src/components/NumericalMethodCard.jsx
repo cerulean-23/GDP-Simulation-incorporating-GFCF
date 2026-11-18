@@ -8,9 +8,9 @@ export default function NumericalMethodCard() {
     <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <h3 className="mb-4 text-[15px] font-semibold tracking-wide text-blue-400">NUMERICAL METHOD</h3>
 
-      {/* Numerical integration — RK4 */}
+      {/* Numerical integration - RK4 */}
       <section className="rounded-lg border border-slate-800 bg-ink-900/60 p-3">
-        <p className="mb-1 text-[13px] font-semibold tracking-wide text-slate-400">1 · NUMERICAL INTEGRATION</p>
+        <p className="mb-1 text-[13px] font-semibold tracking-wide text-slate-400">1.  NUMERICAL INTEGRATION</p>
         <p className="mb-1 text-xs text-slate-300">
           Method: <span className="font-mono">RK4</span> (fourth-order Runge–Kutta)
         </p>
@@ -29,9 +29,9 @@ export default function NumericalMethodCard() {
         />
       </section>
 
-      {/* Parameter estimation — rolling window */}
+      {/* Parameter estimation - rolling window */}
       <section className="mt-4 rounded-lg border border-slate-800 bg-ink-900/60 p-3">
-        <p className="mb-1 text-[13px] font-semibold tracking-wide text-slate-400">2 · PARAMETER ESTIMATION</p>
+        <p className="mb-1 text-[13px] font-semibold tracking-wide text-slate-400">2.  PARAMETER ESTIMATION</p>
         <p className="mb-1 text-xs text-slate-300">Rolling-window fitting</p>
         <p className="mb-3 text-[12px] leading-snug text-slate-500">
           Before each forecast step, a, b, c are re-estimated on the preceding w years of data (annual observations).

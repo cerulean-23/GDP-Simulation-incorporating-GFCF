@@ -25,7 +25,7 @@ export default function ModelConfiguration({ settings, result }) {
   return (
     <section className="rounded-xl border border-slate-800 bg-ink-800 p-5 sm:p-6">
       <SectionHead
-        n="03 · MODEL CONFIGURATION"
+        n="03 - MODEL CONFIGURATION"
         title="Integration, estimation and forecasting are separate steps"
         lede="RK4 integrates the differential equation for given parameters. Differential Evolution is what estimates those parameters."
       />

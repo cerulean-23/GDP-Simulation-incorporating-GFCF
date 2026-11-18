@@ -2,9 +2,9 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { PARAM_COLOR, C, fmtParam, fmtTick } from "../utils/palette";
 
 const PARAMS = [
-  { key: "a_track", sym: "a", label: "a — Intrinsic Growth", desc: "Coefficient of aY", color: PARAM_COLOR.a },
-  { key: "b_track", sym: "b", label: "b — Nonlinear Growth Constraint", desc: "Coefficient of −bY²", color: PARAM_COLOR.b },
-  { key: "c_track", sym: "c", label: "c — GFCF Effect", desc: "Coefficient of cI(t)", color: PARAM_COLOR.c },
+  { key: "a_track", sym: "a", label: "a - Intrinsic Growth", desc: "Coefficient of aY", color: PARAM_COLOR.a },
+  { key: "b_track", sym: "b", label: "b - Nonlinear Growth Constraint", desc: "Coefficient of −bY²", color: PARAM_COLOR.b },
+  { key: "c_track", sym: "c", label: "c - GFCF Effect", desc: "Coefficient of cI(t)", color: PARAM_COLOR.c },
 ];
 
 function WindowTooltip({ active, payload }) {
@@ -13,7 +13,7 @@ function WindowTooltip({ active, payload }) {
   return (
     <div className="rounded-md border border-slate-800 bg-ink-800 px-3 py-2 text-[12px] text-slate-100 shadow-lg">
       <p className="font-mono font-semibold">Forecast year {p.year}</p>
-      <p className="text-slate-400">Estimation window: {p.windowLabel ?? "—"}</p>
+      <p className="text-slate-400">Estimation window: {p.windowLabel ?? "-"}</p>
       {PARAMS.map(({ sym, color }) => (
         <p key={sym} className="font-mono">
           <span style={{ color }}>{sym}</span> = {fmtParam(p[sym])}

@@ -17,7 +17,7 @@ const MAX_ZOOM = 8;
 
 // MAPE color scale matching the mockup legend: green (accurate) -> red (high error)
 function mapeColor(mape) {
-  if (mape == null) return "#4F7692"; // no data yet — muted forest-gray, readable on the dark canvas
+  if (mape == null) return "#4F7692"; // no data yet - muted forest-gray, readable on the dark canvas
   if (mape <= 1) return "#22C55E";
   if (mape <= 2) return "#84CC16";
   if (mape <= 5) return "#EAB308";
@@ -78,7 +78,7 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
             setCenter(coordinates);
           }}
           // Block drag-panning only at the default zoom level, so a click
-          // reliably selects a country there — but once zoomed in, allow
+          // reliably selects a country there - but once zoomed in, allow
           // normal click-drag panning to navigate around.
           filterZoomEvent={({ type }) => (zoom > 1 ? true : type !== "mousedown" && type !== "touchstart")}
         >

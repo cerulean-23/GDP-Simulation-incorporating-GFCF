@@ -32,7 +32,7 @@ export default function PerformanceSummary({ result }) {
       />
       <Metric
         label="RMSE"
-        value={rmse != null ? formatGdp(rmse) : "—"}
+        value={rmse != null ? formatGdp(rmse) : "-"}
         unit="constant 2015 US$"
         formula="Root Mean Squared Error: square root of the mean squared forecast error."
         description="Typical forecast error size, in the same unit as GDP. Not a percentage."

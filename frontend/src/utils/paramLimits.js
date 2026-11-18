@@ -1,5 +1,5 @@
 // Bounds for the DE search-space parameters and population size.
-// See chat/thesis notes for the economic reasoning behind each range —
+// See chat/thesis notes for the economic reasoning behind each range -
 // short version: a can swing further since it's the intrinsic growth rate
 // and needs room during search; b and c must stay non-negative since a
 // negative value for either breaks the model's economic meaning (b<0 means

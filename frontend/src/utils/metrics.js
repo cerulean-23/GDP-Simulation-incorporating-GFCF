@@ -1,5 +1,5 @@
 // Derived purely for display from the same y_actual/y_pred arrays already
-// returned by the backend — not a new calculation, just a client-side
+// returned by the backend - not a new calculation, just a client-side
 // summary reusing existing numbers, masked the same way as the backend's
 // own MAPE/R² evaluation (only years with a real step-ahead forecast count).
 /**
@@ -26,7 +26,7 @@ export function computeRmse(yActual, yPred) {
 
 export function computeForecastRange(result) {
   const forecastYears = result.years.filter((_, i) => result.y_pred[i] != null);
-  if (forecastYears.length === 0) return "—";
+  if (forecastYears.length === 0) return "-";
   return `${forecastYears[0]}–${forecastYears[forecastYears.length - 1]}`;
 }
 
@@ -40,7 +40,7 @@ export function formatGdp(v) {
  * toFixed(3) would show "0.000" for small values.
  */
 export function formatSse(v) {
-  if (v == null || !Number.isFinite(v)) return "—";
+  if (v == null || !Number.isFinite(v)) return "-";
   if (v === 0) return "0";
   const a = Math.abs(v);
   if (a < 0.001 || a >= 1e6) return v.toExponential(2);

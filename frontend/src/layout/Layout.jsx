@@ -169,10 +169,10 @@ export default function Layout() {
           <ChartIcon />
           <div className="min-w-0">
             <h1 className="font-serif text-[20px] font-semibold leading-tight tracking-normal sm:text-[24px]">
-              Nonlinear GDP Growth Simulation
+              GDP Growth Modeling Lab
             </h1>
             <p className="mt-0.5 font-mono text-[12px] font-medium leading-tight tracking-wider text-blue-400 sm:text-[12px]">
-              RK4 &middot; DIFFERENTIAL EVOLUTION &middot; GFCF
+              Nonlinear Economic Growth Modeling & Simulation
             </p>
           </div>
         </div>

@@ -18,9 +18,9 @@ function Field({ label, hint, children }) {
 }
 
 const PARAM_ROWS = [
-  { key: "a", label: "a — intrinsic growth" },
-  { key: "b", label: "b — growth constraint" },
-  { key: "c", label: "c — GFCF effect" },
+  { key: "a", label: "a - intrinsic growth" },
+  { key: "b", label: "b - growth constraint" },
+  { key: "c", label: "c - GFCF effect" },
 ];
 
 export default function FredConfigCard() {

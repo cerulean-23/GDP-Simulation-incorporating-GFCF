@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { alpha3ToName } from "../data/countryCodes";
 
-// Reuses the exact same country list already powering the map — no new
+// Reuses the exact same country list already powering the map - no new
 // data source, no invented countries. Keys are the alpha-3 codes the
 // backend/World Bank API already expects.
 const COUNTRY_OPTIONS = Object.entries(alpha3ToName)

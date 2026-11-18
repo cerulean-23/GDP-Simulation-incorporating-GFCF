@@ -18,7 +18,7 @@ function Group({ title, rows }) {
 }
 
 // Research overview. Every value comes from the loaded data, the settings and
-// the simulation result — nothing is hardcoded except the units/frequency
+// the simulation result - nothing is hardcoded except the units/frequency
 // labels the app already stated (annual data, constant 2015 US$).
 export default function ModelSummary({ settings, result, dataCountry }) {
   const nObs = result.years.length;
@@ -27,17 +27,17 @@ export default function ModelSummary({ settings, result, dataCountry }) {
   return (
     <section className="rounded-xl border border-slate-800 bg-ink-800 p-5 sm:p-6">
       <SectionHead
-        n="01 · RESEARCH OVERVIEW"
-        title={`${dataCountry?.name || dataCountry?.code || "Selected country"} — GDP and GFCF simulation`}
+        n="01 - RESEARCH OVERVIEW"
+        title={`${dataCountry?.name || dataCountry?.code || "Selected country"} - GDP and GFCF simulation`}
         lede="Summary of the data, evaluation scope and computational settings behind the results on this page."
       />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <Group
           title="Data"
           rows={[
-            ["Country", dataCountry?.name || dataCountry?.code || "—"],
-            ["Source", dataCountry?.source === "csv" ? "Uploaded CSV" : dataCountry?.source === "api" ? "World Bank API" : "—"],
-            ["Historical period", computeActualDataRange(result) ?? "—"],
+            ["Country", dataCountry?.name || dataCountry?.code || "-"],
+            ["Source", dataCountry?.source === "csv" ? "Uploaded CSV" : dataCountry?.source === "api" ? "World Bank API" : "-"],
+            ["Historical period", computeActualDataRange(result) ?? "-"],
             ["Observations", nObs],
             ["Frequency", "Annual"],
             ["Unit", "Constant 2015 US$"],

@@ -82,7 +82,7 @@ export default function SettingsPanel() {
   const { settings, setSettings, status, progress, errorMessage, rawData, dataCountry } = useSimulation();
   const { runSimulation, cancelSimulation } = useSimulationSocket();
 
-  const dataRange = computeActualDataRange(rawData) ?? "—";
+  const dataRange = computeActualDataRange(rawData) ?? "-";
   const isRunning = status === "running";
   const validationProblems = validateSettings(settings);
   const isValid = validationProblems.length === 0;
@@ -136,7 +136,7 @@ export default function SettingsPanel() {
       </div>
 
       <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-        {/* Section A — numerical integration (RK4) */}
+        {/* Section A - numerical integration (RK4) */}
         <h3 className="mb-1 text-[15px] font-semibold tracking-wide text-blue-400">
           NUMERICAL INTEGRATION
         </h3>
@@ -152,7 +152,7 @@ export default function SettingsPanel() {
           step={0.1}
         />
 
-        {/* Section B — parameter estimation (rolling window) */}
+        {/* Section B - parameter estimation (rolling window) */}
         <h3 className="mb-1 mt-6 text-[15px] font-semibold tracking-wide text-blue-400">
           PARAMETER ESTIMATION
         </h3>
@@ -182,8 +182,8 @@ export default function SettingsPanel() {
             <div>
               <p className="text-slate-500">Ready to simulate:</p>
               <p className="font-medium text-slate-100">
-                {/* {dataCountry.name} · {settings.startYear}–{settings.endYear} */}
-                {dataCountry.name} · {dataRange}
+                {/* {dataCountry.name}  {settings.startYear}–{settings.endYear} */}
+                {dataCountry.name}  {dataRange}
               </p>
             </div>
             <div className="flex justify-between text-slate-400">
@@ -236,7 +236,7 @@ export default function SettingsPanel() {
             </div>
             {progress && (
               <p className="mt-2 font-mono text-[12px] text-slate-500">
-                year {progress.year} · sse {progress.sse.toFixed(4)}
+                year {progress.year}  sse {progress.sse.toFixed(4)}
               </p>
             )}
           </div>

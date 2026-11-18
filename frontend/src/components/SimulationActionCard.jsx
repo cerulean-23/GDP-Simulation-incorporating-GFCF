@@ -9,7 +9,7 @@ export default function SimulationActionCard() {
   const { settings, status, progress, errorMessage, rawData, dataCountry, result } = useSimulation();
   const { runSimulation, cancelSimulation } = useSimulationSocket();
   const navigate = useNavigate();
-  const dataRange = computeActualDataRange(rawData) ?? "—";
+  const dataRange = computeActualDataRange(rawData) ?? "-";
   const isRunning = status === "running";
   const isDone = status === "done" && !!result;
   const validationProblems = validateSettings(settings);
@@ -113,7 +113,7 @@ export default function SimulationActionCard() {
             )}
             {progress && (
               <p className="mt-1 font-mono text-[12px] text-slate-500">
-                year {progress.year} · sse {progress.sse.toFixed(4)}
+                year {progress.year}  sse {progress.sse.toFixed(4)}
               </p>
             )}
           </div>

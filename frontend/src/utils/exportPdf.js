@@ -12,10 +12,10 @@ const TEXT = [30, 41, 59];
 
 /**
  * Builds a text/table-based PDF report mirroring the content of the
- * Model & Metrics page (Page 2) — same result/settings state, no new
+ * Model & Metrics page (Page 2) - same result/settings state, no new
  * calculations beyond what's already derived client-side elsewhere
  * (RMSE, forecast range). Charts are drawn as vector graphics straight
- * from the result arrays (see pdfCharts.js) — not DOM screenshots — so they
+ * from the result arrays (see pdfCharts.js) - not DOM screenshots - so they
  * work from either page and stay sharp; tables keep the exact numbers.
  */
 export function downloadPdf(result, settings, dataCountry) {
@@ -91,7 +91,7 @@ export function downloadPdf(result, settings, dataCountry) {
   doc.setFontSize(9);
   doc.setTextColor(...CYAN);
   doc.setFont("helvetica", "normal");
-  doc.text("RK4 · Differential Evolution · GFCF — Model & Metrics Report", margin, 46);
+  doc.text("RK4 · Differential Evolution · GFCF - Model & Metrics Report", margin, 46);
   y = 90;
 
   const rmse = computeRmse(result.y_actual, result.y_pred);
@@ -192,7 +192,7 @@ export function downloadPdf(result, settings, dataCountry) {
   if (sseValues.length > 0) {
     // heading + stats grid + chart, kept together on one page
     ensureSpace(275);
-    heading("ERROR ANALYSIS — SSE BY YEAR");
+    heading("ERROR ANALYSIS - SSE BY YEAR");
     const sorted = [...sseValues].sort((a, b) => a - b);
     const avg = sorted.reduce((a, b) => a + b, 0) / sorted.length;
     const median = sorted[Math.floor(sorted.length / 2)];
@@ -223,9 +223,9 @@ export function downloadPdf(result, settings, dataCountry) {
   ensureSpace(160);
   heading("PARAMETER ESTIMATES BY ROLLING WINDOW");
   [
-    ["a — Intrinsic Growth", result.a_track, CHART_COLORS.green],
-    ["b — Growth Constraint", result.b_track, CHART_COLORS.blue],
-    ["c — GFCF Effect", result.c_track, CHART_COLORS.purple],
+    ["a - Intrinsic Growth", result.a_track, CHART_COLORS.green],
+    ["b - Growth Constraint", result.b_track, CHART_COLORS.blue],
+    ["c - GFCF Effect", result.c_track, CHART_COLORS.purple],
   ].forEach(([name, values, color]) => {
     chart(
       { title: name, xs: result.years, series: [{ name: "Estimate", values, color, dots: true }] },
@@ -239,7 +239,7 @@ export function downloadPdf(result, settings, dataCountry) {
   autoTable(doc, {
     startY: y,
     margin: { left: margin, right: margin },
-    head: [["Year", "a — Intrinsic Growth", "b — Growth Constraint", "c — GFCF Effect"]],
+    head: [["Year", "a - Intrinsic Growth", "b - Growth Constraint", "c - GFCF Effect"]],
     body: paramBody,
     styles: { fontSize: 8, cellPadding: 4 },
     headStyles: { fillColor: NAVY, textColor: 255 },

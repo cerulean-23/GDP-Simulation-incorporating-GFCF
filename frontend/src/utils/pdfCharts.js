@@ -157,7 +157,7 @@ export function drawLineChart(doc, o) {
   doc.line(px, py, px, py + ph);
   doc.line(px, py + ph, px + pw, py + ph);
 
-  // Series — lines break wherever a value is missing/invalid
+  // Series - lines break wherever a value is missing/invalid
   series.forEach((s) => {
     doc.setDrawColor(...s.color);
     doc.setFillColor(...s.color);

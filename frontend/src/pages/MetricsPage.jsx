@@ -47,7 +47,7 @@ export default function MetricsPage() {
 
       <section className="space-y-4 rounded-xl border border-slate-800 bg-ink-800 p-5 sm:p-6">
         <SectionHead
-          n="06 · ERROR ANALYSIS"
+          n="06 - ERROR ANALYSIS"
           title="How large are the forecast errors?"
           lede="Metrics cover the step-ahead forecasts over the evaluation period."
         />
@@ -57,7 +57,7 @@ export default function MetricsPage() {
 
       <section className="space-y-4">
         <SectionHead
-          n="07 · PARAMETER ESTIMATION"
+          n="07 - PARAMETER ESTIMATION"
           title="Estimated parameters across rolling windows"
         />
         <ParameterTracksChart result={result} window={settings.window} />

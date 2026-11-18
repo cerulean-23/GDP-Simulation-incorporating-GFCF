@@ -1,7 +1,7 @@
 import { useFred } from "../../context/FredContext";
 import { buildEvaluationRows, downloadFredCsv, downloadFredExcel } from "../../utils/fredExport";
 
-const fx = (v, d) => (Number.isFinite(v) ? (Math.abs(v) >= 1e9 ? v.toExponential(2) : v.toFixed(d)) : "—");
+const fx = (v, d) => (Number.isFinite(v) ? (Math.abs(v) >= 1e9 ? v.toExponential(2) : v.toFixed(d)) : "-");
 
 const BTN =
   "rounded-md border border-slate-700 px-3 py-1 text-xs text-slate-200 hover:border-slate-500 disabled:opacity-60";

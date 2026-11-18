@@ -20,7 +20,7 @@ export default function FredRunCard() {
         {!running && (
           <button
             onClick={loadThesisResult}
-            title="Instantly shows the precomputed default result (window 20, 80/20 split) — no server computation"
+            title="Instantly shows the precomputed default result (window 20, 80/20 split) - no server computation"
             className="rounded-lg border border-blue-500/60 px-4 py-2 text-sm text-blue-300 transition-colors hover:border-blue-400 hover:text-blue-200"
           >
             Load thesis result

@@ -19,7 +19,7 @@ export default function SimulationPage() {
       {/* 2. Global Model Error Map */}
       <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
         <h3 className="mb-1 text-[15px] font-semibold tracking-wide text-blue-400">
-          GLOBAL MODEL ERROR — MAPE
+          GLOBAL MODEL ERROR - MAPE
         </h3>
         <p className="mb-3 text-xs text-slate-500">
           Lower MAPE means smaller percentage prediction error. Click a country to select it, then fetch data and run

@@ -4,7 +4,7 @@ import { computeActualDataRange } from "./metrics";
 
 /**
  * Builds a 3-sheet workbook from the exact same data already shown on
- * Page 1 / Page 2 — no new calculations beyond the existing client-side
+ * Page 1 / Page 2 - no new calculations beyond the existing client-side
  * RMSE derivation already used elsewhere.
  */
 export function downloadExcel(result, settings, dataCountry) {

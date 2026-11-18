@@ -103,7 +103,7 @@ export function buildFredPdf(result) {
   doc.setFontSize(9);
   doc.setTextColor(...CYAN);
   doc.setFont("helvetica", "normal");
-  doc.text(`RK4 · Differential Evolution · GFCF — Quarterly (FRED) Report`, margin, 46);
+  doc.text(`RK4 · Differential Evolution · GFCF - Quarterly (FRED) Report`, margin, 46);
   y = 90;
 
   // --- Summary ---

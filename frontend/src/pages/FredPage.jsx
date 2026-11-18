@@ -59,7 +59,7 @@ export default function FredPage() {
 
       <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
         <h2 className="mb-1 text-[15px] font-semibold tracking-wide text-blue-400">
-          QUARTERLY ANALYSIS — {dataset.meta.name.toUpperCase()} (FRED)
+          QUARTERLY ANALYSIS - {dataset.meta.name.toUpperCase()} (FRED)
         </h2>
         <p className="text-sm text-slate-400">
           Rolling-window one-step-ahead forecasting of real GDP from real gross fixed capital formation. For every quarter,
@@ -78,7 +78,7 @@ export default function FredPage() {
 
       <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
         <h3 className="mb-4 text-[15px] font-semibold tracking-wide text-blue-400">
-          GDP — ACTUAL VS ROLLING FORECAST ({(result ? result.fred.dataset.name : dataset.meta.name).toUpperCase()})
+          GDP - ACTUAL VS ROLLING FORECAST ({(result ? result.fred.dataset.name : dataset.meta.name).toUpperCase()})
         </h3>
         <FredForecastChart />
       </section>

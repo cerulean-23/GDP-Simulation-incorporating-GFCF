@@ -27,7 +27,7 @@ export default function FredDataCard() {
         ))}
       </dl>
       <p className="mt-3 text-xs text-slate-500">
-        Bundled with the application — no upload or external request is needed.
+        Bundled with the application - no upload or external request is needed.
       </p>
     </div>
   );

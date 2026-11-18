@@ -23,7 +23,7 @@ export default function WorkflowSteps() {
     {
       label: "Data",
       state: dataDone ? "done" : "current",
-      note: dataDone ? `${dataCountry?.code ?? ""} · ${rawData.years.length} yrs` : "Not loaded",
+      note: dataDone ? `${dataCountry?.code ?? ""}  ${rawData.years.length} yrs` : "Not loaded",
     },
     {
       label: "Configuration",

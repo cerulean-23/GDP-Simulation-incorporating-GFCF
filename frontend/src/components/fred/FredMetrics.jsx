@@ -2,8 +2,8 @@ import { useFred } from "../../context/FredContext";
 
 // Unstable runs (e.g. very small population/iterations) can produce astronomically large errors.
 const big = (v) => !Number.isFinite(v) || Math.abs(v) >= 1e6;
-const pct = (v) => (Number.isFinite(v) ? (big(v) ? `${v.toExponential(2)}%` : `${v.toFixed(4)}%`) : "—");
-const num3 = (v) => (Number.isFinite(v) ? (big(v) ? v.toExponential(2) : v.toFixed(3)) : "—");
+const pct = (v) => (Number.isFinite(v) ? (big(v) ? `${v.toExponential(2)}%` : `${v.toFixed(4)}%`) : "-");
+const num3 = (v) => (Number.isFinite(v) ? (big(v) ? v.toExponential(2) : v.toFixed(3)) : "-");
 
 function Card({ label, value, sub, accent }) {
   return (
@@ -32,9 +32,9 @@ export default function FredMetrics() {
   return (
     <div>
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        <Card label="MAPE — overall" value={pct(m.overall.mape)} accent />
-        <Card label="MAPE — fitting phase" value={pct(m.fitting.mape)} sub={`${m.fitting.n} quarters`} />
-        <Card label="MAPE — forecast phase" value={pct(m.forecast.mape)} sub={`${m.forecast.n} quarters`} />
+        <Card label="MAPE - overall" value={pct(m.overall.mape)} accent />
+        <Card label="MAPE - fitting phase" value={pct(m.fitting.mape)} sub={`${m.fitting.n} quarters`} />
+        <Card label="MAPE - forecast phase" value={pct(m.forecast.mape)} sub={`${m.forecast.n} quarters`} />
         <Card label="Naive baseline MAPE" value={pct(m.overall.naive_mape)} sub="Previous quarter as forecast" />
       </div>
 
