@@ -10,7 +10,7 @@ function Card({ label, value, sub, accent }) {
     <div className="rounded-lg border border-slate-800 bg-ink-900 p-3">
       <p className="text-xs text-slate-500">{label}</p>
       <p className={`text-xl font-semibold ${accent ? "text-green-400" : "text-slate-100"}`}>{value}</p>
-      {sub && <p className="mt-1 text-[11px] text-slate-500">{sub}</p>}
+      {sub && <p className="mt-1 text-[12px] text-slate-500">{sub}</p>}
     </div>
   );
 }

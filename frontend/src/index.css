@@ -1,39 +1,112 @@
 @import "tailwindcss";
 
+/* ARCHIVAL RESEARCH palette — single source of truth */
+:root {
+  --bg: #f0ede3;
+  --surface: #fffcf5;
+  --surface-2: #f5f1e7;
+  --field: #e8e3d7;
+  --text: #26372f;
+  --text-2: #4d5a51;
+  --text-3: #5f6c62;
+  --forest: #315b48;
+  --terracotta: #9a4f32;
+  --ochre: #8a5a16;
+  --teal: #547a70;
+  --border: #d5d0c3;
+  --divider: #e3ded2;
+}
+
 @theme {
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
 
-  /* surfaces */
-  --color-ink-900: #080d1a;
-  --color-ink-800: #0e1628;
+  /* readable type scale (Tailwind defaults are 12 / 14 px) */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.9rem;
+  --text-sm--line-height: 1.55;
 
-  /* accent: restrained electric cyan (replaces default blue everywhere) */
-  --color-blue-400: #4fc3e0;
-  --color-blue-500: #22a9cc;
-  --color-blue-600: #0b7c9a;
+  --color-ink-900: var(--surface-2);
+  --color-field: var(--field);
+  --color-ink-800: var(--surface);
+
+  /* The components were written against a dark palette. Remapping the scale
+     keeps every existing class valid while moving the whole app to the
+     warm light theme: slate-100 = primary text ... slate-800 = border. */
+  --color-slate-100: #26372f;
+  --color-slate-200: #2d3f36;
+  --color-slate-300: #3a4a41;
+  --color-slate-400: #4d5a51;
+  --color-slate-500: #576459;
+  --color-slate-600: #6b7569;
+  --color-slate-700: #b3ae9e;
+  --color-slate-800: #d5d0c3;
+  --color-slate-900: #e3ded2;
+  --color-slate-950: #e8e3d7;
+
+  /* accent: forest green */
+  --color-blue-200: #27493a;
+  --color-blue-300: #315b48;
+  --color-blue-400: #315b48;
+  --color-blue-500: #3d6e58;
+  --color-blue-600: #315b48;
+  --color-blue-900: #b9ccbf;
+
+  /* analytical secondary: teal (was cyan) */
+  --color-cyan-400: #466a60;
+  --color-cyan-500: #547a70;
+  --color-cyan-900: #bcd0cc;
+  --color-cyan-950: #dce8e5;
+
+  /* status */
+  --color-green-300: #245d36;
+  --color-green-400: #2b6f3f;
+  --color-green-500: #2b6f3f;
+  --color-green-700: #7fb08e;
+  --color-red-300: #8f3020;
+  --color-red-400: #a33a28;
+  --color-red-500: #a33a28;
+  --color-red-900: #e6b8ae;
+  --color-yellow-400: #8a5a16;
+  --color-yellow-500: #8a5a16;
+  --color-amber-100: #5c3f0e;
+  --color-amber-200: #6b4812;
+  --color-amber-400: #8a5a16;
+  --color-amber-600: #b8963f;
+  --color-amber-700: #d7bc7c;
+  --color-purple-400: #8a6a8f;
+  --color-purple-500: #8a6a8f;
 }
+
+html { color-scheme: light; }
 
 body {
-  background-color: var(--color-ink-900);
+  background-color: var(--bg);
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(79, 195, 224, 0.08), transparent),
-    linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
-  background-size: auto, 48px 48px, 48px 48px;
+    radial-gradient(ellipse 70% 40% at 50% -8%, rgba(255, 252, 245, 0.9), transparent),
+    linear-gradient(rgba(38, 55, 47, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38, 55, 47, 0.045) 1px, transparent 1px);
+  background-size: auto, 40px 40px, 40px 40px;
   background-attachment: fixed;
   font-variant-numeric: tabular-nums;
+  color: var(--text);
 }
 
-/* section labels = technical classification -> mono */
-h2,
-h3 {
-  font-family: var(--font-mono);
-  letter-spacing: 0.08em;
+/* section labels use Plex Sans 600 (mono is reserved for numbers/technical ids) (in @layer base so
+   utility classes such as font-serif can still override it) */
+@layer base {
+  h2,
+  h3 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
 }
 
-/* staggered entrance for the blocks of each page */
+::selection { background: rgba(66, 107, 85, 0.2); }
+
 @keyframes rise {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }

@@ -46,7 +46,7 @@ export default function CountrySelect({ value, onChange }) {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="flex w-full items-center justify-between rounded-md border border-slate-700 bg-ink-900 px-3 py-2 text-left text-sm text-slate-100 focus:border-blue-500 focus:outline-none"
+        className="flex w-full items-center justify-between rounded-md border border-slate-700 bg-field px-3 py-2 text-left text-sm text-slate-100 focus:border-blue-500 focus:outline-none"
       >
         <span className="truncate">{currentName}</span>
         <svg width="14" height="14" viewBox="0 0 14 14" className="ml-2 shrink-0 text-slate-500">
@@ -78,7 +78,7 @@ export default function CountrySelect({ value, onChange }) {
                 }`}
               >
                 <span className="truncate">{c.name}</span>
-                <span className="ml-2 shrink-0 text-[10px] text-slate-500">{c.code}</span>
+                <span className="ml-2 shrink-0 text-[12px] text-slate-500">{c.code}</span>
               </button>
             ))}
           </div>

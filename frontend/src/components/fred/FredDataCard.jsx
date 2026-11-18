@@ -17,7 +17,7 @@ export default function FredDataCard() {
   ];
   return (
     <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-      <h3 className="mb-3 text-xs font-semibold tracking-wide text-blue-400">DATA</h3>
+      <h3 className="mb-3 text-[15px] font-semibold tracking-wide text-blue-400">DATA</h3>
       <dl className="space-y-2 text-sm">
         {rows.map(([k, v]) => (
           <div key={k} className="flex justify-between gap-3 border-b border-slate-800 pb-2">

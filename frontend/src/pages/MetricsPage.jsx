@@ -6,6 +6,7 @@ import ModelConfiguration from "../components/ModelConfiguration";
 import MethodologyPipeline from "../components/MethodologyPipeline";
 import PerformanceSummary from "../components/PerformanceSummary";
 import ForecastChart from "../components/ForecastChart";
+import SectionHead from "../components/SectionHead";
 import SseChart from "../components/SseChart";
 import ParameterTracksChart from "../components/ParameterTracksChart";
 
@@ -20,7 +21,7 @@ export default function MetricsPage() {
           <p className="mb-4 text-sm text-slate-400">Simulation in progress - results will appear here once complete.</p>
         ) : (
           <>
-            <p className="mb-1 text-sm font-medium text-slate-300">NO SIMULATION RESULTS</p>
+            <p className="mb-1 text-sm font-semibold tracking-wide text-slate-300">NO SIMULATION RESULTS</p>
             <p className="mb-4 text-sm text-slate-500">
               Run a simulation from the Simulation page to view model metrics and parameter estimates.
             </p>
@@ -37,27 +38,30 @@ export default function MetricsPage() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <ModelSummary settings={settings} result={result} dataCountry={dataCountry} />
-      <MathFormulation settings={settings} result={result} />
-
-      <ModelConfiguration settings={settings} />
+      <MathFormulation />
+      <ModelConfiguration settings={settings} result={result} />
       <MethodologyPipeline />
-
-      <PerformanceSummary result={result} />
-
       <ForecastChart result={result} />
 
-      <div>
-        <h2 className="mb-3 text-xs font-semibold tracking-wide text-blue-400">ERROR ANALYSIS</h2>
+      <section className="space-y-4 rounded-xl border border-slate-800 bg-ink-800 p-5 sm:p-6">
+        <SectionHead
+          n="06 · ERROR ANALYSIS"
+          title="How large are the forecast errors?"
+          lede="Metrics cover the step-ahead forecasts over the evaluation period."
+        />
+        <PerformanceSummary result={result} />
         <SseChart result={result} />
-      </div>
+      </section>
 
-      <ParameterTracksChart
-        result={result}
-        window={settings.window}
-        title="ESTIMATED PARAMETER VALUES BY ROLLING WINDOW"
-      />
+      <section className="space-y-4">
+        <SectionHead
+          n="07 · PARAMETER ESTIMATION"
+          title="Estimated parameters across rolling windows"
+        />
+        <ParameterTracksChart result={result} window={settings.window} />
+      </section>
     </div>
   );
 }

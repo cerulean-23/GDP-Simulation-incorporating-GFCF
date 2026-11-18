@@ -59,7 +59,7 @@ export default function DataConfigPanel() {
 
   return (
     <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-      <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">
+      <h3 className="mb-4 text-[15px] font-semibold tracking-wide text-blue-400">
         DATA CONFIGURATION
       </h3>
 
@@ -78,28 +78,28 @@ export default function DataConfigPanel() {
             <NumberInput
               value={settings.startYear}
               onChange={(n) => setSettings((s) => ({ ...s, startYear: n }))}
-              className="w-full rounded-md border border-slate-700 bg-ink-900 px-3 py-2 text-sm text-slate-100 focus:border-blue-500 focus:outline-none"
+              className="w-full rounded-md border border-slate-700 bg-field px-3 py-2 text-sm text-slate-100 focus:border-blue-500 focus:outline-none"
             />
             <span className="text-slate-500">–</span>
             <NumberInput
               value={settings.endYear}
               onChange={(n) => setSettings((s) => ({ ...s, endYear: n }))}
-              className="w-full rounded-md border border-slate-700 bg-ink-900 px-3 py-2 text-sm text-slate-100 focus:border-blue-500 focus:outline-none"
+              className="w-full rounded-md border border-slate-700 bg-field px-3 py-2 text-sm text-slate-100 focus:border-blue-500 focus:outline-none"
             />
           </div>
         </div>
 
         {settings.startYear >= settings.endYear && (
-          <p className="text-[11px] text-yellow-400">⚠ Start year should be earlier than end year.</p>
+          <p className="text-[12px] text-yellow-400">⚠ Start year should be earlier than end year.</p>
         )}
-        <p className="text-[11px] text-slate-500">
+        <p className="text-[12px] text-slate-500">
           Full period requested from the source. The estimation/forecast split is set by the rolling window.
         </p>
 
         <button
           onClick={handleFetchApi}
           disabled={loading}
-          className="w-full rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-500 disabled:opacity-50"
+          className="w-full rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-500 disabled:bg-slate-600 disabled:hover:bg-slate-600"
         >
           {busyKind === "api" ? "Fetching from World Bank…" : "Fetch from World Bank API"}
         </button>
@@ -115,12 +115,12 @@ export default function DataConfigPanel() {
           <button
             onClick={handleFallbackUpload}
             disabled={loading || !gdpFile || !gfcfFile}
-            className="mt-2 w-full rounded-md border border-slate-700 px-3 py-2 text-xs text-slate-300 hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-40"
+            className="mt-2 w-full rounded-md border border-slate-700 px-3 py-2 text-xs text-slate-300 hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {busyKind === "csv" ? "Processing CSVs…" : "Use uploaded CSVs"}
           </button>
           {(!gdpFile || !gfcfFile) && (
-            <p className="mt-1 text-[11px] text-slate-500">Both GDP and GFCF files are required.</p>
+            <p className="mt-1 text-[12px] text-slate-500">Both GDP and GFCF files are required.</p>
           )}
         </div>
 
@@ -145,7 +145,7 @@ export default function DataConfigPanel() {
 function CsvSlot({ label, file, inputRef, onPick }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="w-10 shrink-0 font-mono text-[11px] text-slate-400">{label}</span>
+      <span className="w-12 shrink-0 text-[13px] font-medium text-slate-400">{label}</span>
       <button
         onClick={() => inputRef.current?.click()}
         className={`flex-1 truncate rounded-md border px-3 py-2 text-left text-xs transition-colors ${

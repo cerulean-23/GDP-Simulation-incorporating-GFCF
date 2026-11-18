@@ -4,7 +4,7 @@ import { buildEvaluationRows, downloadFredCsv, downloadFredExcel } from "../../u
 const fx = (v, d) => (Number.isFinite(v) ? (Math.abs(v) >= 1e9 ? v.toExponential(2) : v.toFixed(d)) : "—");
 
 const BTN =
-  "rounded-md border border-slate-700 px-3 py-1 text-xs text-slate-200 hover:border-slate-500 disabled:opacity-40";
+  "rounded-md border border-slate-700 px-3 py-1 text-xs text-slate-200 hover:border-slate-500 disabled:opacity-60";
 
 export default function FredEvaluationTable() {
   const { result } = useFred();
@@ -15,7 +15,7 @@ export default function FredEvaluationTable() {
     <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div>
-          <h3 className="text-xs font-semibold tracking-wide text-blue-400">EVALUATION TABLE</h3>
+          <h3 className="text-[15px] font-semibold tracking-wide text-blue-400">EVALUATION TABLE</h3>
           <p className="text-xs text-slate-500">
             One row per predicted quarter ({rows.length}); values in {unit}.
           </p>

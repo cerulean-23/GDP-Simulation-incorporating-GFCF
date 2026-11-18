@@ -36,24 +36,24 @@ export default function ResultsChart() {
     <div>
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
-          <XAxis dataKey="year" stroke="#64748B" fontSize={12} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#D5D0C3" />
+          <XAxis dataKey="year" stroke="#4D5A51" fontSize={13} />
           <YAxis
-            stroke="#64748B"
-            fontSize={12}
+            stroke="#4D5A51"
+            fontSize={13}
             tickFormatter={(v) => `${(v / 1e9).toFixed(0)}B`}
           />
           <Tooltip
-            contentStyle={{ background: "#0F1729", border: "1px solid #1E293B", fontSize: 12 }}
+            contentStyle={{ background: "#FFFFFF", border: "1px solid #D5D0C3", color: "#26372F", fontSize: 13 }}
             formatter={(v) => (v != null ? formatGdp(v) : "—")}
           />
-          <Legend wrapperStyle={{ fontSize: 12 }} />
-          <Line type="monotone" dataKey="actual" name="Actual GDP" stroke="#3B82F6" dot={false} strokeWidth={2} />
+          <Legend wrapperStyle={{ fontSize: 13 }} />
+          <Line type="monotone" dataKey="actual" name="Actual GDP" stroke="#315B48" dot={false} strokeWidth={2} />
           <Line
             type="monotone"
             dataKey="predicted"
             name="Simulated GDP"
-            stroke="#F97316"
+            stroke="#9A4F32"
             strokeDasharray="5 4"
             dot={false}
             strokeWidth={2}

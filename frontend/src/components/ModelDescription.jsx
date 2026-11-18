@@ -1,7 +1,7 @@
 export default function ModelDescription() {
   return (
     <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-      <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">MODEL DESCRIPTION</h3>
+      <h3 className="mb-4 text-[15px] font-semibold tracking-wide text-blue-400">MODEL DESCRIPTION</h3>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>

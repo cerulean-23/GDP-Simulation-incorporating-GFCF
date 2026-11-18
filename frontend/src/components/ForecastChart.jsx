@@ -1,61 +1,73 @@
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceArea } from "recharts";
 import { formatGdp } from "../utils/metrics";
+import { C, TOOLTIP_STYLE } from "../utils/palette";
+import SectionHead from "./SectionHead";
 
-// Renders the same result.years/y_actual/y_pred arrays as Page 1's chart -
-// no recalculation, just Page-2-appropriate labels ("Step-Ahead Forecast"
-// rather than "Simulated GDP") and a note on the forecasting methodology.
-// Kept as its own component rather than reusing ResultsChart directly so
-// Page 1's chart/labels stay completely untouched.
+function ForecastTooltip({ active, payload, label }) {
+  if (!active || !payload?.length) return null;
+  const p = payload[0].payload;
+  const hasF = p.forecast != null;
+  return (
+    <div style={TOOLTIP_STYLE} className="px-3 py-2 shadow-lg">
+      <p className="mb-1 font-mono font-semibold">{label}</p>
+      <p style={{ color: C.forest }}>Actual: {formatGdp(p.actual)}</p>
+      {hasF ? (
+        <>
+          <p style={{ color: C.terracotta }}>Forecast: {formatGdp(p.forecast)}</p>
+          <p className="text-slate-400">
+            Error (forecast − actual): {formatGdp(p.forecast - p.actual)} · {(Math.abs(p.forecast - p.actual) / Math.abs(p.actual) * 100).toFixed(2)}%
+          </p>
+        </>
+      ) : (
+        <p className="text-slate-400">No forecast (initial estimation window)</p>
+      )}
+      <p className="text-slate-500">constant 2015 US$</p>
+    </div>
+  );
+}
+
+// Renders the same result.years / y_actual / y_pred arrays as Page 1.
+// Only presentation changed; the error shown in the tooltip is derived from those arrays.
 export default function ForecastChart({ result }) {
   const chartData = result.years.map((year, i) => ({
     year,
     actual: result.y_actual[i],
     forecast: result.y_pred[i],
   }));
+  const firstF = chartData.findIndex((d) => d.forecast != null);
 
   return (
-    <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-      <h2 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">
-        GDP STEP-AHEAD FORECAST PERFORMANCE
-      </h2>
-      <p className="mb-4 text-xs text-slate-500">Actual GDP vs Step-Ahead Forecast GDP</p>
-
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
-          <XAxis dataKey="year" stroke="#64748B" fontSize={12} />
-          <YAxis stroke="#64748B" fontSize={12} tickFormatter={(v) => `${(v / 1e9).toFixed(0)}B`} />
-          <Tooltip
-            contentStyle={{ background: "#0F1729", border: "1px solid #1E293B", fontSize: 12 }}
-            formatter={(v) => (v != null ? `${formatGdp(v)} constant 2015 US$` : "-")}
-          />
-          <Legend wrapperStyle={{ fontSize: 12 }} />
-          <Line type="monotone" dataKey="actual" name="Actual GDP" stroke="#3B82F6" dot={false} strokeWidth={2} />
+    <section className="rounded-xl border border-slate-800 bg-ink-800 p-5 sm:p-6">
+      <SectionHead
+        n="05 · FORECAST PERFORMANCE"
+        title="Actual GDP versus step-ahead forecast"
+        lede="Values in billions of constant 2015 US$. The shaded span is the initial rolling window, which has no forecast."
+      />
+      <ResponsiveContainer width="100%" height={340}>
+        <LineChart data={chartData} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
+          {firstF > 0 && (
+            <ReferenceArea x1={chartData[0].year} x2={chartData[firstF].year} fill={C.ochre} fillOpacity={0.12} stroke="none" />
+          )}
+          <XAxis dataKey="year" stroke={C.text2} fontSize={13} minTickGap={16} />
+          <YAxis stroke={C.text2} fontSize={13} width={52} tickFormatter={(v) => `${(v / 1e9).toFixed(0)}B`} />
+          <Tooltip content={<ForecastTooltip />} />
+          <Legend wrapperStyle={{ fontSize: 13 }} />
+          <Line type="monotone" dataKey="actual" name="Actual GDP" stroke={C.forest} dot={false} strokeWidth={2.25} />
           <Line
             type="monotone"
             dataKey="forecast"
-            name="Step-Ahead Forecast"
-            stroke="#F97316"
-            strokeDasharray="5 4"
+            name="Step-ahead forecast"
+            stroke={C.terracotta}
+            strokeDasharray="6 4"
             dot={false}
-            strokeWidth={2}
+            strokeWidth={2.25}
             connectNulls={false}
           />
         </LineChart>
       </ResponsiveContainer>
-
       <p className="mt-3 text-xs text-slate-500">
-        Forecasts are generated using parameters estimated from the preceding rolling window. GDP
-        values are in constant 2015 US$.
+        Each forecast uses parameters estimated from the preceding rolling window.
       </p>
     </section>
   );

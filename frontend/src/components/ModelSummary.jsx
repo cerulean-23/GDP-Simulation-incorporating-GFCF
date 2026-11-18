@@ -1,15 +1,15 @@
-import { computeForecastRange } from "../utils/metrics";
-import { computeActualDataRange } from "../utils/metrics";
+import { computeActualDataRange, computeForecastRange } from "../utils/metrics";
+import SectionHead from "./SectionHead";
 
-function SubCard({ title, rows }) {
+function Group({ title, rows }) {
   return (
-    <div className="rounded-lg border border-slate-800 bg-ink-900 p-4">
-      <p className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-cyan-500">{title}</p>
-      <dl className="space-y-2">
+    <div>
+      <p className="mb-2 text-[13px] font-semibold uppercase tracking-wider text-slate-500">{title}</p>
+      <dl className="divide-y divide-slate-800/80 border-y border-slate-800">
         {rows.map(([label, value]) => (
-          <div key={label}>
-            <dt className="text-[11px] text-slate-500">{label}</dt>
-            <dd className="text-sm font-medium text-slate-100">{value}</dd>
+          <div key={label} className="flex items-baseline justify-between gap-4 py-2">
+            <dt className="text-xs text-slate-400">{label}</dt>
+            <dd className="text-right font-mono text-[14px] text-slate-100">{value}</dd>
           </div>
         ))}
       </dl>
@@ -17,42 +17,55 @@ function SubCard({ title, rows }) {
   );
 }
 
+// Research overview. Every value comes from the loaded data, the settings and
+// the simulation result — nothing is hardcoded except the units/frequency
+// labels the app already stated (annual data, constant 2015 US$).
 export default function ModelSummary({ settings, result, dataCountry }) {
-  const forecastRange = computeForecastRange(result);
-  const dataRange = computeActualDataRange(result) ?? "—";
+  const nObs = result.years.length;
+  const nForecast = result.y_pred.filter((v) => v != null).length;
 
   return (
-    <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-      <h2 className="mb-4 text-xs font-semibold tracking-wide text-cyan-400">
-        MODEL &amp; SIMULATION SUMMARY
-      </h2>
-
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <SubCard
-          title="Country & Data"
+    <section className="rounded-xl border border-slate-800 bg-ink-800 p-5 sm:p-6">
+      <SectionHead
+        n="01 · RESEARCH OVERVIEW"
+        title={`${dataCountry?.name || dataCountry?.code || "Selected country"} — GDP and GFCF simulation`}
+        lede="Summary of the data, evaluation scope and computational settings behind the results on this page."
+      />
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <Group
+          title="Data"
           rows={[
-            ["Selected Country", dataCountry?.name || dataCountry?.code || "-"],
-            ["Currency", "Constant 2015 US$"],
-            ["Data Type", "Real GDP + GFCF"],
-          ]}
-        />
-        <SubCard
-          title="Timeline & Scope"
-          rows={[
-            ["Data Period", dataRange],
-            // ["Data Period", `${settings.startYear}–${settings.endYear}`],
+            ["Country", dataCountry?.name || dataCountry?.code || "—"],
+            ["Source", dataCountry?.source === "csv" ? "Uploaded CSV" : dataCountry?.source === "api" ? "World Bank API" : "—"],
+            ["Historical period", computeActualDataRange(result) ?? "—"],
+            ["Observations", nObs],
             ["Frequency", "Annual"],
-            ["Rolling Window", `w = ${settings.window} years`],
+            ["Unit", "Constant 2015 US$"],
           ]}
         />
-        <SubCard
-          title="Evaluation Approach"
+        <Group
+          title="Evaluation"
           rows={[
-            ["Forecast Horizon", forecastRange],
-            ["Approach", "Rolling-Window Step-Ahead"],
+            ["Evaluation period", computeForecastRange(result)],
+            ["Forecast observations", nForecast],
+            ["Horizon", "t + 1 (one step ahead)"],
+            ["Rolling window", `w = ${settings.window} years`],
+          ]}
+        />
+        <Group
+          title="Computation"
+          rows={[
+            ["Integrator", "RK4"],
+            ["Step size", `h = ${settings.stepSize}`],
+            ["Optimizer", "Differential Evolution"],
+            ["Population size", settings.populationSize],
+            ["Max iterations", settings.maxIterations],
           ]}
         />
       </div>
+      <p className="mt-4 text-[12px] text-slate-500">
+        The first {settings.window} years are consumed by the initial rolling window and have no step-ahead forecast.
+      </p>
     </section>
   );
 }

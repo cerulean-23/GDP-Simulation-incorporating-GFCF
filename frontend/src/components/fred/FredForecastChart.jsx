@@ -31,27 +31,27 @@ export default function FredForecastChart() {
     <div>
       <ResponsiveContainer width="100%" height={340}>
         <LineChart data={rows} margin={{ top: 10, right: 20, bottom: 5, left: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
-          <XAxis dataKey="label" ticks={ticks} tickFormatter={(l) => l.slice(0, 4)} stroke="#64748B" fontSize={12} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#D5D0C3" />
+          <XAxis dataKey="label" ticks={ticks} tickFormatter={(l) => l.slice(0, 4)} stroke="#4D5A51" fontSize={13} />
           <YAxis
-            stroke="#64748B"
-            fontSize={12}
+            stroke="#4D5A51"
+            fontSize={13}
             width={55}
             domain={["auto", "auto"]}
             tickFormatter={(v) => v.toFixed(0)}
-            label={{ value: unit, angle: -90, position: "insideLeft", fill: "#64748B", fontSize: 11, dy: 40 }}
+            label={{ value: unit, angle: -90, position: "insideLeft", fill: "#4D5A51", fontSize: 12, dy: 40 }}
           />
           <Tooltip
-            contentStyle={{ background: "#0F1729", border: "1px solid #1E293B", fontSize: 12 }}
+            contentStyle={{ background: "#FFFFFF", border: "1px solid #D5D0C3", color: "#26372F", fontSize: 13 }}
             formatter={(v, name) => [v == null ? "—" : `${v.toFixed(2)} ${unit}`, name]}
           />
-          <Legend wrapperStyle={{ fontSize: 12 }} />
-          <Line type="monotone" dataKey="actual" name="GDP actual" stroke="#3B82F6" dot={{ r: 2 }} strokeWidth={1.5} />
+          <Legend wrapperStyle={{ fontSize: 13 }} />
+          <Line type="monotone" dataKey="actual" name="GDP actual" stroke="#315B48" dot={{ r: 2 }} strokeWidth={1.5} />
           <Line
             type="monotone"
             dataKey="fitting"
             name="Fitting phase"
-            stroke="#EAB308"
+            stroke="#8A5A16"
             strokeDasharray="6 4"
             dot={false}
             strokeWidth={3}
@@ -61,7 +61,7 @@ export default function FredForecastChart() {
             type="monotone"
             dataKey="forecast"
             name="Forecast phase"
-            stroke="#EF4444"
+            stroke="#9A4F32"
             strokeDasharray="6 4"
             dot={false}
             strokeWidth={3}
@@ -70,17 +70,17 @@ export default function FredForecastChart() {
           {f && (
             <ReferenceLine
               x={labels[first]}
-              stroke="#94A3B8"
+              stroke="#5F6C62"
               strokeDasharray="6 4"
-              label={{ value: "Start moving forecast", position: "insideTopLeft", fill: "#94A3B8", fontSize: 11 }}
+              label={{ value: "Start moving forecast", position: "insideTopLeft", fill: "#5F6C62", fontSize: 12 }}
             />
           )}
           {f && (
             <ReferenceLine
               x={labels[split]}
-              stroke="#E2E8F0"
+              stroke="#26372F"
               strokeDasharray="2 3"
-              label={{ value: "Fit / forecast boundary", position: "insideTopLeft", fill: "#E2E8F0", fontSize: 11 }}
+              label={{ value: "Fit / forecast boundary", position: "insideTopLeft", fill: "#26372F", fontSize: 12 }}
             />
           )}
         </LineChart>

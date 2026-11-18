@@ -30,15 +30,15 @@ export function BoundInput({ paramKey, value, onChange, limit }) {
         <label className="text-xs text-slate-300">{info.title}</label>
         <InfoTooltip text={info.tooltip} />
       </div>
-      <p className="text-[11px] text-slate-500">{info.desc}</p>
-      <p className="mb-1.5 font-mono text-[11px] text-slate-500">
+      <p className="text-[12px] text-slate-500">{info.desc}</p>
+      <p className="mb-1.5 font-mono text-[12px] text-slate-500">
         Search range: [{lo}, {hi}]
       </p>
       <div className="flex items-center gap-2">
         <NumberInput
           value={lo}
           onChange={(n) => onChange([clamp(n, limit.min, limit.max), hi])}
-          className={`w-full rounded-md border bg-ink-900 px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
+          className={`w-full rounded-md border bg-field px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
             invalid ? "border-red-500" : "border-slate-700 focus:border-blue-500"
           }`}
         />
@@ -46,12 +46,12 @@ export function BoundInput({ paramKey, value, onChange, limit }) {
         <NumberInput
           value={hi}
           onChange={(n) => onChange([lo, clamp(n, limit.min, limit.max)])}
-          className={`w-full rounded-md border bg-ink-900 px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
+          className={`w-full rounded-md border bg-field px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
             invalid ? "border-red-500" : "border-slate-700 focus:border-blue-500"
           }`}
         />
       </div>
-      {invalid && <p className="mt-1 text-[11px] text-red-400">Lower bound must be less than upper bound.</p>}
+      {invalid && <p className="mt-1 text-[12px] text-red-400">Lower bound must be less than upper bound.</p>}
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default function FredPage() {
       {offline && (
         <div
           role="status"
-          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-700/50 bg-[#1a1608] p-4 text-sm text-amber-200"
+          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-700/50 bg-[#FBF3DD] p-4 text-sm text-amber-200"
         >
           <span>
             The server is unreachable, so the page is using bundled data. “Load thesis result” still works; running a custom
@@ -58,7 +58,7 @@ export default function FredPage() {
       )}
 
       <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-        <h2 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">
+        <h2 className="mb-1 text-[15px] font-semibold tracking-wide text-blue-400">
           QUARTERLY ANALYSIS — {dataset.meta.name.toUpperCase()} (FRED)
         </h2>
         <p className="text-sm text-slate-400">
@@ -77,7 +77,7 @@ export default function FredPage() {
       <FredRunCard />
 
       <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-        <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">
+        <h3 className="mb-4 text-[15px] font-semibold tracking-wide text-blue-400">
           GDP — ACTUAL VS ROLLING FORECAST ({(result ? result.fred.dataset.name : dataset.meta.name).toUpperCase()})
         </h3>
         <FredForecastChart />
@@ -86,7 +86,7 @@ export default function FredPage() {
       {result && (
         <>
           {resultSource === "snapshot" && (
-            <p className="rounded-xl border border-blue-900/60 bg-[#0B1530] p-3 text-xs text-blue-200">
+            <p className="rounded-xl border border-blue-900/60 bg-[#E7EFE9] p-3 text-xs text-blue-200">
               Precomputed result: default settings (window {result.fred.config.window} quarters, population{" "}
               {result.fred.config.population_size}, {result.fred.config.max_iterations} iterations, seed{" "}
               {snapshotInfo?.seed ?? 42}), generated {snapshotInfo?.generated_at ?? "earlier"} by this application's backend.
@@ -94,14 +94,14 @@ export default function FredPage() {
             </p>
           )}
           <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-            <h3 className="mb-4 text-xs font-semibold tracking-wide text-blue-400">PERFORMANCE SUMMARY</h3>
+            <h3 className="mb-4 text-[15px] font-semibold tracking-wide text-blue-400">PERFORMANCE SUMMARY</h3>
             <FredMetrics />
           </section>
 
           <ParameterTracksChart
             result={labelled}
             window={result.fred.config.window}
-            title="PARAMETER ESTIMATES BY ROLLING WINDOW"
+            title="ESTIMATED PARAMETER VALUES BY ROLLING WINDOW"
           />
           <SseChart result={labelled} title="SSE BY QUARTER" />
           <FredEvaluationTable />

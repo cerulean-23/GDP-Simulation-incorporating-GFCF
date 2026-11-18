@@ -23,9 +23,9 @@ export default function SimulationActionCard() {
   return (
     <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-xs font-semibold tracking-wide text-blue-400">SIMULATION</h3>
-        {isRunning && <span className="text-[11px] font-medium text-blue-400">SIMULATION IN PROGRESS</span>}
-        {isDone && <span className="text-[11px] font-medium text-green-400">✓ Simulation completed</span>}
+        <h3 className="text-[15px] font-semibold tracking-wide text-blue-400">SIMULATION</h3>
+        {isRunning && <span className="text-[12px] font-medium text-blue-400">SIMULATION IN PROGRESS</span>}
+        {isDone && <span className="text-[12px] font-medium text-green-400">✓ Simulation completed</span>}
       </div>
 
       {!rawData && (
@@ -82,7 +82,7 @@ export default function SimulationActionCard() {
       )}
 
       {errorMessage && (
-        <p role="alert" className="mb-3 rounded-md border border-red-900/60 bg-[#1a0f14] px-3 py-2 text-xs text-red-300">
+        <p role="alert" className="mb-3 rounded-md border border-red-900/60 bg-[#FBEDEA] px-3 py-2 text-xs text-red-300">
           Simulation failed: {errorMessage}
         </p>
       )}
@@ -91,7 +91,7 @@ export default function SimulationActionCard() {
         <button
           onClick={isRunning ? cancelSimulation : () => runSimulation()}
           disabled={!isReady && !isRunning}
-          className="flex items-center justify-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
+          className="flex items-center justify-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-600 disabled:hover:bg-slate-600 sm:w-auto"
         >
           {buttonLabel}
         </button>
@@ -109,10 +109,10 @@ export default function SimulationActionCard() {
               />
             </div>
             {isRunning && !progress && (
-              <p className="mt-1 text-[11px] text-slate-500">Connected, waiting for the first optimization window…</p>
+              <p className="mt-1 text-[12px] text-slate-500">Connected, waiting for the first optimization window…</p>
             )}
             {progress && (
-              <p className="mt-1 font-mono text-[11px] text-slate-500">
+              <p className="mt-1 font-mono text-[12px] text-slate-500">
                 year {progress.year} · sse {progress.sse.toFixed(4)}
               </p>
             )}

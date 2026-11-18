@@ -1,15 +1,16 @@
-function Pillar({ title, description, rows }) {
+import SectionHead from "./SectionHead";
+
+function Group({ n, title, description, rows }) {
   return (
-    <div className="rounded-lg border border-slate-800 bg-ink-900 p-4">
-      <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-cyan-500">{title}</p>
-      <p className="mb-3 text-xs leading-snug text-slate-500">{description}</p>
+    <div className="rounded-lg border border-slate-800 bg-ink-900/60 p-4">
+      <p className="font-mono text-[12px] tracking-wider text-blue-400">{n}</p>
+      <h3 className="mb-1 font-serif text-base font-medium tracking-normal text-slate-100">{title}</h3>
+      <p className="mb-3 text-xs leading-snug text-slate-400">{description}</p>
       <dl className="space-y-1.5">
         {rows.map(([label, value]) => (
-          <div key={label} className="flex items-center justify-between gap-3 text-xs">
+          <div key={label} className="flex items-baseline justify-between gap-3 text-xs">
             <dt className="text-slate-500">{label}</dt>
-            <dd className="rounded border border-slate-700 bg-slate-800/60 px-2 py-0.5 font-medium text-slate-200">
-              {value}
-            </dd>
+            <dd className="text-right font-mono text-slate-100">{value}</dd>
           </div>
         ))}
       </dl>
@@ -17,35 +18,49 @@ function Pillar({ title, description, rows }) {
   );
 }
 
-export default function ModelConfiguration({ settings }) {
-  return (
-    <section className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-      <h2 className="mb-4 text-xs font-semibold tracking-wide text-cyan-400">MODEL CONFIGURATION</h2>
+const fmtB = ([lo, hi]) => `[${lo}, ${hi}]`;
 
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-        <Pillar
-          title="Numerical Integration"
-          description="Runge-Kutta 4th-order numerical integration step."
+export default function ModelConfiguration({ settings, result }) {
+  const nForecast = result ? result.y_pred.filter((v) => v != null).length : null;
+  return (
+    <section className="rounded-xl border border-slate-800 bg-ink-800 p-5 sm:p-6">
+      <SectionHead
+        n="03 · MODEL CONFIGURATION"
+        title="Integration, estimation and forecasting are separate steps"
+        lede="RK4 integrates the differential equation for given parameters. Differential Evolution is what estimates those parameters."
+      />
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <Group
+          n="A"
+          title="Numerical integration"
+          description="Fourth-order Runge–Kutta numerically integrates dY/dt."
           rows={[
             ["Method", "RK4"],
-            ["Step Size", `h = ${settings.stepSize}`],
+            ["Step size", `h = ${settings.stepSize}`],
           ]}
         />
-        <Pillar
-          title="Parameter Estimation"
-          description="Parameters re-estimated for each rolling window using Differential Evolution."
+        <Group
+          n="B"
+          title="Parameter estimation"
+          description="Differential Evolution searches the bounds below to estimate a, b and c."
           rows={[
-            ["Optimization", "Differential Evolution"],
-            ["Population Size", settings.populationSize],
-            ["Max Iterations", settings.maxIterations],
+            ["Algorithm", "Differential Evolution"],
+            ["Population size", settings.populationSize],
+            ["Max iterations", settings.maxIterations],
+            ["Bounds a", fmtB(settings.bounds.a)],
+            ["Bounds b", fmtB(settings.bounds.b)],
+            ["Bounds c", fmtB(settings.bounds.c)],
           ]}
         />
-        <Pillar
-          title="Forecast Method"
-          description="Step-ahead out-of-sample forecast."
+        <Group
+          n="C"
+          title="Forecast methodology"
+          description="Parameters are re-estimated on each rolling window, then used for a one-step-ahead forecast."
           rows={[
-            ["Approach", "Step-Ahead Forecast"],
+            ["Estimation", "Rolling window"],
+            ["Window", `w = ${settings.window} years`],
             ["Horizon", "t + 1"],
+            ...(nForecast != null ? [["Forecasts produced", nForecast]] : []),
           ]}
         />
       </div>

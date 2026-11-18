@@ -12,10 +12,10 @@ import Footer from "../components/Footer";
 function ChartIcon() {
   return (
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" className="shrink-0">
-      <rect width="28" height="28" rx="7" fill="#1E3A8A" />
+      <rect width="28" height="28" rx="7" fill="#315B48" />
       <path
         d="M7 19L11 14L14.5 17L21 9"
-        stroke="#60A5FA"
+        stroke="#F3F0E7"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -75,7 +75,7 @@ function ExportMenu({ result, options, onExport }) {
       <button
         onClick={() => result && setOpen((o) => !o)}
         disabled={!result || busy}
-        className="flex items-center gap-2 whitespace-nowrap rounded-lg border border-slate-700 px-3 py-2 text-sm text-slate-200 sm:px-4 transition-colors hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-40"
+        className="flex items-center gap-2 whitespace-nowrap rounded-lg border border-slate-700 px-3 py-2 text-sm text-slate-200 sm:px-4 transition-colors hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-60"
       >
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0">
           <path
@@ -97,7 +97,7 @@ function ExportMenu({ result, options, onExport }) {
         <div
           role="alert"
           onClick={() => setError(null)}
-          className="absolute right-0 z-20 mt-1 w-72 cursor-pointer rounded-md border border-red-900/60 bg-[#1a0f14] px-3 py-2 text-xs text-red-300 shadow-lg"
+          className="absolute right-0 z-20 mt-1 w-72 cursor-pointer rounded-md border border-red-900/60 bg-[#FBEDEA] px-3 py-2 text-xs text-red-300 shadow-lg"
         >
           {error}
         </div>
@@ -112,7 +112,7 @@ function ExportMenu({ result, options, onExport }) {
               className="flex w-full flex-col items-start px-3 py-2 text-left hover:bg-slate-800"
             >
               <span className="text-sm text-slate-100">{opt.label}</span>
-              <span className="text-[11px] text-slate-500">{opt.hint}</span>
+              <span className="text-[12px] text-slate-500">{opt.hint}</span>
             </button>
           ))}
         </div>
@@ -168,10 +168,10 @@ export default function Layout() {
         <div className="order-1 flex min-w-0 flex-1 items-center gap-3 lg:flex-none">
           <ChartIcon />
           <div className="min-w-0">
-            <h1 className="font-serif text-[15px] font-semibold leading-tight tracking-wide sm:text-lg">
-              NONLINEAR GDP GROWTH SIMULATION
+            <h1 className="font-serif text-[20px] font-semibold leading-tight tracking-normal sm:text-[24px]">
+              Nonlinear GDP Growth Simulation
             </h1>
-            <p className="mt-0.5 font-mono text-[10px] font-medium leading-tight tracking-wider text-blue-400 sm:text-[11px]">
+            <p className="mt-0.5 font-mono text-[12px] font-medium leading-tight tracking-wider text-blue-400 sm:text-[12px]">
               RK4 &middot; DIFFERENTIAL EVOLUTION &middot; GFCF
             </p>
           </div>

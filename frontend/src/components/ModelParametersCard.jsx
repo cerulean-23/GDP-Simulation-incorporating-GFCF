@@ -7,7 +7,7 @@ export default function ModelParametersCard() {
 
   return (
     <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-      <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">MODEL PARAMETERS</h3>
+      <h3 className="mb-1 text-[15px] font-semibold tracking-wide text-blue-400">MODEL PARAMETERS</h3>
       <p className="mb-3 text-xs text-slate-500">
         dY/dt = aY &minus; bY&sup2; + cI(t) - search space (Ω)
       </p>
@@ -32,7 +32,7 @@ export default function ModelParametersCard() {
         />
 
         <div className="border-t border-slate-800 pt-4">
-          <p className="mb-3 text-[11px] font-semibold tracking-wide text-slate-500">
+          <p className="mb-3 text-[12px] font-semibold tracking-wide text-slate-500">
             DIFFERENTIAL EVOLUTION
           </p>
           <div className="space-y-4">

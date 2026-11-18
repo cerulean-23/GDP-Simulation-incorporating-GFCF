@@ -21,14 +21,14 @@ function BoundInput({ paramKey, value, onChange, limit }) {
         <label className="text-xs text-slate-300">{info.title}</label>
         <InfoTooltip text={info.tooltip} />
       </div>
-      <p className="mb-1.5 text-[11px] text-slate-500">
+      <p className="mb-1.5 text-[12px] text-slate-500">
         Search range: {lo} to {hi}
       </p>
       <div className="flex items-center gap-2">
         <NumberInput
           value={lo}
           onChange={(n) => onChange([clamp(n, limit.min, limit.max), hi])}
-          className={`w-full rounded-md border bg-ink-900 px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
+          className={`w-full rounded-md border bg-field px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
             invalid ? "border-red-500" : "border-slate-700 focus:border-blue-500"
           }`}
         />
@@ -36,12 +36,12 @@ function BoundInput({ paramKey, value, onChange, limit }) {
         <NumberInput
           value={hi}
           onChange={(n) => onChange([lo, clamp(n, limit.min, limit.max)])}
-          className={`w-full rounded-md border bg-ink-900 px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
+          className={`w-full rounded-md border bg-field px-2 py-1.5 text-sm text-slate-100 focus:outline-none ${
             invalid ? "border-red-500" : "border-slate-700 focus:border-blue-500"
           }`}
         />
       </div>
-      {invalid && <p className="mt-1 text-[11px] text-red-400">Lower bound must be less than upper bound.</p>}
+      {invalid && <p className="mt-1 text-[12px] text-red-400">Lower bound must be less than upper bound.</p>}
     </div>
   );
 }
@@ -94,7 +94,7 @@ export default function SettingsPanel() {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
-        <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">
+        <h3 className="mb-1 text-[15px] font-semibold tracking-wide text-blue-400">
           DIFFERENTIAL EVOLUTION
         </h3>
         <p className="mb-3 text-xs text-slate-500">Parameter search space (Ω)</p>
@@ -137,7 +137,7 @@ export default function SettingsPanel() {
 
       <div className="rounded-xl border border-slate-800 bg-ink-800 p-5">
         {/* Section A — numerical integration (RK4) */}
-        <h3 className="mb-1 text-xs font-semibold tracking-wide text-blue-400">
+        <h3 className="mb-1 text-[15px] font-semibold tracking-wide text-blue-400">
           NUMERICAL INTEGRATION
         </h3>
         <p className="mb-3 text-xs text-slate-500">Method: RK4</p>
@@ -153,7 +153,7 @@ export default function SettingsPanel() {
         />
 
         {/* Section B — parameter estimation (rolling window) */}
-        <h3 className="mb-1 mt-6 text-xs font-semibold tracking-wide text-blue-400">
+        <h3 className="mb-1 mt-6 text-[15px] font-semibold tracking-wide text-blue-400">
           PARAMETER ESTIMATION
         </h3>
         <p className="mb-3 text-xs text-slate-500">Rolling-window temporal fitting</p>
@@ -169,7 +169,7 @@ export default function SettingsPanel() {
       </div>
 
       <div className="flex flex-col rounded-xl border border-slate-800 bg-ink-800 p-5">
-        <h3 className="mb-3 text-xs font-semibold tracking-wide text-blue-400">RUN SIMULATION</h3>
+        <h3 className="mb-3 text-[15px] font-semibold tracking-wide text-blue-400">RUN SIMULATION</h3>
 
         {!rawData && (
           <p className="mb-4 flex items-start gap-1.5 text-xs text-yellow-400">
@@ -213,7 +213,7 @@ export default function SettingsPanel() {
         <button
           onClick={isRunning ? cancelSimulation : () => runSimulation()}
           disabled={!isReady && !isRunning}
-          className="mb-2 flex items-center justify-center gap-2 rounded-md bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-40"
+          className="mb-2 flex items-center justify-center gap-2 rounded-md bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-600 disabled:hover:bg-slate-600"
         >
           {isRunning ? "Cancel" : buttonLabel}
         </button>
@@ -235,7 +235,7 @@ export default function SettingsPanel() {
               />
             </div>
             {progress && (
-              <p className="mt-2 font-mono text-[11px] text-slate-500">
+              <p className="mt-2 font-mono text-[12px] text-slate-500">
                 year {progress.year} · sse {progress.sse.toFixed(4)}
               </p>
             )}

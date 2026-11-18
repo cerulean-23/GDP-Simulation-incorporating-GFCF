@@ -3,7 +3,7 @@ import NumberInput from "../NumberInput";
 import { maxWindowFor, splitIndexFor, validateFredConfig } from "../../utils/fredValidation";
 
 const INPUT =
-  "w-24 rounded-md border border-slate-700 bg-ink-900 px-2 py-1 text-sm text-slate-100 focus:border-blue-500 focus:outline-none";
+  "w-24 rounded-md border border-slate-700 bg-field px-2 py-1 text-sm text-slate-100 focus:border-blue-500 focus:outline-none";
 
 function Field({ label, hint, children }) {
   return (
@@ -54,11 +54,11 @@ export default function FredConfigCard() {
   return (
     <div className="rounded-xl border border-slate-800 bg-ink-800 p-5 lg:col-span-2">
       <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-xs font-semibold tracking-wide text-blue-400">CONFIGURATION</h3>
+        <h3 className="text-[15px] font-semibold tracking-wide text-blue-400">CONFIGURATION</h3>
         <button
           onClick={resetConfig}
           disabled={disabled}
-          className="rounded-md border border-slate-700 px-2 py-1 text-xs text-slate-300 hover:border-slate-500 disabled:opacity-40"
+          className="rounded-md border border-slate-700 px-2 py-1 text-xs text-slate-300 hover:border-slate-500 disabled:opacity-60"
         >
           Reset to defaults
         </button>
@@ -66,7 +66,7 @@ export default function FredConfigCard() {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div className="space-y-4">
-          <p className="text-xs font-semibold tracking-wide text-slate-400">ROLLING FORECAST</p>
+          <p className="text-[15px] font-semibold tracking-wide text-slate-400">ROLLING FORECAST</p>
           <Field label="Rolling window (quarters)" hint={`Allowed: ${meta.limits.window_min}–${wMax} quarters`}>
             <NumberInput
               aria-label="Rolling window"
@@ -94,7 +94,7 @@ export default function FredConfigCard() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-semibold tracking-wide text-slate-400">DIFFERENTIAL EVOLUTION</p>
+          <p className="text-[15px] font-semibold tracking-wide text-slate-400">DIFFERENTIAL EVOLUTION</p>
           <div className="space-y-2">
             {PARAM_ROWS.map(({ key, label }) => (
               <div key={key} className="flex items-center justify-between gap-2">

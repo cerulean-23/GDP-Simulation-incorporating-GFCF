@@ -10,14 +10,14 @@ const LEGEND = [
   ["5–10%", "#F97316"],
   ["10–20%", "#EF4444"],
   [">20%", "#B91C1C"],
-  ["No MAPE yet", "#1E293B"],
+  ["No MAPE yet", "#D9D4C5"],
 ];
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 8;
 
 // MAPE color scale matching the mockup legend: green (accurate) -> red (high error)
 function mapeColor(mape) {
-  if (mape == null) return "#1E293B"; // no data yet — neutral slate
+  if (mape == null) return "#D9D4C5"; // no data yet — neutral slate
   if (mape <= 1) return "#22C55E";
   if (mape <= 2) return "#84CC16";
   if (mape <= 5) return "#EAB308";
@@ -59,7 +59,7 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
         <div className="h-px bg-slate-700" />
         <button
           onClick={resetZoom}
-          className="flex h-8 w-8 items-center justify-center text-[10px] text-slate-300 hover:bg-slate-800"
+          className="flex h-8 w-8 items-center justify-center text-[12px] text-slate-300 hover:bg-slate-800"
           title="Reset view"
         >
           ⟲
@@ -101,7 +101,7 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
                     key={geo.rsmKey}
                     geography={geo}
                     fill={fillColor}
-                    stroke={isSelected ? "#60A5FA" : hasData ? fillColor : "#0A0F1E"}
+                    stroke={isSelected ? "#26372F" : hasData ? fillColor : "#F3F0E7"}
                     strokeWidth={
                       isSelected ? Math.max(1.5, 1.5 / zoom) : hasData ? Math.max(0.9, 1 / zoom) : Math.max(0.4, 0.5 / zoom)
                     }
@@ -110,7 +110,7 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
                     onMouseLeave={() => setTooltip(null)}
                     style={{
                       default: { fill: fillColor, outline: "none" },
-                      hover: { fill: fillColor, stroke: "#93C5FD", cursor: "pointer", outline: "none" },
+                      hover: { fill: fillColor, stroke: "#26372F", cursor: "pointer", outline: "none" },
                       pressed: { fill: fillColor, outline: "none" },
                     }}
                   />
@@ -139,7 +139,7 @@ export default function WorldMap({ countryMape, onSelectCountry, selectedIso }) 
           </span>
         </p>
       )}
-      <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-[11px] text-slate-400" aria-label="MAPE color legend">
+      <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-[12px] text-slate-400" aria-label="MAPE color legend">
         {LEGEND.map(([label, color]) => (
           <li key={label} className="flex items-center gap-1.5">
             <span className="h-2.5 w-2.5 rounded-sm border border-slate-600" style={{ backgroundColor: color }} />

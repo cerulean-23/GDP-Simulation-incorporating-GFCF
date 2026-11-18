@@ -60,15 +60,15 @@ export default function WorkflowSteps() {
           return (
             <li key={step.label} className="flex items-center gap-2.5" aria-current={step.state === "current" ? "step" : undefined}>
               <span
-                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border font-mono text-[11px] transition-colors ${t.dot}`}
+                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border font-mono text-[12px] transition-colors ${t.dot}`}
               >
                 {step.state === "done" ? "✓" : step.state === "failed" ? "!" : i + 1}
               </span>
               <span className="min-w-0">
-                <span className={`block font-mono text-[11px] font-medium uppercase tracking-wider ${t.text}`}>
+                <span className={`block text-[13px] font-semibold uppercase tracking-wide ${t.text}`}>
                   {step.label}
                 </span>
-                <span className="block truncate text-[11px] text-slate-500">{step.note}</span>
+                <span className="block truncate text-[12px] text-slate-500">{step.note}</span>
               </span>
             </li>
           );

@@ -32,7 +32,7 @@ function Card({ icon, iconColor, label, value, sublabel }) {
       </div>
       <p className="text-2xl font-semibold text-slate-100">{value}</p>
       <p className="mt-1 text-xs text-slate-400">{label}</p>
-      {sublabel && <p className="mt-0.5 text-[11px] text-slate-600">{sublabel}</p>}
+      {sublabel && <p className="mt-0.5 text-[12px] text-slate-600">{sublabel}</p>}
     </div>
   );
 }
